@@ -21,10 +21,24 @@ app.use(
 	cors({
 		origin: (origin, c) => {
 			const secureDomains = c.env.SECURE_DOMAINS;
-			if (!secureDomains) return origin;
-			const allowed = secureDomains.split(",").map((d: string) => d.trim());
+			if (!secureDomains || !origin) return "";
+
+			let originHost: string;
+			try {
+				originHost = new URL(origin).host.toLowerCase();
+			} catch {
+				return "";
+			}
+
+			const allowed = secureDomains
+				.split(",")
+				.map((domain: string) => domain.trim().toLowerCase())
+				.filter(Boolean);
 			if (
-				allowed.some((d: string) => origin === d || origin.endsWith(`.${d}`))
+				allowed.some(
+					(domain: string) =>
+						originHost === domain || originHost.endsWith(`.${domain}`),
+				)
 			) {
 				return origin;
 			}
