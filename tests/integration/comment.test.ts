@@ -93,6 +93,29 @@ describe("GET /api/comment?path= — comment list", () => {
 		expect(body.data.totalPages).toBeGreaterThan(1);
 	});
 
+	it("supports the official client page size of 20", async () => {
+		for (let i = 0; i < 23; i++) await createComment(db, { url: "/page" });
+		const body = await json(
+			await api.get("/api/comment", {
+				params: { path: "/page", pageSize: "20", page: "1" },
+			}),
+		);
+		expect(body.data.pageSize).toBe(20);
+		expect(body.data.data).toHaveLength(20);
+		expect(body.data.totalPages).toBe(2);
+	});
+
+	it("treats SQL metacharacters in the path as data", async () => {
+		await createComment(db, { url: "/page", nick: "Private path" });
+		const body = await json(
+			await api.get("/api/comment", {
+				params: { path: "/missing' OR 1=1 --" },
+			}),
+		);
+		expect(body.data.count).toBe(0);
+		expect(body.data.data).toEqual([]);
+	});
+
 	it("nests replies under parent comments", async () => {
 		const parent = await createComment(db, { url: "/page", nick: "Parent" });
 		await createComment(db, {
@@ -224,6 +247,20 @@ describe("POST /api/comment — create comment", () => {
 		expect(body.errno).toBe(0);
 		expect(body.data.nick).toBe("Alice");
 		expect(body.data.status).toBe("approved");
+	});
+
+	it("returns malicious HTML as escaped comment markup", async () => {
+		const body = await json(
+			await api.post("/api/comment", {
+				body: {
+					nick: "Alice",
+					comment: '<img src=x onerror="alert(1)">',
+					url: "/page",
+				},
+			}),
+		);
+		expect(body.data.comment).not.toContain("<img");
+		expect(body.data.comment).toContain("&lt;img");
 	});
 
 	it("response includes all required Waline comment fields", async () => {
