@@ -1,3 +1,4 @@
+import { uploadCommentImage } from "./media.js";
 import { currentUser, USER_KEY } from "./session.js";
 
 function showAccount() {
@@ -41,6 +42,7 @@ if (!serverURL) {
 			path: config.path || "/",
 			lang: "zh-CN",
 			login: "disable",
+			imageUploader: uploadCommentImage,
 			pageview: false,
 		});
 	} catch {

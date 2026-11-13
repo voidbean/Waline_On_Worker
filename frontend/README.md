@@ -36,3 +36,20 @@ Binding changes require a new Pages deployment. Verify that the homepage loads,
 `/api/comment?path=%2F` returns Waline JSON (not the homepage), and `/ui/login`
 leads to the board account page. Confirm comment reading/posting on the Pages address;
 the client keeps the existing discussion path `/`.
+
+## Comment images and profile photos
+
+Bind the private Standard R2 bucket `copperaqua-media` to Production Pages as
+`MEDIA` alongside `WALINE`; redeploy Pages. No public R2 endpoint, API key,
+backend deployment, or D1 migration is needed. Use a separate bucket for preview.
+Anyone with the image URL can read it. Uploads require a valid board session.
+
+The editor accepts JPEG, PNG and WebP (10 MiB input), re-encodes static pixels
+at up to 2048 px / 2 MiB, and inserts a same-origin Markdown image path. Profile
+photos use the same endpoint, cropped to a square up to 256 px, and are uploaded
+when saving the profile. New object URLs are immutable. Changing an avatar,
+discarding a comment draft or deleting a comment does not delete a stored image.
+For moderation, remove the corresponding `images/<filename>` object in R2;
+previously cached copies can persist. The private `quota/` prefix holds one
+counter per uploader (5/minute and 30/UTC day across both uses). Existing
+Base64 comments are not migrated; edit and reattach the file if necessary.

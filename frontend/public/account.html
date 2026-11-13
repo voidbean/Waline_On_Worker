@@ -17,6 +17,9 @@
 			<p role="status" id="status">正在读取账号…</p>
 			<button type="button" id="qq" hidden>用 QQ 登录 / 注册</button>
 			<form id="profile" hidden>
+				<img id="avatar-preview" alt="当前头像" width="72" height="72" hidden />
+				<label>更换头像<input name="photo" type="file" accept="image/jpeg,image/png,image/webp" /></label>
+				<small>支持 JPG、PNG、WebP（不超过 10 MiB），居中裁成方形，保存后生效。</small>
 				<label>昵称<input name="nick" required maxlength="255" autocomplete="nickname" /></label>
 				<label>个人主页（选填）<input name="homepage" type="url" placeholder="https://" maxlength="1024" /></label>
 				<button type="submit">保存资料</button>

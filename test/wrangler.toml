@@ -31,3 +31,7 @@ namespace_id = "9003"
 [ratelimits.simple]
 limit = 10000
 period = 60
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "local-board-media-test"

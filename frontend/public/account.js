@@ -1,3 +1,4 @@
+import { prepareImage, uploadImage } from "./media.js";
 import { currentUser, USER_KEY } from "./session.js";
 
 const attemptKey = "copperfield.qq.attempt";
@@ -65,6 +66,39 @@ async function init() {
 	status.textContent = "昵称会显示在你的评论旁。";
 	profile.elements.nick.value = user.display_name || "";
 	profile.elements.homepage.value = user.url || "";
+	const preview = document.querySelector("#avatar-preview");
+	const photo = profile.elements.photo;
+	const submit = profile.querySelector("button");
+	let currentAvatar = user.avatar;
+	let prepared = null;
+	let uploaded = "";
+	let previewURL = "";
+	const showPreview = (url) => {
+		preview.hidden = !url;
+		if (url) preview.src = url;
+		else preview.removeAttribute("src");
+	};
+	showPreview(currentAvatar);
+	photo.onchange = async () => {
+		const file = photo.files[0];
+		prepared = null;
+		uploaded = "";
+		if (previewURL) URL.revokeObjectURL(previewURL);
+		showPreview(currentAvatar);
+		if (!file) return;
+		photo.disabled = submit.disabled = true;
+		try {
+			prepared = await prepareImage(file, true);
+			previewURL = URL.createObjectURL(prepared);
+			showPreview(previewURL);
+			status.textContent = "新头像已预览，点保存后生效。";
+		} catch (err) {
+			photo.value = "";
+			status.textContent = err.message;
+		} finally {
+			photo.disabled = submit.disabled = false;
+		}
+	};
 	profile.hidden = false;
 	profile.onsubmit = async (event) => {
 		event.preventDefault();
@@ -75,24 +109,39 @@ async function init() {
 				"请填写昵称；主页可留空，填写时需以 https:// 或 http:// 开头。";
 			return;
 		}
-		const submit = profile.querySelector("button");
-		submit.disabled = true;
+		if (submit.disabled) return;
+		photo.disabled = submit.disabled = true;
 		try {
+			const changes = { display_name: nick, url };
+			if (prepared) {
+				if (!uploaded)
+					uploaded = new URL(
+						await uploadImage(prepared, token),
+						location.origin,
+					).href;
+				changes.avatar = uploaded;
+			}
 			const saved = await accountRequest("/api/user", token, {
 				method: "PUT",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ display_name: nick, url }),
+				body: JSON.stringify(changes),
 			});
 			localStorage.setItem(
 				USER_KEY,
 				JSON.stringify({ ...user, ...saved, token }),
 			);
+			currentAvatar = saved.avatar;
+			showPreview(currentAvatar);
+			prepared = null;
+			uploaded = photo.value = "";
+			if (previewURL) URL.revokeObjectURL(previewURL);
+			previewURL = "";
 			status.textContent = "资料已保存。";
 		} catch (err) {
 			if (!currentUser()) showLogin(err.message);
 			else status.textContent = err.message;
 		} finally {
-			submit.disabled = false;
+			photo.disabled = submit.disabled = false;
 		}
 	};
 }
