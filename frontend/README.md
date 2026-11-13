@@ -6,15 +6,18 @@ through the `WALINE` service binding. The board serves a pinned, patched Waline 
 CSS still loads from unpkg. See vendor/README.md for the build and licenses.
 
 - `/account` is the board's own sign-in and profile page (QQ first). QQ handles external
-  authorization; the return is bound to the initiating tab and lands back on
-  Pages. A first QQ sign-in creates an account using the existing backend flow.
+  authorization; the return is bound to the initiating browser’s cookie store, so QQ can
+  return in a new tab on Pages. The host-only, Secure, SameSite=Lax cookie
+  contains only a random attempt ID, expires after 10 minutes, and is removed
+  on a matching return. Starting another login replaces the pending attempt.
+  Separate browsers/private profiles do not share it. A first QQ sign-in creates an account using the existing backend flow.
   A collapsed secondary form supports email/password registration and sign-in,
   including existing two-factor accounts. No email verification or automatic
   merging by email: returning QQ users keep their linked account. Other OAuth
   providers and first-admin bootstrap are not exposed on the Pages entry. Anonymous
   comments and existing sessions are unaffected.
 - On a QQ callback mismatch only, the account page and browser console show the
-  same diagnostic: QQ-01 means this tab has no pending attempt; QQ-02 means it
+  same diagnostic: QQ-01 means the browser has no pending attempt; QQ-02 means it
   has a different one. The timestamp is UTC. The other labels describe the
   format of the returned ID and the presence of credentials/an error, not their
   values. Screenshot the message before retrying. No diagnostic is uploaded.

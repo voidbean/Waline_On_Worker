@@ -1,8 +1,12 @@
 import { prepareImage, uploadImage } from "./media.js";
-import { describeQQMismatch } from "./qq-attempt.js";
+import {
+	startQQAttempt,
+	readQQAttempt,
+	clearQQAttempt,
+	describeQQMismatch,
+} from "./qq-attempt.js";
 import { currentUser, USER_KEY } from "./session.js";
 
-const attemptKey = "copperfield.qq.attempt";
 const title = document.querySelector("#title");
 const status = document.querySelector("#status");
 const qq = document.querySelector("#qq");
@@ -12,8 +16,11 @@ const result = new URLSearchParams(location.hash.slice(1));
 if (location.hash) history.replaceState(null, "", location.pathname);
 
 qq.onclick = () => {
-	const attempt = crypto.randomUUID();
-	sessionStorage.setItem(attemptKey, attempt);
+	const attempt = startQQAttempt();
+	if (!attempt)
+		return showLogin(
+			"无法保存登录请求，请允许本站使用 Cookie，或改用邮箱登录。",
+		);
 	const query = new URLSearchParams({
 		type: "qq",
 		redirect: "/ui/qq-return/" + attempt,
@@ -141,14 +148,14 @@ async function init() {
 	const callback = result.has("attempt");
 	const stored = currentUser();
 	if (callback) {
-		const expected = sessionStorage.getItem(attemptKey);
+		const expected = readQQAttempt();
 		const mismatch = describeQQMismatch(expected, result);
 		if (mismatch) {
 			const diagnostic = `${mismatch}（${new Date().toISOString()}）`;
 			console.warn("[QQ 登录请求不匹配]", diagnostic);
 			return showLogin(`登录请求不匹配，请从本页重新登录。诊断：${diagnostic}`);
 		}
-		sessionStorage.removeItem(attemptKey);
+		clearQQAttempt();
 		if (result.has("error") || !result.get("token"))
 			return showLogin("QQ 授权未完成，请重试。");
 	}
