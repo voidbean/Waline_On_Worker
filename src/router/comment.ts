@@ -45,6 +45,25 @@ commentRoutes.get("/", async (c) => {
 	}
 });
 
+// The title is public even when the body is folded. Accept only short, single-line text.
+function validateWarning(body: {
+	spoiler?: unknown;
+	spoilerTitle?: unknown;
+}): string | undefined {
+	if (body.spoiler !== undefined && typeof body.spoiler !== "boolean") {
+		return "spoiler must be boolean";
+	}
+	if (body.spoilerTitle === undefined) return;
+	if (body.spoiler !== true) return "spoilerTitle requires spoiler: true";
+	if (
+		typeof body.spoilerTitle !== "string" ||
+		body.spoilerTitle.length > 60 ||
+		/[\u0000-\u001f\u007f\u2028\u2029]/u.test(body.spoilerTitle)
+	) {
+		return "spoilerTitle must be one line of up to 60 characters";
+	}
+}
+
 /**
  * POST /api/comment - Create comment
  */
@@ -52,9 +71,8 @@ commentRoutes.post("/", rateLimit("COMMENT_RATE_LIMIT"), async (c) => {
 	const body = await c.req.json();
 	const { comment, nick, mail, link, url, ua, pid, rid, at: _at } = body;
 
-	if (body.spoiler !== undefined && typeof body.spoiler !== "boolean") {
-		return c.json({ errno: 1, errmsg: "spoiler must be boolean" }, 400);
-	}
+	const warningError = validateWarning(body);
+	if (warningError) return c.json({ errno: 1, errmsg: warningError }, 400);
 
 	if (!url) {
 		return c.json({ errno: 1, errmsg: "url is required" }, 400);
@@ -126,12 +144,14 @@ commentRoutes.post("/", rateLimit("COMMENT_RATE_LIMIT"), async (c) => {
 		}
 	}
 
+	const spoilerTitle = body.spoilerTitle?.trim() ?? "";
+
 	// Render markdown to HTML
 	const renderedComment = renderMarkdown(comment);
 
 	const statement = c.env.DB.prepare(
-		`INSERT INTO wl_Comment (user_id, comment, orig, ip, link, mail, nick, pid, rid, sticky, status, "like", ua, url, spoiler)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, ?, ?)`,
+		`INSERT INTO wl_Comment (user_id, comment, orig, ip, link, mail, nick, pid, rid, sticky, status, "like", ua, url, spoiler, spoiler_title)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, ?, ?, ?)`,
 	).bind(
 		userInfo?.objectId ?? null,
 		renderedComment,
@@ -146,6 +166,7 @@ commentRoutes.post("/", rateLimit("COMMENT_RATE_LIMIT"), async (c) => {
 		ua || "",
 		url,
 		body.spoiler === true ? 1 : 0,
+		spoilerTitle,
 	);
 	const location = parseRegion(c.req.raw.cf);
 	const statements = [statement];
@@ -170,7 +191,7 @@ commentRoutes.post("/", rateLimit("COMMENT_RATE_LIMIT"), async (c) => {
 				db: c.env.DB,
 				env: c.env,
 				commentId,
-				commentText: comment,
+				commentText: spoilerTitle ? `${spoilerTitle}\n${comment}` : comment,
 				nick: nick || "",
 				mail: userInfo?.email || mail || "",
 				ip,
@@ -224,20 +245,27 @@ commentRoutes.put("/:id", async (c) => {
 		});
 	}
 
-	// Owners may change the warning on their own post, not its moderated content.
-	if (body.spoiler !== undefined && typeof body.spoiler !== "boolean") {
-		return c.json({ errno: 1, errmsg: "spoiler must be boolean" }, 400);
-	}
+	// Owners may edit only their warning. New public text on approved posts needs review.
+	const warningError = validateWarning(body);
+	if (warningError) return c.json({ errno: 1, errmsg: warningError }, 400);
+
 	if (
 		!isAdmin &&
 		userInfo &&
 		typeof body.spoiler === "boolean" &&
-		Object.keys(body).length === 1
-	) {
-		const row = await c.env.DB.prepare(
-			"UPDATE wl_Comment SET spoiler = ?, updatedAt = datetime('now') WHERE id = ? AND user_id = ? RETURNING *",
+		Object.keys(body).every(
+			(key) => key === "spoiler" || key === "spoilerTitle",
 		)
-			.bind(body.spoiler ? 1 : 0, id, userInfo.objectId)
+	) {
+		// Null preserves the existing title for older clients; disabling always clears it.
+		const title = body.spoiler ? body.spoilerTitle?.trim() ?? null : "";
+		const row = await c.env.DB.prepare(
+			`UPDATE wl_Comment SET spoiler = ?1, spoiler_title = COALESCE(?2, spoiler_title),
+			 status = CASE WHEN status = 'approved' AND ?2 != '' AND spoiler_title != ?2
+			         THEN 'waiting' ELSE status END,
+			 updatedAt = datetime('now') WHERE id = ?3 AND user_id = ?4 RETURNING *`,
+		)
+			.bind(body.spoiler ? 1 : 0, title, id, userInfo.objectId)
 			.first();
 		if (!row) return c.json({ errno: 1, errmsg: "Forbidden" }, 403);
 		return c.json({
@@ -268,6 +296,10 @@ commentRoutes.put("/:id", async (c) => {
 	if (body.spoiler !== undefined) {
 		updates.push("spoiler = ?");
 		values.push(body.spoiler ? 1 : 0);
+		if (!body.spoiler || body.spoilerTitle !== undefined) {
+			updates.push("spoiler_title = ?");
+			values.push(body.spoiler ? body.spoilerTitle.trim() : "");
+		}
 	}
 	if (body.sticky !== undefined) {
 		updates.push("sticky = ?");
@@ -922,6 +954,7 @@ async function formatComment(
 		rid: row.rid,
 		sticky: Boolean(row.sticky),
 		spoiler: Boolean(row.spoiler),
+		spoilerTitle: row.spoiler ? row.spoiler_title || "" : "",
 		user_id: row.user_id,
 		type: user?.type || (row.user_id ? "guest" : ""),
 		label: user?.label || "",

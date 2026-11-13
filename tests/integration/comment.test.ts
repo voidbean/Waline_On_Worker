@@ -436,7 +436,12 @@ describe("board spoiler warnings", () => {
 		const root = (
 			await json(
 				await api.post("/api/comment", {
-					body: { comment: "ending", url: "/story", spoiler: true },
+					body: {
+						comment: "ending",
+						url: "/story",
+						spoiler: true,
+						spoilerTitle: "  主线第十二章  ",
+					},
 				}),
 			)
 		).data;
@@ -459,7 +464,8 @@ describe("board spoiler warnings", () => {
 		).data.data;
 		expect(list[0]).toMatchObject({
 			spoiler: true,
-			children: [{ spoiler: false }],
+			spoilerTitle: "主线第十二章",
+			children: [{ spoiler: false, spoilerTitle: "" }],
 		});
 		const rss = await (
 			await api.get("/api/comment/rss", { params: { path: "/story" } })
@@ -480,6 +486,109 @@ describe("board spoiler warnings", () => {
 			).status,
 		).toBe(400);
 	});
+	it("keeps a reply title independent and preserves it during legacy flag-only edits", async () => {
+		const root = await createComment(db, { url: "/titles" });
+		const title = "<b>第十二章</b>";
+		const reply = (
+			await json(
+				await api.post("/api/comment", {
+					token: guestToken,
+					body: {
+						url: "/titles",
+						comment: "结局",
+						rid: root.id,
+						pid: root.id,
+						spoiler: true,
+						spoilerTitle: title,
+					},
+				}),
+			)
+		).data;
+		const path = `/api/comment/${reply.objectId}`;
+		const list = async () =>
+			(
+				await json(
+					await api.get("/api/comment", { params: { path: "/titles" } }),
+				)
+			).data.data;
+		expect((await list())[0]).toMatchObject({
+			spoilerTitle: "",
+			children: [{ spoilerTitle: title, orig: "结局" }],
+		});
+		const edit = async (body: object, token = guestToken) =>
+			(await json(await api.put(path, { token, body }))).data;
+		expect(await edit({ spoiler: true })).toMatchObject({
+			spoilerTitle: title,
+			status: "approved",
+		});
+		expect(await edit({ spoiler: true, spoilerTitle: title })).toMatchObject({
+			status: "approved",
+		});
+		expect(await edit({ spoiler: true, spoilerTitle: "支线" })).toMatchObject({
+			spoilerTitle: "支线",
+			status: "waiting",
+			orig: "结局",
+		});
+		expect((await list())[0].children).toEqual([]);
+		expect(await edit({ status: "approved" }, adminToken)).toMatchObject({
+			spoilerTitle: "支线",
+		});
+		expect(await edit({ spoiler: true, spoilerTitle: "  " })).toMatchObject({
+			spoilerTitle: "",
+			status: "approved",
+		});
+		expect(
+			await edit({ spoiler: true, spoilerTitle: "活动" }, adminToken),
+		).toMatchObject({ spoilerTitle: "活动", status: "approved" });
+		expect(await edit({ spoiler: false })).toMatchObject({
+			spoiler: false,
+			spoilerTitle: "",
+			status: "approved",
+		});
+		expect(await edit({ spoiler: true })).toMatchObject({ spoilerTitle: "" });
+	});
+
+	it("rejects invalid titles on create and edit without changing the existing warning", async () => {
+		const root = await createComment(db);
+		for (const warning of [
+			{ spoiler: true, spoilerTitle: 123 },
+			{ spoiler: true, spoilerTitle: "a".repeat(61) },
+			{ spoiler: true, spoilerTitle: "a\nb" },
+			{ spoiler: false, spoilerTitle: "hidden" },
+			{ spoilerTitle: "no flag" },
+		]) {
+			expect(
+				(
+					await api.post("/api/comment", {
+						body: { url: "/", comment: "test", ...warning },
+					})
+				).status,
+			).toBe(400);
+			expect(
+				(
+					await api.put(`/api/comment/${root.id}`, {
+						token: adminToken,
+						body: warning,
+					})
+				).status,
+			).toBe(400);
+		}
+		expect(
+			(
+				await api.put(`/api/comment/${root.id}`, {
+					token: guestToken,
+					body: { spoiler: true, spoilerTitle: "他人的评论" },
+				})
+			).status,
+		).toBe(403);
+		expect(
+			await db
+				.prepare("SELECT spoiler, spoiler_title FROM wl_Comment WHERE id = ?")
+				.bind(root.id)
+				.first(),
+		).toEqual({ spoiler: 0, spoiler_title: "" });
+	});
+
 	it("allows only the verified author or moderator to change a warning without changing review state", async () => {
 		const user = await db
 			.prepare("SELECT id FROM wl_Users WHERE email = ?")

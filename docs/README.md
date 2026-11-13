@@ -2,7 +2,7 @@
 
 For international audience: [English Documentation](README_EN.md)
 
-**已有数据库升级提醒：** 发布支持剧透标记的版本前，先检查 `PRAGMA table_info(wl_Comment)`；如无 `spoiler` 列，请执行一次 [迁移 SQL](../migrations/2026-11-13-comment-spoiler.sql)。仅重新执行 schema.sql 不会更新旧表。然后先部署 Worker，最后发布 Pages。新建数据库不需单独迁移。
+**已有数据库升级提醒：** 发布支持剧透标记的版本前，先检查 `PRAGMA table_info(wl_Comment)`；如无 `spoiler` 列，请执行一次 [标记迁移](../migrations/2026-11-13-comment-spoiler.sql)；如无 `spoiler_title` 列，再执行一次[主题迁移](../migrations/2026-11-13-comment-spoiler-title.sql)。仅重新执行 schema.sql 不会更新旧表。然后先部署 Worker，最后发布 Pages。新建数据库不需单独迁移。
 
 ## 推荐部署：Overture
 

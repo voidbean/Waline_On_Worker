@@ -45,8 +45,8 @@ fi
 echo ""
 echo "[4/5] 初始化数据库 Schema..."
 pnpm exec wrangler d1 execute waline-db --file=./schema.sql --remote --config "$CONFIG"
-pnpm exec wrangler d1 execute waline-db --command "SELECT spoiler FROM wl_Comment LIMIT 0" --remote --config "$CONFIG" || {
-  echo "数据库检查失败；若缺少 spoiler 列，请先执行 migrations/2026-11-13-comment-spoiler.sql"
+pnpm exec wrangler d1 execute waline-db --command "SELECT spoiler, spoiler_title FROM wl_Comment LIMIT 0" --remote --config "$CONFIG" || {
+  echo "数据库检查失败；请按 docs/README.md 的升级说明补齐缺少的剧透字段"
   exit 1
 }
 

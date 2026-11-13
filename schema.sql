@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS "wl_Comment" (
   "pid" INTEGER,
   "rid" INTEGER,
   "spoiler" INTEGER NOT NULL DEFAULT 0 CHECK (spoiler IN (0, 1)),
+  "spoiler_title" TEXT NOT NULL DEFAULT '' CHECK (length(spoiler_title) <= 60),
   "sticky" INTEGER DEFAULT 0,
   "status" TEXT NOT NULL DEFAULT 'approved',
   "like" INTEGER DEFAULT 0,

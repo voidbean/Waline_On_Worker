@@ -48,6 +48,7 @@ export async function getAdminPage(
 <head>
   <meta charset="utf-8">
   <title>Waline Management System</title>
+  <style>.comment-body[data-spoiler-label]::before{content:attr(data-spoiler-label);display:block;font-weight:600;overflow-wrap:anywhere}</style>
   <meta name="viewport" content="width=device-width,initial-scale=1">
 ${showWorker ? `  <style>.wk-badge{display:inline-block;margin-right:8px;padding:1px 8px;background:#f97316;color:#fff;font-size:11px;border-radius:10px;vertical-align:middle;font-weight:normal;letter-spacing:.5px;line-height:18px}</style>` : ""}
 </head>
@@ -65,6 +66,17 @@ ${showWorker ? `  <style>.wk-badge{display:inline-block;margin-right:8px;padding
   <script>
   (function(){
     var _fetch = window.fetch;
+    // The stock moderation table renders the body but ignores spoiler metadata.
+    // Keep the label separate so editing the body never saves the label into it.
+    var warnings = new Map();
+    function labelRows() {
+      document.querySelectorAll('tr[id^="comment-"] .comment-body').forEach(function(cell) {
+        var label = warnings.get(cell.closest('tr').id.slice(8));
+        if (label) cell.dataset.spoilerLabel = label;
+        else delete cell.dataset.spoilerLabel;
+      });
+    }
+    new MutationObserver(labelRows).observe(document.body, {childList:true, subtree:true});
     window.fetch = function(input, init) {
       var url = typeof input === 'string' ? input : (input instanceof Request ? input.url : '');
       if (url.indexOf('registry.npmjs.org/@waline/vercel') !== -1) {
@@ -72,6 +84,19 @@ ${showWorker ? `  <style>.wk-badge{display:inline-block;margin-right:8px;padding
           status: 200,
           headers: { 'Content-Type': 'application/json' }
         }));
+      }
+      var target = new URL(url || location.href, location.href);
+      if (target.origin === location.origin && target.pathname === '/api/comment' &&
+          target.searchParams.get('type') === 'list') {
+        return _fetch.call(this, input, init).then(async function(response) {
+          if (response.ok) {
+            var page = await response.clone().json();
+            warnings = new Map((page.data?.data || []).filter(row => row.spoiler).map(row =>
+              [String(row.objectId), row.spoilerTitle ? '含剧透：' + row.spoilerTitle : '含剧透']));
+            labelRows();
+          }
+          return response;
+        });
       }
       return _fetch.call(this, input, init);
     };

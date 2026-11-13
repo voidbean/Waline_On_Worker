@@ -79,9 +79,10 @@ Base64 comments are not migrated; edit and reattach the file if necessary.
 
 ## Spoiler warnings — release order
 
-1. Existing D1 databases: run migrations/2026-11-13-comment-spoiler.sql once
-   (old comments default to 0). Fresh databases already have the column in
-   schema.sql. Do not re-run the ALTER on a database that has the column.
+1. Existing D1 databases: check `PRAGMA table_info(wl_Comment)`. Apply
+   `migrations/2026-11-13-comment-spoiler.sql` only if `spoiler` is missing,
+   then `migrations/2026-11-13-comment-spoiler-title.sql` only if `spoiler_title`
+   is missing. Fresh databases initialized from schema.sql need neither.
 2. Deploy the updated Waline Worker, then deploy Pages. Do not release the
    new composer first: the old Worker would ignore the spoiler checkbox.
 3. Verify a marked top-level image and its thread remain collapsed after reload;
@@ -89,7 +90,11 @@ Base64 comments are not migrated; edit and reattach the file if necessary.
    opens its composer independently: replying never reveals a folded post.
 
 Guests can mark a new post. Signed-in authors may later change only their
-own warning, without changing the body or moderation status. Anonymous authors
+own warning, not the body. A short optional plain-text title (e.g. “主线第十二章”)
+is visible before expanding; a blank title keeps the original warning. Disabling
+the warning removes its title. Adding or replacing public title text on an
+already approved post as its author returns it to the moderation queue; clearing
+it or toggling the flag alone does not. Anonymous authors
 cannot prove ownership later; a moderator can mark their posts. RSS/recent
 feeds omit marked posts and children of marked roots. The full discussion
 API still returns public comment data; this is a reading preference on the

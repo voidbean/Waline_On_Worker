@@ -35,7 +35,7 @@ export async function deploy(ctx) {
   await ctx.d1.query("db", await ctx.text("migrations/schema.sql"));
   // CREATE TABLE IF NOT EXISTS doesn't upgrade an existing comments table.
   // Fail before switching Worker traffic if the documented migration is missing.
-  await ctx.d1.query("db", "SELECT spoiler FROM wl_Comment LIMIT 0");
+  await ctx.d1.query("db", "SELECT spoiler, spoiler_title FROM wl_Comment LIMIT 0");
   await ctx.step("schema", "success");
 
   if (fullRebuild) {

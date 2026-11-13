@@ -1,23 +1,25 @@
 diff --git a/packages/api/src/typings.ts b/packages/api/src/typings.ts
-index 07558c7..268c83e 100644
+index 07558c7..6d83419 100644
 --- a/packages/api/src/typings.ts
 +++ b/packages/api/src/typings.ts
-@@ -4,4 +4,6 @@ export type WalineUserType = 'administrator' | 'guest';
+@@ -4,4 +4,7 @@ export type WalineUserType = 'administrator' | 'guest';
 
  export interface WalineCommentData {
 +  spoiler?: boolean;
++  spoilerTitle?: string;
 +
    /** User Nickname */
    nick: string;
-@@ -54,4 +56,6 @@ export interface WalineCommentData {
+@@ -54,4 +57,7 @@ export interface WalineCommentData {
 
  export interface BaseWalineResponseComment {
 +  spoiler?: boolean;
++  spoilerTitle?: string;
 +
    /** Comment object ID */
    objectId: number;
 diff --git a/packages/client/src/components/CommentBox.vue b/packages/client/src/components/CommentBox.vue
-index e494066..8e2d2a7 100644
+index e494066..7e92e54 100644
 --- a/packages/client/src/components/CommentBox.vue
 +++ b/packages/client/src/components/CommentBox.vue
 @@ -1,5 +1,5 @@
@@ -27,7 +29,7 @@ index e494066..8e2d2a7 100644
 +import { useDebounceFn, useEventListener, useStorage, watchImmediate } from '@vueuse/core';
  import type { WalineComment, WalineCommentData, UserInfo } from '@waline/api';
  import { addComment, login, updateComment } from '@waline/api';
-@@ -58,7 +58,12 @@ const emit = defineEmits<{
+@@ -58,7 +58,15 @@ const emit = defineEmits<{
  const config = inject(configKey)!;
 
 -const editor = useEditor();
@@ -38,57 +40,73 @@ index e494066..8e2d2a7 100644
 +const spoiler = props.edit
 +  ? ref(Boolean(props.edit.spoiler))
 +  : useStorage<boolean>('COPPERFIELD_DRAFT_SPOILER', false);
++const spoilerTitle = props.edit
++  ? ref(props.edit.spoilerTitle ?? '')
++  : useStorage('COPPERFIELD_DRAFT_SPOILER_TITLE', '');
 +const warningOnly = computed(() => Boolean(props.edit) && userInfo.value.type !== 'administrator');
 
  const inputRefs = ref<Record<string, HTMLInputElement>>({});
-@@ -209,4 +214,5 @@ const submitComment = async (): Promise<void> => {
+@@ -207,6 +215,11 @@ const submitComment = async (): Promise<void> => {
+     config.value;
+
++  const warning = {
++    spoiler: spoiler.value,
++    ...(spoiler.value ? { spoilerTitle: spoilerTitle.value.trim() } : {}),
++  };
    const comment: WalineCommentData = {
      comment: content.value,
-+    spoiler: spoiler.value,
++    ...warning,
      nick: userMeta.value.nick,
      mail: userMeta.value.mail,
-@@ -304,4 +310,5 @@ const submitComment = async (): Promise<void> => {
+@@ -304,4 +317,5 @@ const submitComment = async (): Promise<void> => {
            objectId: props.edit.objectId,
            ...options,
-+          comment: warningOnly.value ? { spoiler: spoiler.value } : comment,
++          comment: warningOnly.value ? warning : comment,
          })
        : addComment(options));
-@@ -318,4 +325,5 @@ const submitComment = async (): Promise<void> => {
+@@ -318,4 +332,6 @@ const submitComment = async (): Promise<void> => {
      emit('submit', response.data!);
 
++    spoilerTitle.value = '';
 +    spoiler.value = false;
      editor.value = '';
 
-@@ -606,4 +614,5 @@ onMounted(() => {
+@@ -606,4 +622,5 @@ onMounted(() => {
          ref="textarea"
          v-model="editor"
 +        :readonly="warningOnly"
          class="wl-editor"
          :placeholder="replyUser ? `@${replyUser}` : locale.placeholder"
-@@ -613,5 +622,5 @@ onMounted(() => {
+@@ -613,5 +630,5 @@ onMounted(() => {
        />
 
 -      <div v-show="showPreview" class="wl-preview">
 +      <div v-if="showPreview" class="wl-preview">
          <hr />
 
-@@ -622,5 +631,5 @@ onMounted(() => {
+@@ -622,5 +639,5 @@ onMounted(() => {
 
        <div class="wl-footer">
 -        <div class="wl-actions">
 +        <div v-if="!warningOnly" class="wl-actions">
            <a
              href="https://guides.github.com/features/mastering-markdown/"
-@@ -691,4 +700,8 @@ onMounted(() => {
+@@ -691,4 +708,14 @@ onMounted(() => {
          <div class="wl-info">
            <div class="wl-captcha-container" />
 +          <label class="board-spoiler-option">
 +            <input v-model="spoiler" type="checkbox" /> 含剧透（文字和图片）
 +          </label>
-+          <span v-if="warningOnly">仅修改剧透标记</span>
++          <label v-if="spoiler" class="board-spoiler-title-field">
++            <span>剧透主题（选填）</span>
++            <input v-model="spoilerTitle" type="text" maxlength="60"
++              placeholder="例如：主线第十二章" />
++            <small>折叠时也能看到，只写范围，不写剧情结果。</small>
++          </label>
++          <span v-if="warningOnly">仅修改剧透提示；新增或改写主题需重新审核。</span>
 
            <div class="wl-text-number">
-@@ -722,5 +735,5 @@ onMounted(() => {
+@@ -722,5 +749,5 @@ onMounted(() => {
 
              <template v-else>
 -              {{ locale.submit }}
@@ -96,7 +114,7 @@ index e494066..8e2d2a7 100644
              </template>
            </button>
 diff --git a/packages/client/src/components/CommentCard.vue b/packages/client/src/components/CommentCard.vue
-index e0af915..2bad3e8 100644
+index e0af915..fda5309 100644
 --- a/packages/client/src/components/CommentCard.vue
 +++ b/packages/client/src/components/CommentCard.vue
 @@ -2,5 +2,5 @@
@@ -111,7 +129,7 @@ index e0af915..2bad3e8 100644
 
 +const revealed = ref(false);
 +const concealed = computed(() => Boolean(comment.spoiler) && !revealed.value);
-+watch(() => [comment.objectId, comment.spoiler], () => { revealed.value = false; });
++watch(() => [comment.objectId, comment.spoiler, comment.spoilerTitle], () => { revealed.value = false; });
 +const toggleSpoiler = (): void => {
 +  // Only a descendant's composer disappears when this thread folds.
 +  if (revealed.value && 'children' in comment) {
@@ -134,7 +152,7 @@ index e0af915..2bad3e8 100644
 
 +      <button v-if="comment.spoiler && !isEditingCurrent" type="button" class="board-spoiler-toggle"
 +        :aria-expanded="revealed" @click="toggleSpoiler">
-+        <span>含剧透</span>
++        <span class="board-spoiler-label">含剧透<template v-if="comment.spoilerTitle">：{{ comment.spoilerTitle }}</template></span>
 +        <span class="board-spoiler-action">{{ revealed ? '收起' : '展开' }}{{ 'children' in comment && comment.children?.length ? '讨论' : '正文' }}</span>
 +      </button>
        <!-- eslint-disable vue/no-v-html -->
@@ -157,7 +175,7 @@ index e0af915..2bad3e8 100644
          <CommentCard
            v-for="child in comment.children"
 diff --git a/packages/client/src/components/WalineComment.vue b/packages/client/src/components/WalineComment.vue
-index 7e6412e..9637473 100644
+index 7e6412e..bf0fde9 100644
 --- a/packages/client/src/components/WalineComment.vue
 +++ b/packages/client/src/components/WalineComment.vue
 @@ -100,8 +100,10 @@ const onSortByChange = (item: WalineCommentSorting): void => {
@@ -171,10 +189,12 @@ index 7e6412e..9637473 100644
 +  if (comment) reply.value = null;
    edit.value = comment;
  };
-@@ -111,4 +113,6 @@ const onSubmit = (comment: WalineComment): void => {
+@@ -111,4 +113,8 @@ const onSubmit = (comment: WalineComment): void => {
      edit.value.comment = comment.comment;
      edit.value.orig = comment.orig;
 +    edit.value.spoiler = comment.spoiler;
++    edit.value.spoilerTitle = comment.spoilerTitle;
++    edit.value.status = comment.status;
 +    edit.value = null;
    } else if ('rid' in comment) {
      const repliedComment = data.value.find(({ objectId }) => objectId === comment.rid);

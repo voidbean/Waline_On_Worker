@@ -1,6 +1,6 @@
 # Waline on Worker - Detailed Documentation
 
-**Upgrading an existing database:** Before deploying spoiler support, check `PRAGMA table_info(wl_Comment)`. If the `spoiler` column is absent, apply the [one-time migration](../migrations/2026-11-13-comment-spoiler.sql), deploy the Worker, then publish Pages. Replaying schema.sql does not upgrade existing tables. Fresh databases need no migration.
+**Upgrading an existing database:** Before deploying spoiler support, check `PRAGMA table_info(wl_Comment)`. If the `spoiler` column is absent, apply the [flag migration](../migrations/2026-11-13-comment-spoiler.sql). If `spoiler_title` is missing, apply the [title migration](../migrations/2026-11-13-comment-spoiler-title.sql). Then deploy the Worker and publish Pages. Replaying schema.sql does not upgrade existing tables. Fresh databases need no migration.
 
 ## Recommended deployment: Overture
 
