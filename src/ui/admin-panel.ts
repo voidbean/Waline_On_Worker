@@ -77,6 +77,41 @@ ${showWorker ? `  <style>.wk-badge{display:inline-block;margin-right:8px;padding
     };
   })();
   </script>
+  <!-- The CDN profile form requires a homepage even for a nickname-only edit.
+       Handle only that case; keep other forms and non-empty URLs on the upstream path. -->
+  <script>
+  document.addEventListener('submit', async function(event) {
+    var form = event.target;
+    if (location.pathname !== '/ui/profile' || !(form instanceof HTMLFormElement)) return;
+    var fields = form.elements;
+    var nick = fields.namedItem('screenName'), url = fields.namedItem('url');
+    var label = fields.namedItem('label'), email = fields.namedItem('email');
+    if (!nick || !url || !label || !email || url.value.trim()) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if (!nick.value.trim()) return alert('请填写昵称');
+    if (email.value !== email.defaultValue) return alert('此操作不支持更换登录邮箱');
+    var button = form.querySelector('button[type="submit"]');
+    if (button && button.disabled) return;
+    if (button) button.disabled = true;
+    try {
+      var token = window.TOKEN || sessionStorage.getItem('TOKEN') || localStorage.getItem('TOKEN');
+      if (!token) throw new Error('请重新登录后保存');
+      var response = await fetch('/api/user', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+        body: JSON.stringify({ display_name: nick.value.trim(), url: '', label: label.value })
+      });
+      var result = await response.json();
+      if (!response.ok || result.errno !== 0) throw new Error(result.errmsg || ('HTTP ' + response.status));
+      location.reload();
+    } catch (error) {
+      alert('保存失败：' + error.message);
+    } finally {
+      if (button) button.disabled = false;
+    }
+  }, true);
+  </script>
   <script src="${adminScript}"></script>
 ${
 	showWorker

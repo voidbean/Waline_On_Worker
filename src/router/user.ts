@@ -196,10 +196,10 @@ userRoutes.post("/", rateLimit("REGISTRATION_RATE_LIMIT"), async (c) => {
 });
 
 /**
- * PUT /api/user/:id - Update user profile
+ * PUT /api/user updates the authenticated profile; /:id also supports admin edits.
  */
-userRoutes.put("/:id", async (c) => {
-	const id = c.req.param("id");
+userRoutes.put("/:id?", async (c) => {
+	const explicitId = c.req.param("id");
 	const userInfo = c.get("userInfo");
 
 	if (!userInfo) {
@@ -207,7 +207,8 @@ userRoutes.put("/:id", async (c) => {
 	}
 
 	const isAdmin = userInfo.type === "administrator";
-	const isSelf = userInfo.objectId === parseInt(id, 10);
+	const id = explicitId ?? String(userInfo.objectId);
+	const isSelf = id === String(userInfo.objectId);
 
 	if (!isAdmin && !isSelf) {
 		return c.json({ errno: 1, errmsg: "Forbidden" }, 403);
@@ -231,7 +232,7 @@ userRoutes.put("/:id", async (c) => {
 	}
 
 	// Admin-only fields
-	if (isAdmin && body.type !== undefined) {
+	if (explicitId && isAdmin && body.type !== undefined) {
 		updates.push("type = ?");
 		values.push(body.type);
 	}

@@ -169,6 +169,57 @@ describe("PUT /api/user/:id — profile update", () => {
 		guestToken = await loginAs("guest@example.com", "pass");
 	});
 
+	it("accepts the admin panel's self-profile PUT with an empty homepage", async () => {
+		const res = await api.put("/api/user?lang=zh-CN", {
+			token: adminToken,
+			body: {
+				display_name: "新昵称",
+				url: "",
+				email: "admin@example.com",
+				label: "成员",
+			},
+		});
+		expect(res.status).toBe(200);
+		expect((await json(res)).data).toMatchObject({
+			objectId: adminId,
+			display_name: "新昵称",
+			url: "",
+		});
+		const me = await json(await api.get("/api/token", { token: adminToken }));
+		expect(me.data).toMatchObject({
+			display_name: "新昵称",
+			url: "",
+			label: "成员",
+		});
+	});
+
+	it("binds the self route to the session, never to a supplied ID or role", async () => {
+		const res = await api.put("/api/user", {
+			token: guestToken,
+			body: {
+				id: adminId,
+				objectId: adminId,
+				type: "administrator",
+				display_name: "Guest",
+			},
+		});
+		expect(res.status).toBe(200);
+		expect((await json(res)).data).toMatchObject({
+			objectId: guestId,
+			type: "guest",
+		});
+		const other = await json(
+			await api.get("/api/token", { token: adminToken }),
+		);
+		expect(other.data.display_name).not.toBe("Guest");
+	});
+
+	it("requires authentication on the self route", async () => {
+		expect(
+			(await api.put("/api/user", { body: { display_name: "name" } })).status,
+		).toBe(401);
+	});
+
 	it("user can update their own display_name", async () => {
 		const res = await api.put(`/api/user/${guestId}`, {
 			token: guestToken,
