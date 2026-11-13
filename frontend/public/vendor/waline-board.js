@@ -6658,30 +6658,30 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 }, Rp = ["src"], zp = { class: "wl-card" }, Bp = { class: "wl-head" }, Vp = ["href"], Hp = {
 	key: 1,
 	class: "wl-nick"
-}, Up = ["textContent"], Wp = ["textContent"], Gp = ["textContent"], Kp = ["textContent"], qp = { class: "wl-comment-actions" }, Jp = ["disabled"], Yp = ["title", "href"], Xp = ["title"], Zp = ["disabled", "title"], Qp = {
+}, Up = ["textContent"], Wp = ["textContent"], Gp = ["textContent"], Kp = ["textContent"], qp = { class: "wl-comment-actions" }, Jp = ["disabled"], Yp = ["title", "href"], Xp = ["title"], Zp = ["title"], Qp = {
 	class: "wl-meta",
 	"aria-hidden": "true"
 }, $p = ["data-value", "textContent"], em = {
 	key: 0,
 	class: "wl-warning",
 	"aria-hidden": "true"
-}, tm = ["aria-expanded"], nm = {
+}, tm = ["aria-expanded"], nm = { class: "board-spoiler-action" }, rm = {
 	key: 2,
 	class: "wl-content"
-}, rm = {
+}, im = {
 	key: 0,
 	class: "wl-reply-to"
-}, im = ["href"], am = ["innerHTML"], om = {
+}, am = ["href"], om = ["innerHTML"], sm = {
 	key: 3,
 	class: "wl-admin-actions"
-}, sm = { class: "wl-comment-status" }, cm = [
+}, cm = { class: "wl-comment-status" }, lm = [
 	"disabled",
 	"onClick",
 	"textContent"
-], lm = {
+], um = {
 	key: 5,
 	class: "wl-quote"
-}, um = /* @__PURE__ */ cr({
+}, dm = /* @__PURE__ */ cr({
 	__name: "CommentCard",
 	props: {
 		comment: {},
@@ -6712,7 +6712,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			h.value = !1;
 		});
 		let _ = () => {
-			h.value && (e.reply && n("reply", null), e.edit && n("edit", null)), h.value = !h.value;
+			h.value && "children" in e.comment && (e.comment.children?.some((t) => t.objectId === e.reply?.objectId) && n("reply", null), e.comment.children?.some((t) => t.objectId === e.edit?.objectId) && n("edit", null)), h.value = !h.value;
 		}, v = K(() => e.comment.objectId === e.edit?.objectId);
 		return (t, a) => {
 			let o = Cr("CommentCard", !0);
@@ -6785,7 +6785,6 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 						H("button", {
 							type: "button",
 							class: O(["wl-reply", { active: m.value }]),
-							disabled: g.value,
 							title: m.value ? c.value.cancelReply : c.value.reply,
 							onClick: a[3] ||= (t) => n("reply", m.value ? null : e.comment)
 						}, [U(I(Of))], 10, Zp)
@@ -6808,11 +6807,11 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 					class: "board-spoiler-toggle",
 					"aria-expanded": h.value,
 					onClick: _
-				}, " ⚠ 含剧透 · " + k(h.value ? "收起" : "点击查看") + k(!h.value && "children" in e.comment && e.comment.children?.length ? "（含回复）" : ""), 9, tm)) : W("v-if", !0),
+				}, [a[17] ||= H("span", null, "含剧透", -1), H("span", nm, k(h.value ? "收起" : "展开") + k("children" in e.comment && e.comment.children?.length ? "讨论" : "正文"), 1)], 8, tm)) : W("v-if", !0),
 				W(" eslint-disable vue/no-v-html "),
-				!g.value && !v.value ? (B(), V("div", nm, ["reply_user" in e.comment && e.comment.reply_user ? (B(), V("p", rm, [H("a", { href: "#" + e.comment.pid }, "@" + k(e.comment.reply_user.nick), 9, im), a[17] ||= H("span", null, ": ", -1)])) : W("v-if", !0), H("div", { innerHTML: e.comment.comment }, null, 8, am)])) : W("v-if", !0),
+				!g.value && !v.value ? (B(), V("div", rm, ["reply_user" in e.comment && e.comment.reply_user ? (B(), V("p", im, [H("a", { href: "#" + e.comment.pid }, "@" + k(e.comment.reply_user.nick), 9, am), a[18] ||= H("span", null, ": ", -1)])) : W("v-if", !0), H("div", { innerHTML: e.comment.comment }, null, 8, om)])) : W("v-if", !0),
 				W(" eslint-enable vue/no-v-html "),
-				f.value && !v.value ? (B(), V("div", om, [H("span", sm, [(B(), V(z, null, Dr(r, (t) => H("button", {
+				f.value && !v.value ? (B(), V("div", sm, [H("span", cm, [(B(), V(z, null, Dr(r, (t) => H("button", {
 					key: t,
 					type: "submit",
 					class: O(`wl-btn wl-${t}`),
@@ -6822,13 +6821,13 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 						comment: e.comment
 					}),
 					textContent: k(c.value[t])
-				}, null, 10, cm)), 64))]), f.value && !("rid" in e.comment) ? (B(), V("button", {
+				}, null, 10, lm)), 64))]), f.value && !("rid" in e.comment) ? (B(), V("button", {
 					key: 0,
 					type: "submit",
 					class: "wl-btn wl-sticky",
 					onClick: a[4] ||= (t) => n("sticky", e.comment)
 				}, k(e.comment.sticky ? c.value.unsticky : c.value.sticky), 1)) : W("v-if", !0)])) : W("v-if", !0),
-				!g.value && (m.value || v.value) ? (B(), V("div", {
+				m.value || !g.value && v.value ? (B(), V("div", {
 					key: 4,
 					class: O({
 						"wl-reply-wrapper": m.value,
@@ -6849,7 +6848,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 					"reply-user",
 					"root-id"
 				])], 2)) : W("v-if", !0),
-				!g.value && "children" in e.comment ? (B(), V("div", lm, [(B(!0), V(z, null, Dr(e.comment.children, (t) => (B(), Mi(o, {
+				!g.value && "children" in e.comment ? (B(), V("div", um, [(B(!0), V(z, null, Dr(e.comment.children, (t) => (B(), Mi(o, {
 					key: t.objectId,
 					comment: t,
 					reply: e.reply,
@@ -6872,22 +6871,22 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			])], 8, Ip);
 		};
 	}
-}), dm = { "data-waline": "" }, fm = { class: "wl-meta-head" }, pm = { class: "wl-count" }, mm = ["textContent"], hm = { class: "wl-sort" }, gm = ["onClick"], _m = { class: "wl-cards" }, vm = {
+}), fm = { "data-waline": "" }, pm = { class: "wl-meta-head" }, mm = { class: "wl-count" }, hm = ["textContent"], gm = { class: "wl-sort" }, _m = ["onClick"], vm = { class: "wl-cards" }, ym = {
 	key: 1,
 	class: "wl-operation"
-}, ym = ["textContent"], bm = {
+}, bm = ["textContent"], xm = {
 	key: 2,
 	class: "wl-loading"
-}, xm = ["textContent"], Sm = { class: "wl-operation" }, Cm = ["textContent"], wm = {
+}, Sm = ["textContent"], Cm = { class: "wl-operation" }, wm = ["textContent"], Tm = {
 	key: 5,
 	class: "wl-meta-foot"
-}, Tm = {
+}, Em = {
 	key: 0,
 	class: "wl-rss"
-}, Em = ["href", "alt"], Dm = ["textContent"], Om = ["href", "alt"], km = ["textContent"], Am = {
+}, Dm = ["href", "alt"], Om = ["textContent"], km = ["href", "alt"], Am = ["textContent"], jm = {
 	key: 1,
 	class: "wl-power"
-}, jm = /* @__PURE__ */ cr({
+}, Mm = /* @__PURE__ */ cr({
 	__name: "WalineComment",
 	props: {
 		serverURL: {},
@@ -6938,9 +6937,9 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 		}, y = (e) => {
 			l.value !== e && (l.value = e, v());
 		}, b = (e) => {
-			d.value = e;
+			e && (f.value = null), d.value = e;
 		}, x = (e) => {
-			f.value = e;
+			e && (d.value = null), f.value = e;
 		}, S = (e) => {
 			if (f.value) f.value.comment = e.comment, f.value.orig = e.orig, f.value.spoiler = e.spoiler, f.value = null;
 			else if ("rid" in e) {
@@ -7002,23 +7001,23 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			i.searchParams.delete("token"), history.replaceState(null, "", i.pathname + (i.searchParams.toString() ? `?${i.searchParams.toString()}` : "") + i.hash);
 		}), xr(() => {
 			h?.();
-		}), (e, t) => (B(), V("div", dm, [
+		}), (e, t) => (B(), V("div", fm, [
 			U(Wf),
 			!d.value && !f.value ? (B(), Mi(Fp, {
 				key: 0,
 				onLog: v,
 				onSubmit: S
 			})) : W("v-if", !0),
-			H("div", fm, [H("div", pm, [a.value ? (B(), V("span", {
+			H("div", pm, [H("div", mm, [a.value ? (B(), V("span", {
 				key: 0,
 				class: "wl-num",
 				textContent: k(a.value)
-			}, null, 8, mm)) : W("v-if", !0), Bi(" " + k(m.value.comment), 1)]), H("ul", hm, [(B(!0), V(z, null, Dr(I(Nc), (e) => (B(), V("li", {
+			}, null, 8, hm)) : W("v-if", !0), Bi(" " + k(m.value.comment), 1)]), H("ul", gm, [(B(!0), V(z, null, Dr(I(Nc), (e) => (B(), V("li", {
 				key: e,
 				class: O([e === l.value ? "active" : ""]),
 				onClick: (t) => y(e)
-			}, k(m.value[e]), 11, gm))), 128))])]),
-			H("div", _m, [(B(!0), V(z, null, Dr(u.value, (e) => (B(), Mi(um, {
+			}, k(m.value[e]), 11, _m))), 128))])]),
+			H("div", vm, [(B(!0), V(z, null, Dr(u.value, (e) => (B(), Mi(dm, {
 				key: e.objectId,
 				"root-id": e.objectId,
 				comment: e,
@@ -7038,35 +7037,35 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 				"reply",
 				"edit"
 			]))), 128))]),
-			i.value === "error" ? (B(), V("div", vm, [H("button", {
+			i.value === "error" ? (B(), V("div", ym, [H("button", {
 				type: "button",
 				class: "wl-btn",
 				onClick: v,
 				textContent: k(m.value.refresh)
-			}, null, 8, ym)])) : i.value === "loading" ? (B(), V("div", bm, [U(I(Mf), { size: 30 })])) : u.value.length ? o.value < s.value ? (B(), V(z, { key: 4 }, [W(" Load more button "), H("div", Sm, [H("button", {
+			}, null, 8, bm)])) : i.value === "loading" ? (B(), V("div", xm, [U(I(Mf), { size: 30 })])) : u.value.length ? o.value < s.value ? (B(), V(z, { key: 4 }, [W(" Load more button "), H("div", Cm, [H("button", {
 				type: "button",
 				class: "wl-btn",
 				onClick: _,
 				textContent: k(m.value.more)
-			}, null, 8, Cm)])], 2112)) : W("v-if", !0) : (B(), V("div", {
+			}, null, 8, wm)])], 2112)) : W("v-if", !0) : (B(), V("div", {
 				key: 3,
 				class: "wl-empty",
 				textContent: k(m.value.sofa)
-			}, null, 8, xm)),
-			u.value.length || i.value !== "loading" ? (B(), V("div", wm, [
-				c.value.noRss ? W("v-if", !0) : (B(), V("div", Tm, [H("a", {
+			}, null, 8, Sm)),
+			u.value.length || i.value !== "loading" ? (B(), V("div", Tm, [
+				c.value.noRss ? W("v-if", !0) : (B(), V("div", Em, [H("a", {
 					href: `${c.value.serverURL}/api/comment/rss?path=${encodeURIComponent(c.value.path)}`,
 					target: "_blank",
 					rel: "noopener noreferrer",
 					alt: m.value.subPostComment
-				}, [U(I(Pf)), H("span", { textContent: k(m.value.subPostComment) }, null, 8, Dm)], 8, Em), H("a", {
+				}, [U(I(Pf)), H("span", { textContent: k(m.value.subPostComment) }, null, 8, Om)], 8, Dm), H("a", {
 					href: `${c.value.serverURL}/api/comment/rss`,
 					target: "_blank",
 					rel: "noopener noreferrer",
 					alt: m.value.subSiteComment
-				}, [U(I(Pf)), H("span", { textContent: k(m.value.subSiteComment) }, null, 8, km)], 8, Om)])),
+				}, [U(I(Pf)), H("span", { textContent: k(m.value.subSiteComment) }, null, 8, Am)], 8, km)])),
 				W(" Copyright Information "),
-				c.value.noCopyright ? W("v-if", !0) : (B(), V("div", Am, [
+				c.value.noCopyright ? W("v-if", !0) : (B(), V("div", jm, [
 					t[0] ||= Bi(" Powered by ", -1),
 					t[1] ||= H("a", {
 						href: "https://github.com/walinejs/waline",
@@ -7078,18 +7077,18 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			])) : W("v-if", !0)
 		]));
 	}
-}), Mm = (e, t) => {
+}), Nm = (e, t) => {
 	t.forEach((t, n) => {
 		let r = e[n].time;
 		typeof r == "number" && (t.textContent = r.toString());
 	});
-}, Nm = ({ serverURL: e, path: t = window.location.pathname, selector: n = ".waline-pageview-count", update: r = !0, lang: i = navigator.language }) => {
+}, Pm = ({ serverURL: e, path: t = window.location.pathname, selector: n = ".waline-pageview-count", update: r = !0, lang: i = navigator.language }) => {
 	let a = new AbortController(), o = [...document.querySelectorAll(n)], s = (e) => {
 		let n = Yd(e);
 		return n != null && t !== n;
 	}, c = async (n) => {
 		try {
-			Mm(await Lo({
+			Nm(await Lo({
 				serverURL: Rc(e),
 				paths: n.map((e) => Yd(e) ?? t),
 				lang: i,
@@ -7106,11 +7105,11 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			path: t,
 			lang: i
 		}).then((e) => {
-			Mm(e, n);
+			Nm(e, n);
 		}), r.length > 0 && c(r);
 	} else c(o);
 	return a.abort.bind(a);
-}, Pm = ({ el: e = "#waline", path: t = window.location.pathname, comment: n = !1, pageview: r = !1, ...i }) => {
+}, Fm = ({ el: e = "#waline", path: t = window.location.pathname, comment: n = !1, pageview: r = !1, ...i }) => {
 	let a = e ? zl(e) : null;
 	if (e && !a) throw Error("Option 'el' do not match any domElement!");
 	if (!i.serverURL) throw Error("Option 'serverURL' is missing!");
@@ -7125,13 +7124,13 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			...Hc(s.comment) ? { selector: s.comment } : {}
 		});
 	}, l = () => {
-		s.pageview && Nm({
+		s.pageview && Pm({
 			serverURL: o.serverURL,
 			path: s.path,
 			...Hc(s.pageview) ? { selector: s.pageview } : {}
 		});
 	}, u = null;
-	a && (u = So(() => q(jm, {
+	a && (u = So(() => q(Mm, {
 		path: s.path,
 		...o
 	})), u.mount(a));
@@ -7148,4 +7147,4 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 		}
 	};
 };
-export { Pm as init };
+export { Fm as init };

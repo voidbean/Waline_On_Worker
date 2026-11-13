@@ -96,7 +96,7 @@ index e494066..8e2d2a7 100644
              </template>
            </button>
 diff --git a/packages/client/src/components/CommentCard.vue b/packages/client/src/components/CommentCard.vue
-index e0af915..54272c9 100644
+index e0af915..2bad3e8 100644
 --- a/packages/client/src/components/CommentCard.vue
 +++ b/packages/client/src/components/CommentCard.vue
 @@ -2,5 +2,5 @@
@@ -106,54 +106,50 @@ index e0af915..54272c9 100644
 +import { computed, inject, ref, watch } from 'vue';
 
  import { useLikeStorage, useUserInfo } from '../composables/index.js';
-@@ -67,4 +67,14 @@ const isOwner = computed(() => comment.user_id && userInfo.value.objectId === co
+@@ -67,4 +67,15 @@ const isOwner = computed(() => comment.user_id && userInfo.value.objectId === co
  const isReplyingCurrent = computed(() => comment.objectId === reply?.objectId);
 
 +const revealed = ref(false);
 +const concealed = computed(() => Boolean(comment.spoiler) && !revealed.value);
 +watch(() => [comment.objectId, comment.spoiler], () => { revealed.value = false; });
 +const toggleSpoiler = (): void => {
-+  if (revealed.value) {
-+    if (reply) emit('reply', null);
-+    if (edit) emit('edit', null);
++  // Only a descendant's composer disappears when this thread folds.
++  if (revealed.value && 'children' in comment) {
++    if (comment.children?.some((child) => child.objectId === reply?.objectId)) emit('reply', null);
++    if (comment.children?.some((child) => child.objectId === edit?.objectId)) emit('edit', null);
 +  }
 +  revealed.value = !revealed.value;
 +};
  const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
  </script>
-@@ -107,5 +117,5 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
+@@ -107,5 +118,5 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
          <div class="wl-comment-actions">
            <template v-if="isAdmin || isOwner">
 -            <button type="button" class="wl-edit" @click="emit('edit', comment)">
 +            <button type="button" class="wl-edit" :disabled="concealed" @click="emit('edit', comment)">
                <EditIcon />
              </button>
-@@ -141,4 +151,5 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
-             type="button"
-             class="wl-reply"
-+            :disabled="concealed"
-             :class="{ active: isReplyingCurrent }"
-             :title="isReplyingCurrent ? locale.cancelReply : locale.reply"
-@@ -166,6 +177,10 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
+@@ -166,6 +177,11 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
        </div>
 
 +      <button v-if="comment.spoiler && !isEditingCurrent" type="button" class="board-spoiler-toggle"
 +        :aria-expanded="revealed" @click="toggleSpoiler">
-+        ⚠ 含剧透 · {{ revealed ? '收起' : '点击查看' }}{{ !revealed && 'children' in comment && comment.children?.length ? '（含回复）' : '' }}
++        <span>含剧透</span>
++        <span class="board-spoiler-action">{{ revealed ? '收起' : '展开' }}{{ 'children' in comment && comment.children?.length ? '讨论' : '正文' }}</span>
 +      </button>
        <!-- eslint-disable vue/no-v-html -->
 -      <div v-if="!isEditingCurrent" class="wl-content">
 +      <div v-if="!concealed && !isEditingCurrent" class="wl-content">
          <p v-if="'reply_user' in comment && comment.reply_user" class="wl-reply-to">
            <a :href="'#' + comment.pid">@{{ comment.reply_user.nick }}</a>
-@@ -202,5 +217,5 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
+@@ -202,5 +218,5 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
 
        <div
 -        v-if="isReplyingCurrent || isEditingCurrent"
-+        v-if="!concealed && (isReplyingCurrent || isEditingCurrent)"
++        v-if="isReplyingCurrent || (!concealed && isEditingCurrent)"
          :class="{
            'wl-reply-wrapper': isReplyingCurrent,
-@@ -220,5 +235,5 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
+@@ -220,5 +236,5 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
        </div>
 
 -      <div v-if="'children' in comment" class="wl-quote">
@@ -161,10 +157,21 @@ index e0af915..54272c9 100644
          <CommentCard
            v-for="child in comment.children"
 diff --git a/packages/client/src/components/WalineComment.vue b/packages/client/src/components/WalineComment.vue
-index 7e6412e..136685c 100644
+index 7e6412e..9637473 100644
 --- a/packages/client/src/components/WalineComment.vue
 +++ b/packages/client/src/components/WalineComment.vue
-@@ -111,4 +111,6 @@ const onSubmit = (comment: WalineComment): void => {
+@@ -100,8 +100,10 @@ const onSortByChange = (item: WalineCommentSorting): void => {
+
+ const onReply = (comment: WalineComment | null): void => {
++  if (comment) edit.value = null;
+   reply.value = comment;
+ };
+
+ const onEdit = (comment: WalineComment | null): void => {
++  if (comment) reply.value = null;
+   edit.value = comment;
+ };
+@@ -111,4 +113,6 @@ const onSubmit = (comment: WalineComment): void => {
      edit.value.comment = comment.comment;
      edit.value.orig = comment.orig;
 +    edit.value.spoiler = comment.spoiler;

@@ -69,7 +69,8 @@ Base64 comments are not migrated; edit and reattach the file if necessary.
 2. Deploy the updated Waline Worker, then deploy Pages. Do not release the
    new composer first: the old Worker would ignore the spoiler checkbox.
 3. Verify a marked top-level image and its thread remain collapsed after reload;
-   a marked reply to an ordinary post conceals only that reply.
+   a marked reply to an ordinary post conceals only that reply. The reply button
+   opens its composer independently: replying never reveals a folded post.
 
 Guests can mark a new post. Signed-in authors may later change only their
 own warning, without changing the body or moderation status. Anonymous authors

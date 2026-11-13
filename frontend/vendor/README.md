@@ -24,3 +24,9 @@ cp "$work/upstream/packages/client/LICENSE" frontend/public/vendor/Waline-LICENS
 
 When upgrading the client also update its pinned CSS URL and check the editor,
 image request timing, nested reply disclosure, owner edits and moderation.
+
+For a folded-reply smoke test, create a marked root with an image and a child.
+On a fresh page, click Reply (not the disclosure) and submit a reply. Check that
+the root stays folded, its image is not requested and no child body appears.
+Expand it explicitly and confirm the reply is under the correct author. Repeat
+on a marked reply under an ordinary root; the rest of that thread stays visible.
