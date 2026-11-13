@@ -117,3 +117,13 @@ h2 { margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -.035em; }
 @media (prefers-reduced-motion: reduce) {
 	*, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
 }
+
+.account-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.account-bar a { display: inline-flex; align-items: center; gap: .5rem; color: #86502e; font-weight: 600; }
+.account-bar img { width: 30px; height: 30px; border-radius: 50%; }
+.account-bar button { border: 0; background: transparent; color: #65717a; cursor: pointer; }
+.account-page { max-width: 32rem; padding: 3rem 0; }
+.account-page h1 { font-size: 1.8rem; }
+.account-page label { display: block; margin: 1rem 0; }
+.account-page input { display: block; width: 100%; margin-top: .4rem; padding: .65rem; font: inherit; }
+.account-page button { padding: .6rem 1rem; border: 0; border-radius: 6px; background: #845334; color: white; font: inherit; cursor: pointer; }

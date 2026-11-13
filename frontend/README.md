@@ -1,11 +1,20 @@
 # Copperfield Pages frontend
 
 The Copperfield discussion board serves its static homepage on Pages. The browser
-uses that same origin for Waline: Pages Functions pass `/api/*` (comments and
-account requests) and `/ui`, `/ui/*` (login and profile pages) to the existing
-Worker through a service binding. There is no browser redirect to workers.dev,
-public upstream fallback, extra database, or private domain to configure.
-The Waline client assets still load from unpkg.
+uses that same origin for comments and accounts. Pages calls the existing Worker
+through the `WALINE` service binding. The Worker, D1, and the original Worker
+admin UI are unchanged. The Waline client assets still load from unpkg.
+
+- `/account` is the board's own QQ sign-in and profile page. QQ handles external
+  authorization; the return is bound to the initiating tab and lands back on
+  Pages. A first QQ sign-in creates an account using the existing backend flow.
+  Password sign-in, registration, and other OAuth providers aren't exposed on
+  the Pages entry. This doesn't disable anonymous comments or revoke sessions.
+- Previously shared `/ui/*` links lead to the board account page; use the
+  original Worker UI for administration. Nickname and optional homepage can
+  be changed on Pages without giving the frontend a privileged credential.
+- The comment-create response omits a null root ID on top-level comments so
+  Waline v3 can insert them immediately. Replies keep their real root ID.
 
 ## Cloudflare Pages (Git integration)
 
@@ -25,5 +34,5 @@ The Waline client assets still load from unpkg.
 Deploy via the existing Pages Git integration only after release approval.
 Binding changes require a new Pages deployment. Verify that the homepage loads,
 `/api/comment?path=%2F` returns Waline JSON (not the homepage), and `/ui/login`
-serves the login page. Confirm comment reading/posting on the Pages address;
+leads to the board account page. Confirm comment reading/posting on the Pages address;
 the client keeps the existing discussion path `/`.

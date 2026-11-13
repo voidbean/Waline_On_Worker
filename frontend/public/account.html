@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="referrer" content="no-referrer" />
+	<title>水楼账号 · Copperfield</title>
+	<link rel="stylesheet" href="/styles.css" />
+	<script type="module" src="/account.js"></script>
+</head>
+<body>
+	<header class="site-header"><a class="brand" href="/">← 返回水楼</a></header>
+	<main class="account-page">
+		<section class="board">
+			<p class="eyebrow">COPPERFIELD ／ ACCOUNT</p>
+			<h1 id="title">水楼账号</h1>
+			<p role="status" id="status">正在读取账号…</p>
+			<button type="button" id="qq" hidden>用 QQ 登录 / 注册</button>
+			<form id="profile" hidden>
+				<label>昵称<input name="nick" required maxlength="255" autocomplete="nickname" /></label>
+				<label>个人主页（选填）<input name="homepage" type="url" placeholder="https://" maxlength="1024" /></label>
+				<button type="submit">保存资料</button>
+			</form>
+		</section>
+	</main>
+</body>
+</html>
