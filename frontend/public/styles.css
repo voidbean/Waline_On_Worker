@@ -176,5 +176,5 @@ h2 { margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -.035em; }
   font-size: .75rem; white-space: nowrap;
 }
 #waline .wl-content img.wl-emoji {
-  display: inline-block; width: auto; height: 2em; max-width: 3em; vertical-align: middle; margin: 0 .08em;
+  display: inline-block; width: auto; height: 2.6em; max-width: 3.9em; vertical-align: middle; margin: 0 .08em;
 }
