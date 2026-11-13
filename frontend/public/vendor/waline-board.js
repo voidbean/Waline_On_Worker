@@ -6189,41 +6189,41 @@ var zf = ["data-index"], Bf = [
 	"onUpdate:modelValue",
 	"name",
 	"type"
-], Zf = ["readonly", "placeholder"], Qf = {
+], Zf = {
 	key: 1,
+	class: "board-spoiler-title-field"
+}, Qf = ["readonly", "placeholder"], $f = {
+	key: 2,
 	class: "wl-preview"
-}, $f = ["innerHTML"], ep = { class: "wl-footer" }, tp = {
+}, ep = ["innerHTML"], tp = { class: "wl-footer" }, np = { class: "board-composer-tools" }, rp = {
 	key: 0,
 	class: "wl-actions"
-}, np = {
+}, ip = {
 	href: "https://guides.github.com/features/mastering-markdown/",
 	title: "Markdown Guide",
 	"aria-label": "Markdown is supported",
 	class: "wl-action",
 	target: "_blank",
 	rel: "noopener noreferrer"
-}, rp = ["title"], ip = ["title"], ap = ["title", "aria-label"], op = ["title"], sp = { class: "wl-info" }, cp = { class: "board-spoiler-option" }, lp = {
-	key: 0,
-	class: "board-spoiler-title-field"
-}, up = { key: 1 }, dp = { class: "wl-text-number" }, fp = { key: 0 }, pp = ["textContent"], mp = ["textContent"], hp = ["disabled"], gp = ["placeholder"], _p = {
+}, ap = ["title"], op = ["title"], sp = ["title", "aria-label"], cp = ["title"], lp = { class: "board-spoiler-option" }, up = { class: "wl-info" }, dp = { key: 0 }, fp = { class: "wl-text-number" }, pp = { key: 0 }, mp = ["textContent"], hp = ["textContent"], gp = ["disabled"], _p = ["placeholder"], vp = {
 	key: 1,
 	class: "wl-loading"
-}, vp = [
+}, yp = [
 	"title",
 	"onClick",
 	"onMouseenter"
-], yp = ["src", "alt"], bp = ["src"], xp = {
+], bp = ["src", "alt"], xp = ["src"], Sp = {
 	key: 0,
 	class: "wl-tabs"
-}, Sp = [
+}, Cp = [
 	"aria-pressed",
 	"aria-label",
 	"onClick"
-], Cp = [
+], wp = [
 	"src",
 	"alt",
 	"title"
-], wp = ["title"], Tp = /* @__PURE__ */ sr({
+], Tp = ["title"], Ep = /* @__PURE__ */ sr({
 	__name: "CommentBox",
 	props: {
 		edit: {},
@@ -6463,44 +6463,50 @@ var zf = ["data-index"], Bf = [
 					name: e,
 					type: e === "mail" ? "email" : "text"
 				}, null, 10, Xf), [[go, L(o)[e]]])]))), 128))], 2)) : G("v-if", !0),
+				L(c) ? (V(), H("label", Zf, [f[9] ||= U("span", null, "剧透主题", -1), Gn(U("input", {
+					"onUpdate:modelValue": f[0] ||= (e) => /* @__PURE__ */ F(l) ? l.value = e : null,
+					type: "text",
+					maxlength: "60",
+					placeholder: "选填，例如：主线第十二章"
+				}, null, 512), [[oo, L(l)]])])) : G("v-if", !0),
 				Gn(U("textarea", {
 					id: "wl-edit",
 					ref: "textarea",
-					"onUpdate:modelValue": f[0] ||= (e) => /* @__PURE__ */ F(a) ? a.value = e : null,
+					"onUpdate:modelValue": f[1] ||= (e) => /* @__PURE__ */ F(a) ? a.value = e : null,
 					readonly: u.value,
 					class: "wl-editor",
 					placeholder: e.replyUser ? `@${e.replyUser}` : D.value.placeholder,
 					onKeydown: be,
 					onDrop: he,
 					onPaste: ge
-				}, null, 40, Zf), [[oo, L(a)]]),
-				ie.value ? (V(), H("div", Qf, [
-					f[9] ||= U("hr", null, null, -1),
+				}, null, 40, Qf), [[oo, L(a)]]),
+				ie.value ? (V(), H("div", $f, [
+					f[10] ||= U("hr", null, null, -1),
 					U("h4", null, A(D.value.preview) + ":", 1),
 					G(" eslint-disable-next-line vue/no-v-html "),
 					U("div", {
 						class: "wl-content",
 						innerHTML: w.value
-					}, null, 8, $f)
+					}, null, 8, ep)
 				])) : G("v-if", !0),
-				U("div", ep, [
-					u.value ? G("v-if", !0) : (V(), H("div", tp, [
-						U("a", np, [W(L(df))]),
+				U("div", tp, [
+					U("div", np, [u.value ? G("v-if", !0) : (V(), H("div", rp, [
+						U("a", ip, [W(L(df))]),
 						Gn(U("button", {
 							ref: "emoji-button",
 							type: "button",
 							class: O(["wl-action", { active: x.value }]),
 							title: D.value.emoji,
-							onClick: f[1] ||= (e) => x.value = !x.value
-						}, [W(L(sf))], 10, rp), [[Ta, y.value.tabs.length]]),
+							onClick: f[2] ||= (e) => x.value = !x.value
+						}, [W(L(sf))], 10, ap), [[Ta, y.value.tabs.length]]),
 						L(i).search ? (V(), H("button", {
 							key: 0,
 							ref: "gif-button",
 							type: "button",
 							class: O(["wl-action", { active: re.value }]),
 							title: D.value.gif,
-							onClick: f[2] ||= (e) => re.value = !re.value
-						}, [W(L(_f))], 10, ip)) : G("v-if", !0),
+							onClick: f[3] ||= (e) => re.value = !re.value
+						}, [W(L(_f))], 10, op)) : G("v-if", !0),
 						U("input", {
 							id: "wl-image-upload",
 							ref: "image-uploader",
@@ -6516,44 +6522,37 @@ var zf = ["data-index"], Bf = [
 							class: "wl-action",
 							title: D.value.uploadImage,
 							"aria-label": D.value.uploadImage
-						}, [W(L(cf))], 8, ap)) : G("v-if", !0),
+						}, [W(L(cf))], 8, sp)) : G("v-if", !0),
 						U("button", {
 							type: "button",
 							class: O(["wl-action", { active: ie.value }]),
 							title: D.value.preview,
-							onClick: f[3] ||= (e) => ie.value = !ie.value
-						}, [W(L(uf))], 10, op)
-					])),
-					U("div", sp, [
+							onClick: f[4] ||= (e) => ie.value = !ie.value
+						}, [W(L(uf))], 10, cp)
+					])), U("label", lp, [Gn(U("input", {
+						"onUpdate:modelValue": f[5] ||= (e) => /* @__PURE__ */ F(c) ? c.value = e : null,
+						type: "checkbox"
+					}, null, 512), [[so, L(c)]]), f[11] ||= zi(" 含剧透 ", -1)])]),
+					U("div", up, [
 						f[13] ||= U("div", { class: "wl-captcha-container" }, null, -1),
-						U("label", cp, [Gn(U("input", {
-							"onUpdate:modelValue": f[4] ||= (e) => /* @__PURE__ */ F(c) ? c.value = e : null,
-							type: "checkbox"
-						}, null, 512), [[so, L(c)]]), f[10] ||= zi(" 含剧透（文字和图片） ", -1)]),
-						L(c) ? (V(), H("label", lp, [f[11] ||= U("span", null, "剧透主题（选填）", -1), Gn(U("input", {
-							"onUpdate:modelValue": f[5] ||= (e) => /* @__PURE__ */ F(l) ? l.value = e : null,
-							type: "text",
-							maxlength: "60",
-							placeholder: "例如：主线第十二章"
-						}, null, 512), [[oo, L(l)]])])) : G("v-if", !0),
-						u.value ? (V(), H("span", up, "仅修改剧透提示；新增或改写主题需重新审核。")) : G("v-if", !0),
-						U("div", dp, [
+						u.value ? (V(), H("span", dp, "仅修改剧透提示；新增或改写主题需重新审核。")) : G("v-if", !0),
+						U("div", fp, [
 							zi(A(ae.value) + " ", 1),
-							L(i).wordLimit ? (V(), H("span", fp, [f[12] ||= zi(" \xA0/\xA0 ", -1), U("span", {
+							L(i).wordLimit ? (V(), H("span", pp, [f[12] ||= zi(" \xA0/\xA0 ", -1), U("span", {
 								class: O({ illegal: !se.value }),
 								textContent: A(oe.value)
-							}, null, 10, pp)])) : G("v-if", !0),
+							}, null, 10, mp)])) : G("v-if", !0),
 							zi(" \xA0" + A(D.value.word), 1)
 						]),
 						L(i).login !== "disable" && !ue.value ? (V(), H("button", {
-							key: 2,
+							key: 1,
 							type: "button",
 							class: "wl-btn",
 							onClick: xe,
 							textContent: A(D.value.login)
-						}, null, 8, mp)) : G("v-if", !0),
+						}, null, 8, hp)) : G("v-if", !0),
 						L(i).login !== "force" || ue.value ? (V(), H("button", {
-							key: 3,
+							key: 2,
 							type: "submit",
 							class: "primary wl-btn",
 							title: "Cmd|Ctrl + Enter",
@@ -6562,7 +6561,7 @@ var zf = ["data-index"], Bf = [
 						}, [ce.value ? (V(), ji(L(gf), {
 							key: 0,
 							size: 16
-						})) : (V(), H(B, { key: 1 }, [zi(A(n.edit ? "保存修改" : L(c) ? "发布剧透评论" : D.value.submit), 1)], 64))], 8, hp)) : G("v-if", !0)
+						})) : (V(), H(B, { key: 1 }, [zi(A(n.edit ? "保存修改" : L(c) ? "发布剧透评论" : D.value.submit), 1)], 64))], 8, gp)) : G("v-if", !0)
 					]),
 					U("div", {
 						ref: "gif-popup",
@@ -6573,7 +6572,7 @@ var zf = ["data-index"], Bf = [
 							type: "text",
 							placeholder: D.value.gifSearchPlaceholder,
 							onInput: f[6] ||= (...e) => L(Te) && L(Te)(...e)
-						}, null, 40, gp),
+						}, null, 40, _p),
 						T.list.length ? (V(), ji(Vf, {
 							key: 0,
 							items: T.list,
@@ -6582,7 +6581,7 @@ var zf = ["data-index"], Bf = [
 							onInsert: f[7] ||= (e) => pe(e),
 							onScroll: we
 						}, null, 8, ["items"])) : G("v-if", !0),
-						T.loading ? (V(), H("div", _p, [W(L(gf), { size: 30 })])) : G("v-if", !0)
+						T.loading ? (V(), H("div", vp, [W(L(gf), { size: 30 })])) : G("v-if", !0)
 					], 2),
 					U("div", {
 						ref: "emoji-popup",
@@ -6606,7 +6605,7 @@ var zf = ["data-index"], Bf = [
 							alt: e,
 							loading: "lazy",
 							referrerPolicy: "no-referrer"
-						}, null, 8, yp)) : G("v-if", !0)], 40, vp))), 128))], 32)) : G("v-if", !0)], 64))), 128)),
+						}, null, 8, bp)) : G("v-if", !0)], 40, yp))), 128))], 32)) : G("v-if", !0)], 64))), 128)),
 						U("div", null, [S.value ? (V(), H("img", {
 							key: 0,
 							class: "wl-emoji-preview",
@@ -6615,8 +6614,8 @@ var zf = ["data-index"], Bf = [
 							loading: "lazy",
 							referrerPolicy: "no-referrer",
 							style: fe(C.value)
-						}, null, 12, bp)) : G("v-if", !0)]),
-						y.value.tabs.length > 1 ? (V(), H("div", xp, [(V(!0), H(B, null, Er(y.value.tabs, (e, t) => (V(), H("button", {
+						}, null, 12, xp)) : G("v-if", !0)]),
+						y.value.tabs.length > 1 ? (V(), H("div", Sp, [(V(!0), H(B, null, Er(y.value.tabs, (e, t) => (V(), H("button", {
 							key: e.name,
 							type: "button",
 							class: O(["wl-tab", { active: b.value === t }]),
@@ -6630,7 +6629,7 @@ var zf = ["data-index"], Bf = [
 							title: e.name,
 							loading: "lazy",
 							referrerPolicy: "no-referrer"
-						}, null, 8, Cp), U("span", null, A(e.name), 1)], 10, Sp))), 128))])) : G("v-if", !0)
+						}, null, 8, wp), U("span", null, A(e.name), 1)], 10, Cp))), 128))])) : G("v-if", !0)
 					], 2)
 				])
 			]),
@@ -6640,39 +6639,39 @@ var zf = ["data-index"], Bf = [
 				class: "wl-close",
 				title: D.value.cancelReply,
 				onClick: f[8] ||= (t) => e.replyId ? r("cancelReply") : r("cancelEdit")
-			}, [W(L(af), { size: 24 })], 8, wp)) : G("v-if", !0)
+			}, [W(L(af), { size: 24 })], 8, Tp)) : G("v-if", !0)
 		]));
 	}
-}), Ep = ["id"], Dp = {
+}), Dp = ["id"], Op = {
 	class: "wl-user",
 	"aria-hidden": "true"
-}, Op = ["src"], kp = { class: "wl-card" }, Ap = { class: "wl-head" }, jp = ["href"], Mp = {
+}, kp = ["src"], Ap = { class: "wl-card" }, jp = { class: "wl-head" }, Mp = ["href"], Np = {
 	key: 1,
 	class: "wl-nick"
-}, Np = ["textContent"], Pp = ["textContent"], Fp = ["textContent"], Ip = ["textContent"], Lp = { class: "wl-comment-actions" }, Rp = ["disabled"], zp = ["title", "href"], Bp = ["title"], Vp = ["title"], Hp = {
+}, Pp = ["textContent"], Fp = ["textContent"], Ip = ["textContent"], Lp = ["textContent"], Rp = { class: "wl-comment-actions" }, zp = ["disabled"], Bp = ["title", "href"], Vp = ["title"], Hp = ["title"], Up = {
 	class: "wl-meta",
 	"aria-hidden": "true"
-}, Up = ["data-value", "textContent"], Wp = {
+}, Wp = ["data-value", "textContent"], Gp = {
 	key: 0,
 	class: "wl-warning",
 	"aria-hidden": "true"
-}, Gp = ["aria-expanded"], Kp = { class: "board-spoiler-label" }, qp = { class: "board-spoiler-action" }, Jp = {
+}, Kp = ["aria-expanded"], qp = { class: "board-spoiler-label" }, Jp = { class: "board-spoiler-action" }, Yp = {
 	key: 2,
 	class: "wl-content"
-}, Yp = {
+}, Xp = {
 	key: 0,
 	class: "wl-reply-to"
-}, Xp = ["href"], Zp = ["innerHTML"], Qp = {
+}, Zp = ["href"], Qp = ["innerHTML"], $p = {
 	key: 3,
 	class: "wl-admin-actions"
-}, $p = { class: "wl-comment-status" }, em = [
+}, em = { class: "wl-comment-status" }, tm = [
 	"disabled",
 	"onClick",
 	"textContent"
-], tm = {
+], nm = {
 	key: 5,
 	class: "wl-quote"
-}, nm = /* @__PURE__ */ sr({
+}, rm = /* @__PURE__ */ sr({
 	__name: "CommentCard",
 	props: {
 		comment: {},
@@ -6714,50 +6713,50 @@ var zf = ["data-index"], Bf = [
 			return V(), H("div", {
 				id: e.comment.objectId.toString(),
 				class: "wl-card-item"
-			}, [U("div", Dp, [
+			}, [U("div", Op, [
 				e.comment.avatar ? (V(), H("img", {
 					key: 0,
 					class: "wl-user-avatar",
 					src: e.comment.avatar,
 					alt: ""
-				}, null, 8, Op)) : G("v-if", !0),
+				}, null, 8, kp)) : G("v-if", !0),
 				e.comment.type === "guest" ? (V(), ji(L(mf), { key: 1 })) : G("v-if", !0),
 				e.comment.type === "administrator" ? (V(), ji(L(hf), { key: 2 })) : G("v-if", !0)
-			]), U("div", kp, [
-				U("div", Ap, [
+			]), U("div", Ap, [
+				U("div", jp, [
 					l.value ? (V(), H("a", {
 						key: 0,
 						class: "wl-nick",
 						href: l.value,
 						target: "_blank",
 						rel: "ugc nofollow noreferrer noopener"
-					}, A(e.comment.nick), 9, jp)) : (V(), H("span", Mp, A(e.comment.nick), 1)),
+					}, A(e.comment.nick), 9, Mp)) : (V(), H("span", Np, A(e.comment.nick), 1)),
 					e.comment.label ? (V(), H("span", {
 						key: 2,
 						class: "wl-badge",
 						textContent: A(e.comment.label)
-					}, null, 8, Np)) : G("v-if", !0),
+					}, null, 8, Pp)) : G("v-if", !0),
 					e.comment.sticky ? (V(), H("span", {
 						key: 3,
 						class: "wl-badge",
 						textContent: A(c.value.sticky)
-					}, null, 8, Pp)) : G("v-if", !0),
+					}, null, 8, Fp)) : G("v-if", !0),
 					typeof e.comment.level == "number" ? (V(), H("span", {
 						key: 4,
 						class: O(`wl-badge level${e.comment.level}`),
 						textContent: A(c.value[`level${e.comment.level}`] || `Level ${e.comment.level}`)
-					}, null, 10, Fp)) : G("v-if", !0),
+					}, null, 10, Ip)) : G("v-if", !0),
 					U("span", {
 						class: "wl-time",
 						textContent: A(d.value)
-					}, null, 8, Ip),
-					U("div", Lp, [
+					}, null, 8, Lp),
+					U("div", Rp, [
 						f.value || p.value ? (V(), H(B, { key: 0 }, [U("button", {
 							type: "button",
 							class: "wl-edit",
 							disabled: g.value,
 							onClick: a[0] ||= (t) => n("edit", e.comment)
-						}, [W(L(pf))], 8, Rp), U("button", {
+						}, [W(L(pf))], 8, zp), U("button", {
 							type: "button",
 							class: "wl-delete",
 							onClick: a[1] ||= (t) => n("delete", e.comment)
@@ -6770,22 +6769,22 @@ var zf = ["data-index"], Bf = [
 							href: `${L(i).serverURL}/api/comment/rss?user_id=${e.comment.user_id}`,
 							target: "_blank",
 							rel: "noopener noreferrer"
-						}, [W(L(yf))], 8, zp)) : G("v-if", !0),
+						}, [W(L(yf))], 8, Bp)) : G("v-if", !0),
 						U("button", {
 							type: "button",
 							class: "wl-like",
 							title: u.value ? c.value.cancelLike : c.value.like,
 							onClick: a[2] ||= (t) => n("like", e.comment)
-						}, [W(L(lf), { active: u.value }, null, 8, ["active"]), zi(" " + A("like" in e.comment ? e.comment.like : ""), 1)], 8, Bp),
+						}, [W(L(lf), { active: u.value }, null, 8, ["active"]), zi(" " + A("like" in e.comment ? e.comment.like : ""), 1)], 8, Vp),
 						U("button", {
 							type: "button",
 							class: O(["wl-reply", { active: m.value }]),
 							title: m.value ? c.value.cancelReply : c.value.reply,
 							onClick: a[3] ||= (t) => n("reply", m.value ? null : e.comment)
-						}, [W(L(ff))], 10, Vp)
+						}, [W(L(ff))], 10, Hp)
 					])
 				]),
-				U("div", Hp, [(V(), H(B, null, Er([
+				U("div", Up, [(V(), H(B, null, Er([
 					"addr",
 					"browser",
 					"os"
@@ -6794,19 +6793,19 @@ var zf = ["data-index"], Bf = [
 					class: O(`wl-${t}`),
 					"data-value": e.comment[t],
 					textContent: A(e.comment[t])
-				}, null, 10, Up)) : G("v-if", !0)], 64))), 64))]),
-				e.comment.status === "waiting" && !f.value ? (V(), H("div", Wp, A(c.value.commentUnderReview), 1)) : G("v-if", !0),
+				}, null, 10, Wp)) : G("v-if", !0)], 64))), 64))]),
+				e.comment.status === "waiting" && !f.value ? (V(), H("div", Gp, A(c.value.commentUnderReview), 1)) : G("v-if", !0),
 				e.comment.spoiler && !v.value ? (V(), H("button", {
 					key: 1,
 					type: "button",
 					class: "board-spoiler-toggle",
 					"aria-expanded": h.value,
 					onClick: _
-				}, [U("span", Kp, [a[17] ||= zi("含剧透", -1), e.comment.spoilerTitle ? (V(), H(B, { key: 0 }, [zi("：" + A(e.comment.spoilerTitle), 1)], 64)) : G("v-if", !0)]), U("span", qp, A(h.value ? "收起" : "展开") + A("children" in e.comment && e.comment.children?.length ? "讨论" : "正文"), 1)], 8, Gp)) : G("v-if", !0),
+				}, [U("span", qp, [a[17] ||= zi("含剧透", -1), e.comment.spoilerTitle ? (V(), H(B, { key: 0 }, [zi("：" + A(e.comment.spoilerTitle), 1)], 64)) : G("v-if", !0)]), U("span", Jp, A(h.value ? "收起" : "展开") + A("children" in e.comment && e.comment.children?.length ? "讨论" : "正文"), 1)], 8, Kp)) : G("v-if", !0),
 				G(" eslint-disable vue/no-v-html "),
-				!g.value && !v.value ? (V(), H("div", Jp, ["reply_user" in e.comment && e.comment.reply_user ? (V(), H("p", Yp, [U("a", { href: "#" + e.comment.pid }, "@" + A(e.comment.reply_user.nick), 9, Xp), a[18] ||= U("span", null, ": ", -1)])) : G("v-if", !0), U("div", { innerHTML: e.comment.comment }, null, 8, Zp)])) : G("v-if", !0),
+				!g.value && !v.value ? (V(), H("div", Yp, ["reply_user" in e.comment && e.comment.reply_user ? (V(), H("p", Xp, [U("a", { href: "#" + e.comment.pid }, "@" + A(e.comment.reply_user.nick), 9, Zp), a[18] ||= U("span", null, ": ", -1)])) : G("v-if", !0), U("div", { innerHTML: e.comment.comment }, null, 8, Qp)])) : G("v-if", !0),
 				G(" eslint-enable vue/no-v-html "),
-				f.value && !v.value ? (V(), H("div", Qp, [U("span", $p, [(V(), H(B, null, Er(r, (t) => U("button", {
+				f.value && !v.value ? (V(), H("div", $p, [U("span", em, [(V(), H(B, null, Er(r, (t) => U("button", {
 					key: t,
 					type: "submit",
 					class: O(`wl-btn wl-${t}`),
@@ -6816,7 +6815,7 @@ var zf = ["data-index"], Bf = [
 						comment: e.comment
 					}),
 					textContent: A(c.value[t])
-				}, null, 10, em)), 64))]), f.value && !("rid" in e.comment) ? (V(), H("button", {
+				}, null, 10, tm)), 64))]), f.value && !("rid" in e.comment) ? (V(), H("button", {
 					key: 0,
 					type: "submit",
 					class: "wl-btn wl-sticky",
@@ -6828,7 +6827,7 @@ var zf = ["data-index"], Bf = [
 						"wl-reply-wrapper": m.value,
 						"wl-edit-wrapper": v.value
 					})
-				}, [W(Tp, {
+				}, [W(Ep, {
 					edit: e.edit,
 					"reply-id": e.reply?.objectId,
 					"reply-user": e.comment.nick,
@@ -6843,7 +6842,7 @@ var zf = ["data-index"], Bf = [
 					"reply-user",
 					"root-id"
 				])], 2)) : G("v-if", !0),
-				!g.value && "children" in e.comment ? (V(), H("div", tm, [(V(!0), H(B, null, Er(e.comment.children, (t) => (V(), ji(o, {
+				!g.value && "children" in e.comment ? (V(), H("div", nm, [(V(!0), H(B, null, Er(e.comment.children, (t) => (V(), ji(o, {
 					key: t.objectId,
 					comment: t,
 					reply: e.reply,
@@ -6863,25 +6862,25 @@ var zf = ["data-index"], Bf = [
 					"edit",
 					"root-id"
 				]))), 128))])) : G("v-if", !0)
-			])], 8, Ep);
+			])], 8, Dp);
 		};
 	}
-}), rm = { "data-waline": "" }, im = { class: "wl-meta-head" }, am = { class: "wl-count" }, om = ["textContent"], sm = { class: "wl-sort" }, cm = ["onClick"], lm = { class: "wl-cards" }, um = {
+}), im = { "data-waline": "" }, am = { class: "wl-meta-head" }, om = { class: "wl-count" }, sm = ["textContent"], cm = { class: "wl-sort" }, lm = ["onClick"], um = { class: "wl-cards" }, dm = {
 	key: 1,
 	class: "wl-operation"
-}, dm = ["textContent"], fm = {
+}, fm = ["textContent"], pm = {
 	key: 2,
 	class: "wl-loading"
-}, pm = ["textContent"], mm = { class: "wl-operation" }, hm = ["textContent"], gm = {
+}, mm = ["textContent"], hm = { class: "wl-operation" }, gm = ["textContent"], _m = {
 	key: 5,
 	class: "wl-meta-foot"
-}, _m = {
+}, vm = {
 	key: 0,
 	class: "wl-rss"
-}, vm = ["href", "alt"], ym = ["textContent"], bm = ["href", "alt"], xm = ["textContent"], Sm = {
+}, ym = ["href", "alt"], bm = ["textContent"], xm = ["href", "alt"], Sm = ["textContent"], Cm = {
 	key: 1,
 	class: "wl-power"
-}, Cm = /* @__PURE__ */ sr({
+}, wm = /* @__PURE__ */ sr({
 	__name: "WalineComment",
 	props: {
 		serverURL: {},
@@ -6996,23 +6995,23 @@ var zf = ["data-index"], Bf = [
 			i.searchParams.delete("token"), history.replaceState(null, "", i.pathname + (i.searchParams.toString() ? `?${i.searchParams.toString()}` : "") + i.hash);
 		}), br(() => {
 			h?.();
-		}), (e, t) => (V(), H("div", rm, [
+		}), (e, t) => (V(), H("div", im, [
 			W(Of),
-			!d.value && !f.value ? (V(), ji(Tp, {
+			!d.value && !f.value ? (V(), ji(Ep, {
 				key: 0,
 				onLog: v,
 				onSubmit: S
 			})) : G("v-if", !0),
-			U("div", im, [U("div", am, [a.value ? (V(), H("span", {
+			U("div", am, [U("div", om, [a.value ? (V(), H("span", {
 				key: 0,
 				class: "wl-num",
 				textContent: A(a.value)
-			}, null, 8, om)) : G("v-if", !0), zi(" " + A(m.value.comment), 1)]), U("ul", sm, [(V(!0), H(B, null, Er(L(Pc), (e) => (V(), H("li", {
+			}, null, 8, sm)) : G("v-if", !0), zi(" " + A(m.value.comment), 1)]), U("ul", cm, [(V(!0), H(B, null, Er(L(Pc), (e) => (V(), H("li", {
 				key: e,
 				class: O([e === l.value ? "active" : ""]),
 				onClick: (t) => y(e)
-			}, A(m.value[e]), 11, cm))), 128))])]),
-			U("div", lm, [(V(!0), H(B, null, Er(u.value, (e) => (V(), ji(nm, {
+			}, A(m.value[e]), 11, lm))), 128))])]),
+			U("div", um, [(V(!0), H(B, null, Er(u.value, (e) => (V(), ji(rm, {
 				key: e.objectId,
 				"root-id": e.objectId,
 				comment: e,
@@ -7032,35 +7031,35 @@ var zf = ["data-index"], Bf = [
 				"reply",
 				"edit"
 			]))), 128))]),
-			i.value === "error" ? (V(), H("div", um, [U("button", {
+			i.value === "error" ? (V(), H("div", dm, [U("button", {
 				type: "button",
 				class: "wl-btn",
 				onClick: v,
 				textContent: A(m.value.refresh)
-			}, null, 8, dm)])) : i.value === "loading" ? (V(), H("div", fm, [W(L(gf), { size: 30 })])) : u.value.length ? o.value < s.value ? (V(), H(B, { key: 4 }, [G(" Load more button "), U("div", mm, [U("button", {
+			}, null, 8, fm)])) : i.value === "loading" ? (V(), H("div", pm, [W(L(gf), { size: 30 })])) : u.value.length ? o.value < s.value ? (V(), H(B, { key: 4 }, [G(" Load more button "), U("div", hm, [U("button", {
 				type: "button",
 				class: "wl-btn",
 				onClick: _,
 				textContent: A(m.value.more)
-			}, null, 8, hm)])], 2112)) : G("v-if", !0) : (V(), H("div", {
+			}, null, 8, gm)])], 2112)) : G("v-if", !0) : (V(), H("div", {
 				key: 3,
 				class: "wl-empty",
 				textContent: A(m.value.sofa)
-			}, null, 8, pm)),
-			u.value.length || i.value !== "loading" ? (V(), H("div", gm, [
-				c.value.noRss ? G("v-if", !0) : (V(), H("div", _m, [U("a", {
+			}, null, 8, mm)),
+			u.value.length || i.value !== "loading" ? (V(), H("div", _m, [
+				c.value.noRss ? G("v-if", !0) : (V(), H("div", vm, [U("a", {
 					href: `${c.value.serverURL}/api/comment/rss?path=${encodeURIComponent(c.value.path)}`,
 					target: "_blank",
 					rel: "noopener noreferrer",
 					alt: m.value.subPostComment
-				}, [W(L(vf)), U("span", { textContent: A(m.value.subPostComment) }, null, 8, ym)], 8, vm), U("a", {
+				}, [W(L(vf)), U("span", { textContent: A(m.value.subPostComment) }, null, 8, bm)], 8, ym), U("a", {
 					href: `${c.value.serverURL}/api/comment/rss`,
 					target: "_blank",
 					rel: "noopener noreferrer",
 					alt: m.value.subSiteComment
-				}, [W(L(vf)), U("span", { textContent: A(m.value.subSiteComment) }, null, 8, xm)], 8, bm)])),
+				}, [W(L(vf)), U("span", { textContent: A(m.value.subSiteComment) }, null, 8, Sm)], 8, xm)])),
 				G(" Copyright Information "),
-				c.value.noCopyright ? G("v-if", !0) : (V(), H("div", Sm, [
+				c.value.noCopyright ? G("v-if", !0) : (V(), H("div", Cm, [
 					t[0] ||= zi(" Powered by ", -1),
 					t[1] ||= U("a", {
 						href: "https://github.com/walinejs/waline",
@@ -7072,18 +7071,18 @@ var zf = ["data-index"], Bf = [
 			])) : G("v-if", !0)
 		]));
 	}
-}), wm = (e, t) => {
+}), Tm = (e, t) => {
 	t.forEach((t, n) => {
 		let r = e[n].time;
 		typeof r == "number" && (t.textContent = r.toString());
 	});
-}, Tm = ({ serverURL: e, path: t = window.location.pathname, selector: n = ".waline-pageview-count", update: r = !0, lang: i = navigator.language }) => {
+}, Em = ({ serverURL: e, path: t = window.location.pathname, selector: n = ".waline-pageview-count", update: r = !0, lang: i = navigator.language }) => {
 	let a = new AbortController(), o = [...document.querySelectorAll(n)], s = (e) => {
 		let n = Nd(e);
 		return n != null && t !== n;
 	}, c = async (n) => {
 		try {
-			wm(await Lo({
+			Tm(await Lo({
 				serverURL: zc(e),
 				paths: n.map((e) => Nd(e) ?? t),
 				lang: i,
@@ -7100,11 +7099,11 @@ var zf = ["data-index"], Bf = [
 			path: t,
 			lang: i
 		}).then((e) => {
-			wm(e, n);
+			Tm(e, n);
 		}), r.length > 0 && c(r);
 	} else c(o);
 	return a.abort.bind(a);
-}, Em = ({ el: e = "#waline", path: t = window.location.pathname, comment: n = !1, pageview: r = !1, ...i }) => {
+}, Dm = ({ el: e = "#waline", path: t = window.location.pathname, comment: n = !1, pageview: r = !1, ...i }) => {
 	let a = e ? Bl(e) : null;
 	if (e && !a) throw Error("Option 'el' do not match any domElement!");
 	if (!i.serverURL) throw Error("Option 'serverURL' is missing!");
@@ -7119,13 +7118,13 @@ var zf = ["data-index"], Bf = [
 			...Uc(s.comment) ? { selector: s.comment } : {}
 		});
 	}, l = () => {
-		s.pageview && Tm({
+		s.pageview && Em({
 			serverURL: o.serverURL,
 			path: s.path,
 			...Uc(s.pageview) ? { selector: s.pageview } : {}
 		});
 	}, u = null;
-	a && (u = So(() => q(Cm, {
+	a && (u = So(() => q(wm, {
 		path: s.path,
 		...o
 	})), u.mount(a));
@@ -7142,4 +7141,4 @@ var zf = ["data-index"], Bf = [
 		}
 	};
 };
-export { Em as init };
+export { Dm as init };

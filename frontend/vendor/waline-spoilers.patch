@@ -19,7 +19,7 @@ index 07558c7..6d83419 100644
    /** Comment object ID */
    objectId: number;
 diff --git a/packages/client/src/components/CommentBox.vue b/packages/client/src/components/CommentBox.vue
-index e494066..ff2b369 100644
+index e494066..63f8a00 100644
 --- a/packages/client/src/components/CommentBox.vue
 +++ b/packages/client/src/components/CommentBox.vue
 @@ -1,5 +1,5 @@
@@ -71,41 +71,169 @@ index e494066..ff2b369 100644
 +    spoiler.value = false;
      editor.value = '';
 
-@@ -606,4 +622,5 @@ onMounted(() => {
+@@ -602,8 +618,14 @@ onMounted(() => {
+       </div>
+
++      <label v-if="spoiler" class="board-spoiler-title-field">
++        <span>剧透主题</span>
++        <input v-model="spoilerTitle" type="text" maxlength="60" placeholder="选填，例如：主线第十二章" />
++      </label>
++
+       <textarea
+         id="wl-edit"
          ref="textarea"
          v-model="editor"
 +        :readonly="warningOnly"
          class="wl-editor"
          :placeholder="replyUser ? `@${replyUser}` : locale.placeholder"
-@@ -613,5 +630,5 @@ onMounted(() => {
+@@ -613,5 +635,5 @@ onMounted(() => {
        />
 
 -      <div v-show="showPreview" class="wl-preview">
 +      <div v-if="showPreview" class="wl-preview">
          <hr />
 
-@@ -622,5 +639,5 @@ onMounted(() => {
+@@ -622,73 +644,79 @@ onMounted(() => {
 
        <div class="wl-footer">
 -        <div class="wl-actions">
-+        <div v-if="!warningOnly" class="wl-actions">
-           <a
-             href="https://guides.github.com/features/mastering-markdown/"
-@@ -691,4 +708,13 @@ onMounted(() => {
+-          <a
+-            href="https://guides.github.com/features/mastering-markdown/"
+-            title="Markdown Guide"
+-            aria-label="Markdown is supported"
+-            class="wl-action"
+-            target="_blank"
+-            rel="noopener noreferrer"
+-          >
+-            <MarkdownIcon />
+-          </a>
++        <div class="board-composer-tools">
++          <div v-if="!warningOnly" class="wl-actions">
++            <a
++              href="https://guides.github.com/features/mastering-markdown/"
++              title="Markdown Guide"
++              aria-label="Markdown is supported"
++              class="wl-action"
++              target="_blank"
++              rel="noopener noreferrer"
++            >
++              <MarkdownIcon />
++            </a>
+
+-          <button
+-            v-show="emoji.tabs.length"
+-            ref="emoji-button"
+-            type="button"
+-            class="wl-action"
+-            :class="{ active: showEmoji }"
+-            :title="locale.emoji"
+-            @click="showEmoji = !showEmoji"
+-          >
+-            <EmojiIcon />
+-          </button>
++            <button
++              v-show="emoji.tabs.length"
++              ref="emoji-button"
++              type="button"
++              class="wl-action"
++              :class="{ active: showEmoji }"
++              :title="locale.emoji"
++              @click="showEmoji = !showEmoji"
++            >
++              <EmojiIcon />
++            </button>
+
+-          <button
+-            v-if="config.search"
+-            ref="gif-button"
+-            type="button"
+-            class="wl-action"
+-            :class="{ active: showGif }"
+-            :title="locale.gif"
+-            @click="showGif = !showGif"
+-          >
+-            <GifIcon />
+-          </button>
++            <button
++              v-if="config.search"
++              ref="gif-button"
++              type="button"
++              class="wl-action"
++              :class="{ active: showGif }"
++              :title="locale.gif"
++              @click="showGif = !showGif"
++            >
++              <GifIcon />
++            </button>
+
+-          <input
+-            id="wl-image-upload"
+-            ref="image-uploader"
+-            class="upload"
+-            aria-hidden="true"
+-            type="file"
+-            accept=".png,.jpg,.jpeg,.webp,.bmp,.gif"
+-            @change="onImageChange"
+-          />
++            <input
++              id="wl-image-upload"
++              ref="image-uploader"
++              class="upload"
++              aria-hidden="true"
++              type="file"
++              accept=".png,.jpg,.jpeg,.webp,.bmp,.gif"
++              @change="onImageChange"
++            />
+
+-          <label
+-            v-if="canUploadImage"
+-            for="wl-image-upload"
+-            class="wl-action"
+-            :title="locale.uploadImage"
+-            :aria-label="locale.uploadImage"
+-          >
+-            <ImageIcon />
+-          </label>
++            <label
++              v-if="canUploadImage"
++              for="wl-image-upload"
++              class="wl-action"
++              :title="locale.uploadImage"
++              :aria-label="locale.uploadImage"
++            >
++              <ImageIcon />
++            </label>
+
+-          <button
+-            type="button"
+-            class="wl-action"
+-            :class="{ active: showPreview }"
+-            :title="locale.preview"
+-            @click="showPreview = !showPreview"
+-          >
+-            <PreviewIcon />
+-          </button>
++            <button
++              type="button"
++              class="wl-action"
++              :class="{ active: showPreview }"
++              :title="locale.preview"
++              @click="showPreview = !showPreview"
++            >
++              <PreviewIcon />
++            </button>
++          </div>
++          <label class="board-spoiler-option">
++            <input v-model="spoiler" type="checkbox" /> 含剧透
++          </label>
+         </div>
+
          <div class="wl-info">
            <div class="wl-captcha-container" />
-+          <label class="board-spoiler-option">
-+            <input v-model="spoiler" type="checkbox" /> 含剧透（文字和图片）
-+          </label>
-+          <label v-if="spoiler" class="board-spoiler-title-field">
-+            <span>剧透主题（选填）</span>
-+            <input v-model="spoilerTitle" type="text" maxlength="60"
-+              placeholder="例如：主线第十二章" />
-+          </label>
 +          <span v-if="warningOnly">仅修改剧透提示；新增或改写主题需重新审核。</span>
 
            <div class="wl-text-number">
-@@ -722,5 +748,5 @@ onMounted(() => {
+@@ -722,5 +750,5 @@ onMounted(() => {
 
              <template v-else>
 -              {{ locale.submit }}
