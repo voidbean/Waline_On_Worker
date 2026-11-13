@@ -16,6 +16,13 @@ CSS still loads from unpkg. See vendor/README.md for the build and licenses.
 - The comment-create response omits a null root ID on top-level comments so
   Waline v3 can insert them immediately. Replies keep their real root ID.
 
+## Board emblem
+
+The header uses the Gray Raven squad emblem from *Punishing: Gray Raven* (Kuro Games):
+[BWiki: 势力 灰鸦小队.png](https://wiki.biligame.com/zspms/文件:势力_灰鸦小队.png).
+The favicon uses the same artwork on a light background for dark browser tabs.
+Both assets are served locally; the board is an unofficial fan site.
+
 ## Cloudflare Pages (Git integration)
 
 - Project: `copperaqua`; production branch: `main`.
