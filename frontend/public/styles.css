@@ -147,7 +147,7 @@ h2 { margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -.035em; }
 	color: #65584d; font-size: .8rem; text-align: start;
 }
 #waline .board-spoiler-title-field input {
-	width: 100%; min-width: 0; padding: .4rem .55rem; border: 1px solid #c7a98c;
+	box-sizing: border-box; width: 100%; min-width: 0; padding: .4rem .55rem; border: 1px solid #c7a98c;
 	border-radius: .4rem; background: var(--paper); color: var(--ink); font: inherit;
 }
 #waline .board-spoiler-title-field input:focus-visible { outline: 2px solid #925a36; }
