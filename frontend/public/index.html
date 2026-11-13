@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="description"
+			content="战双帕弥什玩家交流用的轻量水楼。任务结束后，来这里留句话。"
+		/>
+		<meta name="theme-color" content="#141a22" />
+		<title>Copperfield · 指挥官水楼</title>
+		<link rel="preconnect" href="https://unpkg.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+		/>
+		<link rel="stylesheet" href="./styles.css" />
+		<script src="./config.js"></script>
+		<script type="module" src="./main.js"></script>
+	</head>
+	<body>
+		<div class="ambient ambient-one" aria-hidden="true"></div>
+		<div class="ambient ambient-two" aria-hidden="true"></div>
+		<header class="site-header">
+			<a class="brand" href="/" aria-label="Copperfield 指挥官水楼首页">
+				<span class="brand-mark" aria-hidden="true">C</span>
+				<span class="brand-name">COPPERFIELD</span>
+			</a>
+			<span class="header-note"><span class="status-dot"></span> COMMANDER LOUNGE</span>
+		</header>
+
+		<main>
+			<section class="hero" aria-labelledby="page-title">
+				<p class="eyebrow">PUNISHING: GRAY RAVEN <span>／</span> 轻量水楼</p>
+				<h1 id="page-title">指挥官，<em>坐会儿？</em></h1>
+				<p class="intro">
+					任务、版本、抽卡，或者今天的晚饭。<br class="desktop-break" />
+					不必汇报战况，想聊什么就留句话。
+				</p>
+				<div class="hero-rule" aria-hidden="true"><span></span><span></span><span></span></div>
+			</section>
+
+			<section class="board" aria-labelledby="board-title">
+				<div class="board-heading">
+					<div>
+						<p class="section-kicker">OPEN CHANNEL <span>·</span> 01</p>
+						<h2 id="board-title">本日闲聊区</h2>
+					</div>
+					<span class="board-tag">自由交流</span>
+				</div>
+				<div class="notice" role="note">
+					<span class="notice-icon" aria-hidden="true">i</span>
+					<span>友善交流；涉及剧情时请先标注剧透。这里是玩家自建交流页，非官方社区。</span>
+				</div>
+				<div id="waline" aria-live="polite">
+					<div class="loading-state">
+						<span class="loading-mark" aria-hidden="true"></span>
+						<span>正在接入通讯频道…</span>
+					</div>
+				</div>
+				<p id="setup-message" class="setup-message" hidden>
+					评论区正在准备中，请稍后再来。
+				</p>
+			</section>
+
+			<footer class="site-footer">
+				<span>非官方玩家交流页</span>
+				<span class="footer-separator" aria-hidden="true">✦</span>
+				<span>请遵守社区规则并保护个人信息</span>
+			</footer>
+		</main>
+	</body>
+</html>
