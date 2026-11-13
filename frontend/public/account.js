@@ -1,4 +1,5 @@
 import { prepareImage, uploadImage } from "./media.js";
+import { describeQQMismatch } from "./qq-attempt.js";
 import { currentUser, USER_KEY } from "./session.js";
 
 const attemptKey = "copperfield.qq.attempt";
@@ -141,8 +142,12 @@ async function init() {
 	const stored = currentUser();
 	if (callback) {
 		const expected = sessionStorage.getItem(attemptKey);
-		if (!expected || result.get("attempt") !== expected)
-			return showLogin("登录请求不匹配，请从本页重新登录。");
+		const mismatch = describeQQMismatch(expected, result);
+		if (mismatch) {
+			const diagnostic = `${mismatch}（${new Date().toISOString()}）`;
+			console.warn("[QQ 登录请求不匹配]", diagnostic);
+			return showLogin(`登录请求不匹配，请从本页重新登录。诊断：${diagnostic}`);
+		}
 		sessionStorage.removeItem(attemptKey);
 		if (result.has("error") || !result.get("token"))
 			return showLogin("QQ 授权未完成，请重试。");

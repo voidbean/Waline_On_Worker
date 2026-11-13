@@ -13,6 +13,11 @@ CSS still loads from unpkg. See vendor/README.md for the build and licenses.
   merging by email: returning QQ users keep their linked account. Other OAuth
   providers and first-admin bootstrap are not exposed on the Pages entry. Anonymous
   comments and existing sessions are unaffected.
+- On a QQ callback mismatch only, the account page and browser console show the
+  same diagnostic: QQ-01 means this tab has no pending attempt; QQ-02 means it
+  has a different one. The timestamp is UTC. The other labels describe the
+  format of the returned ID and the presence of credentials/an error, not their
+  values. Screenshot the message before retrying. No diagnostic is uploaded.
 - Previously shared `/ui/*` links lead to the board account page; use the
   original Worker UI for administration. Nickname and optional homepage can
   be changed on Pages without giving the frontend a privileged credential.
