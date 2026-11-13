@@ -6525,25 +6525,21 @@ var zf = ["data-index"], Bf = [
 						}, [W(L(uf))], 10, op)
 					])),
 					U("div", sp, [
-						f[14] ||= U("div", { class: "wl-captcha-container" }, null, -1),
+						f[13] ||= U("div", { class: "wl-captcha-container" }, null, -1),
 						U("label", cp, [Gn(U("input", {
 							"onUpdate:modelValue": f[4] ||= (e) => /* @__PURE__ */ F(c) ? c.value = e : null,
 							type: "checkbox"
 						}, null, 512), [[so, L(c)]]), f[10] ||= zi(" 含剧透（文字和图片） ", -1)]),
-						L(c) ? (V(), H("label", lp, [
-							f[11] ||= U("span", null, "剧透主题（选填）", -1),
-							Gn(U("input", {
-								"onUpdate:modelValue": f[5] ||= (e) => /* @__PURE__ */ F(l) ? l.value = e : null,
-								type: "text",
-								maxlength: "60",
-								placeholder: "例如：主线第十二章"
-							}, null, 512), [[oo, L(l)]]),
-							f[12] ||= U("small", null, "折叠时也能看到，只写范围，不写剧情结果。", -1)
-						])) : G("v-if", !0),
+						L(c) ? (V(), H("label", lp, [f[11] ||= U("span", null, "剧透主题（选填）", -1), Gn(U("input", {
+							"onUpdate:modelValue": f[5] ||= (e) => /* @__PURE__ */ F(l) ? l.value = e : null,
+							type: "text",
+							maxlength: "60",
+							placeholder: "例如：主线第十二章"
+						}, null, 512), [[oo, L(l)]])])) : G("v-if", !0),
 						u.value ? (V(), H("span", up, "仅修改剧透提示；新增或改写主题需重新审核。")) : G("v-if", !0),
 						U("div", dp, [
 							zi(A(ae.value) + " ", 1),
-							L(i).wordLimit ? (V(), H("span", fp, [f[13] ||= zi(" \xA0/\xA0 ", -1), U("span", {
+							L(i).wordLimit ? (V(), H("span", fp, [f[12] ||= zi(" \xA0/\xA0 ", -1), U("span", {
 								class: O({ illegal: !se.value }),
 								textContent: A(oe.value)
 							}, null, 10, pp)])) : G("v-if", !0),
