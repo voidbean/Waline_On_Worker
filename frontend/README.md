@@ -11,8 +11,8 @@ CSS still loads from unpkg. See vendor/README.md for the build and licenses.
   contains only a random attempt ID, expires after 10 minutes, and is removed
   on a matching return. Starting another login replaces the pending attempt.
   Separate browsers/private profiles do not share it. A first QQ sign-in creates an account using the existing backend flow.
-  A collapsed secondary form supports email/password registration and sign-in,
-  including existing two-factor accounts. No email verification or automatic
+  The board shows only the QQ entry. The email/password form stays hidden;
+  its registration and sign-in APIs, including two-factor login, are unchanged. No email verification or automatic
   merging by email: returning QQ users keep their linked account. Other OAuth
   providers and first-admin bootstrap are not exposed on the Pages entry. Anonymous
   comments and existing sessions are unaffected.

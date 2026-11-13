@@ -10,7 +10,6 @@ import { currentUser, USER_KEY } from "./session.js";
 const title = document.querySelector("#title");
 const status = document.querySelector("#status");
 const qq = document.querySelector("#qq");
-const alternative = document.querySelector("#email-alternative");
 const profile = document.querySelector("#profile");
 const result = new URLSearchParams(location.hash.slice(1));
 if (location.hash) history.replaceState(null, "", location.pathname);
@@ -18,9 +17,7 @@ if (location.hash) history.replaceState(null, "", location.pathname);
 qq.onclick = () => {
 	const attempt = startQQAttempt();
 	if (!attempt)
-		return showLogin(
-			"无法保存登录请求，请允许本站使用 Cookie，或改用邮箱登录。",
-		);
+		return showLogin("无法保存登录请求，请允许本站使用 Cookie 后重试。");
 	const query = new URLSearchParams({
 		type: "qq",
 		redirect: "/ui/qq-return/" + attempt,
@@ -50,7 +47,7 @@ async function accountRequest(path, token, options) {
 function showLogin(message) {
 	title.textContent = "QQ 登录 / 注册";
 	status.textContent = message || "首次使用 QQ 登录会自动创建水楼账号。";
-	qq.hidden = alternative.hidden = false;
+	qq.hidden = false;
 	profile.hidden = true;
 }
 
