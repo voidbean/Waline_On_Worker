@@ -2,8 +2,8 @@
 
 The Copperfield discussion board serves its static homepage on Pages. The browser
 uses that same origin for comments and accounts. Pages calls the existing Worker
-through the `WALINE` service binding. The Worker, D1, and the original Worker
-admin UI are unchanged. The Waline client assets still load from unpkg.
+through the `WALINE` service binding. The board serves a pinned, patched Waline client bundle locally; its version-matched
+CSS still loads from unpkg. See vendor/README.md for the build and licenses.
 
 - `/account` is the board's own QQ sign-in and profile page. QQ handles external
   authorization; the return is bound to the initiating tab and lands back on
@@ -53,3 +53,20 @@ For moderation, remove the corresponding `images/<filename>` object in R2;
 previously cached copies can persist. The private `quota/` prefix holds one
 counter per uploader (5/minute and 30/UTC day across both uses). Existing
 Base64 comments are not migrated; edit and reattach the file if necessary.
+
+## Spoiler warnings — release order
+
+1. Existing D1 databases: run migrations/2026-11-13-comment-spoiler.sql once
+   (old comments default to 0). Fresh databases already have the column in
+   schema.sql. Do not re-run the ALTER on a database that has the column.
+2. Deploy the updated Waline Worker, then deploy Pages. Do not release the
+   new composer first: the old Worker would ignore the spoiler checkbox.
+3. Verify a marked top-level image and its thread remain collapsed after reload;
+   a marked reply to an ordinary post conceals only that reply.
+
+Guests can mark a new post. Signed-in authors may later change only their
+own warning, without changing the body or moderation status. Anonymous authors
+cannot prove ownership later; a moderator can mark their posts. RSS/recent
+feeds omit marked posts and children of marked roots. The full discussion
+API still returns public comment data; this is a reading preference on the
+Pages board, not access control.

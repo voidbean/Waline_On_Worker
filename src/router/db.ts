@@ -36,6 +36,7 @@ const ALLOWED_COLUMNS: Record<string, Set<string>> = {
 		"pid",
 		"rid",
 		"sticky",
+		"spoiler",
 		"status",
 		"like",
 		"ua",

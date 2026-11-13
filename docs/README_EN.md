@@ -1,5 +1,7 @@
 # Waline on Worker - Detailed Documentation
 
+**Upgrading an existing database:** Before deploying spoiler support, check `PRAGMA table_info(wl_Comment)`. If the `spoiler` column is absent, apply the [one-time migration](../migrations/2026-11-13-comment-spoiler.sql), deploy the Worker, then publish Pages. Replaying schema.sql does not upgrade existing tables. Fresh databases need no migration.
+
 ## Recommended deployment: Overture
 
 Open the [Overture deployment page](https://overture.voidcarve.com/?src=lsy-404/Waline_On_Worker), then select a release from this repository. It creates or reuses D1, applies the schema, deploys the Worker, and generates `JWT_SECRET` for a first deployment. A custom domain is optional: leave it empty for the Worker’s `workers.dev` address, or provide one to attach it.

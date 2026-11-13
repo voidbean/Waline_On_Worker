@@ -2,6 +2,8 @@
 
 For international audience: [English Documentation](README_EN.md)
 
+**已有数据库升级提醒：** 发布支持剧透标记的版本前，先检查 `PRAGMA table_info(wl_Comment)`；如无 `spoiler` 列，请执行一次 [迁移 SQL](../migrations/2026-11-13-comment-spoiler.sql)。仅重新执行 schema.sql 不会更新旧表。然后先部署 Worker，最后发布 Pages。新建数据库不需单独迁移。
+
 ## 推荐部署：Overture
 
 打开 [Overture 部署入口](https://overture.voidcarve.com/?src=lsy-404/Waline_On_Worker)，选择本仓库的发布版本即可部署。它会创建或复用 D1 数据库、写入 schema、部署 Worker，并在首次部署时生成 `JWT_SECRET`。自定义域名可选：留空将使用 Worker 的 `workers.dev` 地址；填写时才会绑定域名。

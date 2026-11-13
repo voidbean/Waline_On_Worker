@@ -52,6 +52,10 @@ commentRoutes.post("/", rateLimit("COMMENT_RATE_LIMIT"), async (c) => {
 	const body = await c.req.json();
 	const { comment, nick, mail, link, url, ua, pid, rid, at: _at } = body;
 
+	if (body.spoiler !== undefined && typeof body.spoiler !== "boolean") {
+		return c.json({ errno: 1, errmsg: "spoiler must be boolean" }, 400);
+	}
+
 	if (!url) {
 		return c.json({ errno: 1, errmsg: "url is required" }, 400);
 	}
@@ -126,8 +130,8 @@ commentRoutes.post("/", rateLimit("COMMENT_RATE_LIMIT"), async (c) => {
 	const renderedComment = renderMarkdown(comment);
 
 	const statement = c.env.DB.prepare(
-		`INSERT INTO wl_Comment (user_id, comment, orig, ip, link, mail, nick, pid, rid, sticky, status, "like", ua, url)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, ?)`,
+		`INSERT INTO wl_Comment (user_id, comment, orig, ip, link, mail, nick, pid, rid, sticky, status, "like", ua, url, spoiler)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, 0, ?, ?, ?)`,
 	).bind(
 		userInfo?.objectId ?? null,
 		renderedComment,
@@ -141,6 +145,7 @@ commentRoutes.post("/", rateLimit("COMMENT_RATE_LIMIT"), async (c) => {
 		status,
 		ua || "",
 		url,
+		body.spoiler === true ? 1 : 0,
 	);
 	const location = parseRegion(c.req.raw.cf);
 	const statements = [statement];
@@ -219,6 +224,29 @@ commentRoutes.put("/:id", async (c) => {
 		});
 	}
 
+	// Owners may change the warning on their own post, not its moderated content.
+	if (body.spoiler !== undefined && typeof body.spoiler !== "boolean") {
+		return c.json({ errno: 1, errmsg: "spoiler must be boolean" }, 400);
+	}
+	if (
+		!isAdmin &&
+		userInfo &&
+		typeof body.spoiler === "boolean" &&
+		Object.keys(body).length === 1
+	) {
+		const row = await c.env.DB.prepare(
+			"UPDATE wl_Comment SET spoiler = ?, updatedAt = datetime('now') WHERE id = ? AND user_id = ? RETURNING *",
+		)
+			.bind(body.spoiler ? 1 : 0, id, userInfo.objectId)
+			.first();
+		if (!row) return c.json({ errno: 1, errmsg: "Forbidden" }, 403);
+		return c.json({
+			errno: 0,
+			errmsg: "",
+			data: (await formatComments([row], c.env))[0],
+		});
+	}
+
 	// Only admin can update other fields
 	if (!isAdmin) {
 		return c.json({ errno: 1, errmsg: "Unauthorized" }, 403);
@@ -236,6 +264,10 @@ commentRoutes.put("/:id", async (c) => {
 		values.push(renderMarkdown(body.comment));
 		updates.push("orig = ?");
 		values.push(body.comment);
+	}
+	if (body.spoiler !== undefined) {
+		updates.push("spoiler = ?");
+		values.push(body.spoiler ? 1 : 0);
 	}
 	if (body.sticky !== undefined) {
 		updates.push("sticky = ?");
@@ -335,6 +367,9 @@ commentRoutes.delete("/:id", async (c) => {
  *   - email / user_id: get replies to a user's comments
  *   - count: number of items (default 20, max 50)
  */
+const FEED_SAFE =
+	"spoiler = 0 AND NOT EXISTS (SELECT 1 FROM wl_Comment root WHERE root.id = wl_Comment.rid AND root.spoiler = 1)";
+
 commentRoutes.get("/rss", async (c) => {
 	const path = c.req.query("path");
 	const email = c.req.query("email");
@@ -352,7 +387,7 @@ commentRoutes.get("/rss", async (c) => {
 		const result = await c.env.DB.prepare(
 			`SELECT id, comment, insertedAt, link, nick, url, user_id FROM wl_Comment
        WHERE url = ? AND status NOT IN ('waiting', 'spam')
-       ORDER BY insertedAt DESC LIMIT ?`,
+       AND ${FEED_SAFE} ORDER BY insertedAt DESC LIMIT ?`,
 		)
 			.bind(path, limit)
 			.all();
@@ -394,7 +429,7 @@ commentRoutes.get("/rss", async (c) => {
 		const result = await c.env.DB.prepare(
 			`SELECT id, comment, insertedAt, link, nick, url, user_id FROM wl_Comment
        WHERE pid IN (${placeholders}) AND status NOT IN ('waiting', 'spam')
-       ORDER BY insertedAt DESC LIMIT ?`,
+       AND ${FEED_SAFE} ORDER BY insertedAt DESC LIMIT ?`,
 		)
 			.bind(...parentIds, limit)
 			.all();
@@ -404,7 +439,7 @@ commentRoutes.get("/rss", async (c) => {
 		const result = await c.env.DB.prepare(
 			`SELECT id, comment, insertedAt, link, nick, url, user_id FROM wl_Comment
        WHERE status NOT IN ('waiting', 'spam')
-       ORDER BY insertedAt DESC LIMIT ?`,
+       AND ${FEED_SAFE} ORDER BY insertedAt DESC LIMIT ?`,
 		)
 			.bind(limit)
 			.all();
@@ -551,7 +586,7 @@ async function getRecentComments(c: any) {
 	);
 
 	const result = await c.env.DB.prepare(
-		`SELECT * FROM wl_Comment WHERE status = 'approved'
+		`SELECT * FROM wl_Comment WHERE status = 'approved' AND ${FEED_SAFE}
      ORDER BY insertedAt DESC LIMIT ?`,
 	)
 		.bind(count)
@@ -886,6 +921,7 @@ async function formatComment(
 		pid: row.pid,
 		rid: row.rid,
 		sticky: Boolean(row.sticky),
+		spoiler: Boolean(row.spoiler),
 		user_id: row.user_id,
 		type: user?.type || (row.user_id ? "guest" : ""),
 		label: user?.label || "",

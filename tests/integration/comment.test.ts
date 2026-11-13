@@ -430,3 +430,113 @@ describe("DELETE /api/comment/:id", () => {
 		).toBe(403);
 	});
 });
+
+describe("board spoiler warnings", () => {
+	it("persists a root warning and keeps reply warnings independent", async () => {
+		const root = (
+			await json(
+				await api.post("/api/comment", {
+					body: { comment: "ending", url: "/story", spoiler: true },
+				}),
+			)
+		).data;
+		expect(root.spoiler).toBe(true);
+		const reply = (
+			await json(
+				await api.post("/api/comment", {
+					body: {
+						comment: "reaction",
+						url: "/story",
+						pid: root.objectId,
+						rid: root.objectId,
+					},
+				}),
+			)
+		).data;
+		expect(reply.spoiler).toBe(false);
+		const list = (
+			await json(await api.get("/api/comment", { params: { path: "/story" } }))
+		).data.data;
+		expect(list[0]).toMatchObject({
+			spoiler: true,
+			children: [{ spoiler: false }],
+		});
+		const rss = await (
+			await api.get("/api/comment/rss", { params: { path: "/story" } })
+		).text();
+		expect(rss).not.toContain("<item>");
+		expect(
+			(
+				await json(
+					await api.get("/api/comment", { params: { type: "recent" } }),
+				)
+			).data,
+		).toEqual([]);
+		expect(
+			(
+				await api.post("/api/comment", {
+					body: { comment: "bad", url: "/", spoiler: "false" },
+				})
+			).status,
+		).toBe(400);
+	});
+	it("allows only the verified author or moderator to change a warning without changing review state", async () => {
+		const user = await db
+			.prepare("SELECT id FROM wl_Users WHERE email = ?")
+			.bind("guest@test.com")
+			.first();
+		const own = await createComment(db, {
+			user_id: user!.id,
+			status: "waiting",
+		});
+		const other = await createComment(db);
+		for (const id of [own.id, other.id]) {
+			expect(
+				(await api.put(`/api/comment/${id}`, { body: { spoiler: true } }))
+					.status,
+			).toBe(403);
+		}
+		expect(
+			(
+				await api.put(`/api/comment/${other.id}`, {
+					token: guestToken,
+					body: { spoiler: true },
+				})
+			).status,
+		).toBe(403);
+		expect(
+			(
+				await api.put(`/api/comment/${own.id}`, {
+					token: guestToken,
+					body: { spoiler: true, status: "approved" },
+				})
+			).status,
+		).toBe(403);
+		for (const flag of [true, false]) {
+			expect(
+				(
+					await json(
+						await api.put(`/api/comment/${own.id}`, {
+							token: guestToken,
+							body: { spoiler: flag },
+						}),
+					)
+				).data,
+			).toMatchObject({
+				spoiler: flag,
+				status: "waiting",
+				orig: "Test comment",
+			});
+		}
+		expect(
+			(
+				await json(
+					await api.put(`/api/comment/${other.id}`, {
+						token: adminToken,
+						body: { spoiler: true },
+					}),
+				)
+			).data.spoiler,
+		).toBe(true);
+	});
+});

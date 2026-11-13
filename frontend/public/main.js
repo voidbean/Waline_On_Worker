@@ -35,7 +35,7 @@ if (!serverURL) {
 		if (endpoint.protocol !== "https:" && endpoint.hostname !== "localhost") {
 			throw new Error("The comment service must use HTTPS.");
 		}
-		const { init } = await import("https://unpkg.com/@waline/client@v3/dist/waline.js");
+		const { init } = await import("./vendor/waline-board.js");
 		init({
 			el: "#waline",
 			serverURL: endpoint.origin,

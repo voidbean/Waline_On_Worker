@@ -55,6 +55,8 @@ if ($tomlContent -match 'database_id\s*=\s*""') {
 Write-Host ""
 Write-Host "[4/5] 初始化数据库 Schema..." -ForegroundColor Yellow
 pnpm exec wrangler d1 execute waline-db --file=./schema.sql --remote --config $Config
+pnpm exec wrangler d1 execute waline-db --command "SELECT spoiler FROM wl_Comment LIMIT 0" --remote --config $Config
+if ($LASTEXITCODE -ne 0) { throw "数据库检查失败；若缺少 spoiler 列，请先执行 migrations/2026-11-13-comment-spoiler.sql" }
 
 # 设置 JWT_SECRET
 Write-Host ""

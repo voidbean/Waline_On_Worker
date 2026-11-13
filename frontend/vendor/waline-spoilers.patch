@@ -1,0 +1,173 @@
+diff --git a/packages/api/src/typings.ts b/packages/api/src/typings.ts
+index 07558c7..268c83e 100644
+--- a/packages/api/src/typings.ts
++++ b/packages/api/src/typings.ts
+@@ -4,4 +4,6 @@ export type WalineUserType = 'administrator' | 'guest';
+
+ export interface WalineCommentData {
++  spoiler?: boolean;
++
+   /** User Nickname */
+   nick: string;
+@@ -54,4 +56,6 @@ export interface WalineCommentData {
+
+ export interface BaseWalineResponseComment {
++  spoiler?: boolean;
++
+   /** Comment object ID */
+   objectId: number;
+diff --git a/packages/client/src/components/CommentBox.vue b/packages/client/src/components/CommentBox.vue
+index e494066..8e2d2a7 100644
+--- a/packages/client/src/components/CommentBox.vue
++++ b/packages/client/src/components/CommentBox.vue
+@@ -1,5 +1,5 @@
+ <script setup lang="ts">
+ //
+-import { useDebounceFn, useEventListener, watchImmediate } from '@vueuse/core';
++import { useDebounceFn, useEventListener, useStorage, watchImmediate } from '@vueuse/core';
+ import type { WalineComment, WalineCommentData, UserInfo } from '@waline/api';
+ import { addComment, login, updateComment } from '@waline/api';
+@@ -58,7 +58,12 @@ const emit = defineEmits<{
+ const config = inject(configKey)!;
+
+-const editor = useEditor();
++// Never copy the author’s existing post into the persisted draft when editing.
++const editor = props.edit ? ref(props.edit.orig) : useEditor();
+ const userMeta = useUserMeta();
+ const userInfo = useUserInfo();
++const spoiler = props.edit
++  ? ref(Boolean(props.edit.spoiler))
++  : useStorage<boolean>('COPPERFIELD_DRAFT_SPOILER', false);
++const warningOnly = computed(() => Boolean(props.edit) && userInfo.value.type !== 'administrator');
+
+ const inputRefs = ref<Record<string, HTMLInputElement>>({});
+@@ -209,4 +214,5 @@ const submitComment = async (): Promise<void> => {
+   const comment: WalineCommentData = {
+     comment: content.value,
++    spoiler: spoiler.value,
+     nick: userMeta.value.nick,
+     mail: userMeta.value.mail,
+@@ -304,4 +310,5 @@ const submitComment = async (): Promise<void> => {
+           objectId: props.edit.objectId,
+           ...options,
++          comment: warningOnly.value ? { spoiler: spoiler.value } : comment,
+         })
+       : addComment(options));
+@@ -318,4 +325,5 @@ const submitComment = async (): Promise<void> => {
+     emit('submit', response.data!);
+
++    spoiler.value = false;
+     editor.value = '';
+
+@@ -606,4 +614,5 @@ onMounted(() => {
+         ref="textarea"
+         v-model="editor"
++        :readonly="warningOnly"
+         class="wl-editor"
+         :placeholder="replyUser ? `@${replyUser}` : locale.placeholder"
+@@ -613,5 +622,5 @@ onMounted(() => {
+       />
+
+-      <div v-show="showPreview" class="wl-preview">
++      <div v-if="showPreview" class="wl-preview">
+         <hr />
+
+@@ -622,5 +631,5 @@ onMounted(() => {
+
+       <div class="wl-footer">
+-        <div class="wl-actions">
++        <div v-if="!warningOnly" class="wl-actions">
+           <a
+             href="https://guides.github.com/features/mastering-markdown/"
+@@ -691,4 +700,8 @@ onMounted(() => {
+         <div class="wl-info">
+           <div class="wl-captcha-container" />
++          <label class="board-spoiler-option">
++            <input v-model="spoiler" type="checkbox" /> 含剧透（文字和图片）
++          </label>
++          <span v-if="warningOnly">仅修改剧透标记</span>
+
+           <div class="wl-text-number">
+@@ -722,5 +735,5 @@ onMounted(() => {
+
+             <template v-else>
+-              {{ locale.submit }}
++              {{ props.edit ? '保存修改' : spoiler ? '发布剧透评论' : locale.submit }}
+             </template>
+           </button>
+diff --git a/packages/client/src/components/CommentCard.vue b/packages/client/src/components/CommentCard.vue
+index e0af915..54272c9 100644
+--- a/packages/client/src/components/CommentCard.vue
++++ b/packages/client/src/components/CommentCard.vue
+@@ -2,5 +2,5 @@
+ import { useNow } from '@vueuse/core';
+ import type { WalineComment, WalineCommentStatus } from '@waline/api';
+-import { computed, inject } from 'vue';
++import { computed, inject, ref, watch } from 'vue';
+
+ import { useLikeStorage, useUserInfo } from '../composables/index.js';
+@@ -67,4 +67,14 @@ const isOwner = computed(() => comment.user_id && userInfo.value.objectId === co
+ const isReplyingCurrent = computed(() => comment.objectId === reply?.objectId);
+
++const revealed = ref(false);
++const concealed = computed(() => Boolean(comment.spoiler) && !revealed.value);
++watch(() => [comment.objectId, comment.spoiler], () => { revealed.value = false; });
++const toggleSpoiler = (): void => {
++  if (revealed.value) {
++    if (reply) emit('reply', null);
++    if (edit) emit('edit', null);
++  }
++  revealed.value = !revealed.value;
++};
+ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
+ </script>
+@@ -107,5 +117,5 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
+         <div class="wl-comment-actions">
+           <template v-if="isAdmin || isOwner">
+-            <button type="button" class="wl-edit" @click="emit('edit', comment)">
++            <button type="button" class="wl-edit" :disabled="concealed" @click="emit('edit', comment)">
+               <EditIcon />
+             </button>
+@@ -141,4 +151,5 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
+             type="button"
+             class="wl-reply"
++            :disabled="concealed"
+             :class="{ active: isReplyingCurrent }"
+             :title="isReplyingCurrent ? locale.cancelReply : locale.reply"
+@@ -166,6 +177,10 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
+       </div>
+
++      <button v-if="comment.spoiler && !isEditingCurrent" type="button" class="board-spoiler-toggle"
++        :aria-expanded="revealed" @click="toggleSpoiler">
++        ⚠ 含剧透 · {{ revealed ? '收起' : '点击查看' }}{{ !revealed && 'children' in comment && comment.children?.length ? '（含回复）' : '' }}
++      </button>
+       <!-- eslint-disable vue/no-v-html -->
+-      <div v-if="!isEditingCurrent" class="wl-content">
++      <div v-if="!concealed && !isEditingCurrent" class="wl-content">
+         <p v-if="'reply_user' in comment && comment.reply_user" class="wl-reply-to">
+           <a :href="'#' + comment.pid">@{{ comment.reply_user.nick }}</a>
+@@ -202,5 +217,5 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
+
+       <div
+-        v-if="isReplyingCurrent || isEditingCurrent"
++        v-if="!concealed && (isReplyingCurrent || isEditingCurrent)"
+         :class="{
+           'wl-reply-wrapper': isReplyingCurrent,
+@@ -220,5 +235,5 @@ const isEditingCurrent = computed(() => comment.objectId === edit?.objectId);
+       </div>
+
+-      <div v-if="'children' in comment" class="wl-quote">
++      <div v-if="!concealed && 'children' in comment" class="wl-quote">
+         <CommentCard
+           v-for="child in comment.children"
+diff --git a/packages/client/src/components/WalineComment.vue b/packages/client/src/components/WalineComment.vue
+index 7e6412e..136685c 100644
+--- a/packages/client/src/components/WalineComment.vue
++++ b/packages/client/src/components/WalineComment.vue
+@@ -111,4 +111,6 @@ const onSubmit = (comment: WalineComment): void => {
+     edit.value.comment = comment.comment;
+     edit.value.orig = comment.orig;
++    edit.value.spoiler = comment.spoiler;
++    edit.value = null;
+   } else if ('rid' in comment) {
+     const repliedComment = data.value.find(({ objectId }) => objectId === comment.rid);
