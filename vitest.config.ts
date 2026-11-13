@@ -16,7 +16,10 @@ export default defineConfig({
     cloudflareTest({
       wrangler: { configPath: './test/wrangler.toml' },
       miniflare: {
-        bindings: { JWT_SECRET: 'test-secret' },
+        bindings: {
+          JWT_SECRET: 'test-secret',
+          ADMIN_BOOTSTRAP_TOKEN: 'test-bootstrap-token',
+        },
       },
     }),
   ],

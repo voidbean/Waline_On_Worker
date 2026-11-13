@@ -50,7 +50,7 @@ For international audience: [English Documentation](README_EN.md)
 - [x] LLM 评论审查（内嵌 [waline-plugin-llm-reviewer-next](https://github.com/lsy-404/waline-plugin-llm-reviewer-next) 设计，支持自然语言安全策略）
 - [x] 评论默认状态控制（匿名 / 登录用户独立设置）
 - [x] 管理面板（@waline/admin CDN + Worker 设置页）
-- [x] IP 频率限制 (IPQPS) 可直接配置 Cloudflare 安全规则实现
+- [x] 登录、注册、评论按 IP 限流（Wrangler Rate Limiting bindings；近似、区域内计数）
 - [x] 附加管理面板，能够设置前端默认版本，控制评论默认状态，配置反垃圾策略等功能
 - [ ] 邮件通知（SMTP）
 - [ ] Webhook 通知

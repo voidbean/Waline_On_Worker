@@ -249,6 +249,20 @@ describe("POST /api/comment — create comment", () => {
 		expect(body.data.status).toBe("approved");
 	});
 
+	it("AUDIT=true holds anonymous and logged-in comments for review by default", async () => {
+		const anonymous = await api.post("/api/comment", {
+			env: { AUDIT: "true" },
+			body: { comment: "Review me", url: "/audit" },
+		});
+		const loggedIn = await api.post("/api/comment", {
+			env: { AUDIT: "true" },
+			token: guestToken,
+			body: { comment: "Review me too", url: "/audit" },
+		});
+		expect((await json(anonymous)).data.status).toBe("waiting");
+		expect((await json(loggedIn)).data.status).toBe("waiting");
+	});
+
 	it("returns malicious HTML as escaped comment markup", async () => {
 		const body = await json(
 			await api.post("/api/comment", {

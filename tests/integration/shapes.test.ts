@@ -63,6 +63,7 @@ describe("Response shape — POST /api/user", () => {
 	it("registration response has exact Waline shape", async () => {
 		const body = await json(
 			await api.post("/api/user", {
+				env: { ALLOW_REGISTRATION: "true" },
 				body: {
 					email: "newshape@test.com",
 					password: "pass",

@@ -4,6 +4,7 @@ import {
 } from "cloudflare:test";
 import { env } from "cloudflare:workers";
 import { createComment } from "@tests/helpers/factories.js";
+import { testRateLimits } from "@tests/helpers/rate-limits.js";
 import { resetDB } from "@tests/helpers/setup.js";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { Env } from "@/env.js";
@@ -102,7 +103,7 @@ describe("adversarial display configuration", () => {
 							city: `City-${index}`,
 						},
 					}),
-					{ DB: db },
+					{ ...testRateLimits, DB: db },
 					ctx,
 				);
 				await waitOnExecutionContext(ctx);

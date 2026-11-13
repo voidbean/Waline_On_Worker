@@ -7,3 +7,27 @@ compatibility_flags = ["nodejs_compat"]
 binding = "DB"
 database_name = "waline-test"
 database_id = "00000000-0000-0000-0000-000000000000"
+
+[[ratelimits]]
+name = "LOGIN_RATE_LIMIT"
+namespace_id = "9001"
+
+[ratelimits.simple]
+limit = 10000
+period = 60
+
+[[ratelimits]]
+name = "REGISTRATION_RATE_LIMIT"
+namespace_id = "9002"
+
+[ratelimits.simple]
+limit = 10000
+period = 60
+
+[[ratelimits]]
+name = "COMMENT_RATE_LIMIT"
+namespace_id = "9003"
+
+[ratelimits.simple]
+limit = 10000
+period = 60

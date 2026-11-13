@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import type { Env, Variables } from "../env.js";
+import { rateLimit } from "../middleware/rate-limit.js";
 import { checkAkismet } from "../utils/akismet.js";
 import { getAvatar, proxyAvatar } from "../utils/avatar.js";
 import { getLevel, isEnabled, parseLevels } from "../utils/display.js";
@@ -47,7 +48,7 @@ commentRoutes.get("/", async (c) => {
 /**
  * POST /api/comment - Create comment
  */
-commentRoutes.post("/", async (c) => {
+commentRoutes.post("/", rateLimit("COMMENT_RATE_LIMIT"), async (c) => {
 	const body = await c.req.json();
 	const { comment, nick, mail, link, url, ua, pid, rid, at: _at } = body;
 
@@ -96,7 +97,7 @@ commentRoutes.post("/", async (c) => {
 	// Determine initial status:
 	// - comment_default_status setting: anonymous users
 	// - user_comment_default_status setting: logged-in users
-	// - Fallback: AUDIT env var, then approved
+	// - Fallback: AUDIT env var, then approved (for both anonymous and logged-in users)
 	const statusSettings = await getSettings(c.env.DB, [
 		"comment_default_status",
 		"user_comment_default_status",
@@ -104,10 +105,12 @@ commentRoutes.post("/", async (c) => {
 
 	let status: string;
 	if (userInfo) {
-		status =
-			statusSettings.user_comment_default_status === "waiting"
-				? "waiting"
-				: "approved";
+		const defaultStatus = statusSettings.user_comment_default_status;
+		if (defaultStatus === "waiting" || defaultStatus === "approved") {
+			status = defaultStatus;
+		} else {
+			status = c.env.AUDIT ? "waiting" : "approved";
+		}
 	} else {
 		const defaultStatus = statusSettings.comment_default_status;
 		if (defaultStatus === "waiting" || defaultStatus === "approved") {

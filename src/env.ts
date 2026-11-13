@@ -14,6 +14,11 @@ export interface Env {
 	LEVELS?: string;
 	IPQPS?: string;
 	AUDIT?: string;
+	ALLOW_REGISTRATION?: string;
+	ADMIN_BOOTSTRAP_TOKEN?: string;
+	LOGIN_RATE_LIMIT: RateLimitBinding;
+	REGISTRATION_RATE_LIMIT: RateLimitBinding;
+	COMMENT_RATE_LIMIT: RateLimitBinding;
 
 	// SMTP
 	SMTP_SERVICE?: string;
@@ -41,6 +46,13 @@ export interface Env {
 	TURNSTILE_SECRET?: string;
 	RECAPTCHA_V3_KEY?: string;
 	RECAPTCHA_V3_SECRET?: string;
+}
+
+export interface RateLimitBinding {
+	limit(options: {
+		key: string;
+		delta?: number;
+	}): Promise<{ success: boolean }>;
 }
 
 export interface UserInfo {

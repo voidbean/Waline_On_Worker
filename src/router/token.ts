@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import type { Env, Variables } from "../env.js";
 import { signJwt } from "../middleware/auth.js";
+import { rateLimit } from "../middleware/rate-limit.js";
 import { getAvatar, proxyAvatar } from "../utils/avatar.js";
 import { md5 } from "../utils/hash.js";
 import { verifyPassword } from "../utils/password.js";
@@ -49,7 +50,7 @@ tokenRoutes.get("/", async (c) => {
 /**
  * POST /api/token - Login
  */
-tokenRoutes.post("/", async (c) => {
+tokenRoutes.post("/", rateLimit("LOGIN_RATE_LIMIT"), async (c) => {
 	const body = await c.req.json();
 	const { email, password } = body;
 

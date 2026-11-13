@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import type { Env, Variables } from "../env.js";
+import { rateLimit } from "../middleware/rate-limit.js";
 import { getAvatar, proxyAvatar } from "../utils/avatar.js";
 import { getLevel, parseLevels } from "../utils/display.js";
 import { hashPassword } from "../utils/password.js";
@@ -111,7 +112,7 @@ userRoutes.get("/", async (c) => {
 /**
  * POST /api/user - Register
  */
-userRoutes.post("/", async (c) => {
+userRoutes.post("/", rateLimit("REGISTRATION_RATE_LIMIT"), async (c) => {
 	const body = await c.req.json();
 	const { display_name, email, password, url } = body;
 
@@ -119,37 +120,64 @@ userRoutes.post("/", async (c) => {
 		return c.json({ errno: 1, errmsg: "email and password are required" }, 400);
 	}
 
-	// Check if email exists
+	// First-admin bootstrap is never available through open registration. It
+	// requires a secret header set outside the public client, and an atomic
+	// conditional insert ensures that only one request can initialize the DB.
+	const userCount = await c.env.DB.prepare(
+		"SELECT COUNT(*) as count FROM wl_Users",
+	).first();
+	const isFirst = ((userCount?.count as number) || 0) === 0;
+	if (isFirst) {
+		const expectedToken = c.env.ADMIN_BOOTSTRAP_TOKEN;
+		const suppliedToken = c.req.header("X-Admin-Bootstrap-Token");
+		if (!expectedToken || suppliedToken !== expectedToken) {
+			return c.json({ errno: 1, errmsg: "Registration is disabled" }, 403);
+		}
+	} else if (c.env.ALLOW_REGISTRATION?.trim().toLowerCase() !== "true") {
+		return c.json({ errno: 1, errmsg: "Registration is disabled" }, 403);
+	}
+
+	// Do not reveal account existence while registration is disabled.
 	const existing = await c.env.DB.prepare(
 		"SELECT id FROM wl_Users WHERE email = ?",
 	)
 		.bind(email)
 		.first();
-
 	if (existing) {
 		return c.json({ errno: 1, errmsg: "Registration failed" }, 409);
 	}
 
-	// Check if first user (becomes admin)
-	const userCount = await c.env.DB.prepare(
-		"SELECT COUNT(*) as count FROM wl_Users",
-	).first();
-	const isFirst = ((userCount?.count as number) || 0) === 0;
-
 	const hashedPassword = await hashPassword(password);
-
-	await c.env.DB.prepare(
-		`INSERT INTO wl_Users (display_name, email, password, type, url)
-     VALUES (?, ?, ?, ?, ?)`,
-	)
-		.bind(
-			display_name || email.split("@")[0],
-			email,
-			hashedPassword,
-			isFirst ? "administrator" : "guest",
-			url || "",
-		)
-		.run();
+	const insert = isFirst
+		? await c.env.DB.prepare(
+				`INSERT INTO wl_Users (display_name, email, password, type, url)
+				 SELECT ?, ?, ?, 'administrator', ?
+				 WHERE NOT EXISTS (SELECT 1 FROM wl_Users)`,
+			)
+				.bind(
+					display_name || email.split("@")[0],
+					email,
+					hashedPassword,
+					url || "",
+				)
+				.run()
+		: await c.env.DB.prepare(
+				`INSERT INTO wl_Users (display_name, email, password, type, url)
+				 VALUES (?, ?, ?, 'guest', ?)`,
+			)
+				.bind(
+					display_name || email.split("@")[0],
+					email,
+					hashedPassword,
+					url || "",
+				)
+				.run();
+	if (isFirst && insert.meta.changes === 0) {
+		return c.json(
+			{ errno: 1, errmsg: "Administrator is already initialized" },
+			409,
+		);
+	}
 
 	const newUser = await c.env.DB.prepare(
 		"SELECT id, display_name, email, type, url, avatar FROM wl_Users WHERE email = ?",

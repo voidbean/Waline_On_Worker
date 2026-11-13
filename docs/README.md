@@ -185,6 +185,8 @@ pnpm exec wrangler d1 execute <database-name> --remote --file=backup.sql
 | `AVATAR_PROXY` | 配置代理服务 URL 后，客户端通过该服务加载头像；未配置或为 `false`/`0` 时直连 | 未配置 |
 | `LEVELS` | 评论等级阈值，逗号分隔的非负整数严格递增序列；未设置、为空、`false`/`0` 或非法时关闭 | 关闭 |
 | `DISABLE_REGION` | 设置为 `true` 或其他非空且非 `false`/`0` 的值时隐藏公开地区；管理员仍可见 | 关闭 |
+| `ALLOW_REGISTRATION` | 仅设为 `true` 时开放普通访客注册；空用户表仍必须使用首位管理员引导密钥 | 关闭 |
+| `AUDIT` | 评论状态设置尚未显式保存时，让匿名和登录用户的新评论进入待审核 | 关闭 |
 
 显示配置说明：
 
@@ -203,7 +205,24 @@ pnpm exec wrangler d1 execute <database-name> --remote --file=backup.sql
 
 评论显示变量 `DISABLE_REGION`、`DISABLE_USERAGENT`（及别名 `DISABLE_AGENT`）、`AVATAR_PROXY` 和 `LEVELS` 均已接入。
 
-以下上游变量和能力目前尚未实现或接入，设置它们不会启用对应功能（`LOGIN` 是变量名，不代表项目没有现有登录功能）：`LOGIN`、`SERVER_URL`、`GRAVATAR_STR`、`COMMENT_AUDIT`、`MARKDOWN_*`、`SMTP_*`、`SENDER_*`、`DISABLE_AUTHOR_NOTIFY`、`WEBHOOK`、服务端 `TURNSTILE_SECRET` / `RECAPTCHA_V3_SECRET` 验证，以及 `IPQPS` 环境变量限流。项目已有自定义 `AUDIT`，不能用上游 `COMMENT_AUDIT` 变量替代。Captcha 前端 key 目前只注入管理面板，尚未形成完整的机器人验证。这些集成都可以后续实现，并非 Workers 做不到。
+以下上游变量和能力目前尚未实现或接入，设置它们不会启用对应功能（`LOGIN` 是变量名，不代表项目没有现有登录功能）：`LOGIN`、`SERVER_URL`、`GRAVATAR_STR`、`COMMENT_AUDIT`、`MARKDOWN_*`、`SMTP_*`、`SENDER_*`、`DISABLE_AUTHOR_NOTIFY`、`WEBHOOK`、服务端 `TURNSTILE_SECRET` / `RECAPTCHA_V3_SECRET` 验证，以及 `IPQPS` 环境变量限流。项目已有自定义 `AUDIT`，不能用上游 `COMMENT_AUDIT` 变量替代。Captcha 前端 key 目前只注入管理面板，尚未形成完整的机器人验证。登录、注册、评论的限流通过 Wrangler `ratelimits` binding 配置，不读取 `IPQPS`。
+
+### 上线前注册与首位管理员安全
+
+- 普通注册默认关闭。只有将 `ALLOW_REGISTRATION` 明确设为 `true` 才允许已初始化数据库中的新用户以 `guest` 身份注册。
+- 空用户表不会因开放普通注册而自动授予首位管理员。首位管理员创建必须同时配置 Wrangler Secret `ADMIN_BOOTSTRAP_TOKEN`，并在 `POST /api/user` 请求中提供 `X-Admin-Bootstrap-Token`。注册请求使用一次性条件写入；并发初始化最多只有一个请求能成功。
+- 引导密钥仅用于第一次创建管理员，不要放入 `[vars]`、前端代码、浏览器请求或仓库。首次管理员创建后删除该 Secret；普通注册仍由 `ALLOW_REGISTRATION` 单独控制。
+- Wrangler Rate Limiting binding 分别保护登录（10 次/分钟/IP）、注册（5 次/分钟/IP）和评论（10 次/分钟/IP）。这是 Cloudflare 位置内的近似限流，不是严格的全球总量上限。
+- `wrangler.toml.example` 将 `AUDIT = "true"` 作为首发安全默认值：在管理面板未保存显式评论状态前，匿名和登录评论都进入待审核。已保存的 `comment_default_status` / `user_comment_default_status` 设置优先于此回退值。
+
+Worker 创建且经你批准部署后，设置密钥的命令为：
+
+```bash
+pnpm exec wrangler secret put JWT_SECRET
+pnpm exec wrangler secret put ADMIN_BOOTSTRAP_TOKEN
+```
+
+随后仅通过你控制的客户端向 `/api/user` 发送一次首位管理员注册请求，并在请求头放入 `X-Admin-Bootstrap-Token`；确认管理员已创建后执行 `pnpm exec wrangler secret delete ADMIN_BOOTSTRAP_TOKEN`。不要在公开部署前执行部署命令。
 
 此后端固定使用 D1；上游 Waline 的 `MONGO_*`、`MYSQL_*`、`PG_*` / `POSTGRES_*`、`LEAN_*`、`GITHUB_*`、`TCB_*` 等存储驱动变量不会切换本项目的数据存储。这是当前后端选择，不代表 Workers 无法连接其他数据库。
 

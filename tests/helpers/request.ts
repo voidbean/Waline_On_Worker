@@ -1,4 +1,11 @@
-import { SELF } from "cloudflare:test";
+import {
+	createExecutionContext,
+	waitOnExecutionContext,
+} from "cloudflare:test";
+import { env } from "cloudflare:workers";
+import { testRateLimits } from "@tests/helpers/rate-limits.js";
+import type { Env } from "@/env.js";
+import app from "@/index.js";
 
 const BASE = "http://localhost";
 
@@ -7,7 +14,9 @@ type Method = "GET" | "POST" | "PUT" | "DELETE";
 interface RequestOptions {
 	body?: unknown;
 	token?: string;
+	bootstrapToken?: string;
 	params?: Record<string, string | string[]>;
+	env?: Partial<Env>;
 }
 
 function buildUrl(
@@ -28,15 +37,23 @@ async function request(
 	path: string,
 	options: RequestOptions = {},
 ): Promise<Response> {
-	const { body, token, params } = options;
+	const { body, token, bootstrapToken, params, env: envOverrides } = options;
 	const headers: Record<string, string> = {};
 	if (body !== undefined) headers["Content-Type"] = "application/json";
 	if (token) headers.Authorization = `Bearer ${token}`;
-	return SELF.fetch(buildUrl(path, params), {
-		method,
-		headers,
-		body: body !== undefined ? JSON.stringify(body) : undefined,
-	});
+	if (bootstrapToken) headers["X-Admin-Bootstrap-Token"] = bootstrapToken;
+	const ctx = createExecutionContext();
+	const response = await app.fetch(
+		new Request(buildUrl(path, params), {
+			method,
+			headers,
+			body: body !== undefined ? JSON.stringify(body) : undefined,
+		}),
+		{ ...(env as Env), ...testRateLimits, ...envOverrides } as Env,
+		ctx,
+	);
+	await waitOnExecutionContext(ctx);
+	return response;
 }
 
 export const api = {

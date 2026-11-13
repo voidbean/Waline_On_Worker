@@ -198,6 +198,8 @@ Recommended solutions:
 | AVATAR_PROXY | Proxy service URL used by clients to load avatars; unset, `false`, or `0` uses direct URLs | Unset |
 | LEVELS | Comma-separated, strictly increasing non-negative integer thresholds; unset, empty, `false`, `0`, or invalid values disable levels | Off |
 | DISABLE_REGION | Hide public region data when set to `true` or another non-empty value other than `false` or `0`; admins can still see it | Off |
+| ALLOW_REGISTRATION | Enable ordinary guest registration only when set to `true`; an empty user table still requires the first-admin bootstrap secret | Off |
+| AUDIT | Hold new comments from anonymous and logged-in users for review until an explicit default status is saved | Off |
 
 Display configuration details:
 
@@ -219,7 +221,17 @@ pnpm run deploy
 
 The display variables `DISABLE_REGION`, `DISABLE_USERAGENT` (and its `DISABLE_AGENT` alias), `AVATAR_PROXY`, and `LEVELS` are wired into the Worker.
 
-The following upstream variables and integrations are not implemented, so setting them does not enable the corresponding feature (the `LOGIN` variable does not control the login feature): `LOGIN`, `SERVER_URL`, `GRAVATAR_STR`, `COMMENT_AUDIT`, `MARKDOWN_*`, `SMTP_*`, `SENDER_*`, `DISABLE_AUTHOR_NOTIFY`, `WEBHOOK`, server-side verification with `TURNSTILE_SECRET` / `RECAPTCHA_V3_SECRET`, and `IPQPS` environment-variable rate limiting. The project has its own `AUDIT` setting; it is different from the upstream `COMMENT_AUDIT` variable. The frontend Captcha key is currently injected only into the admin page and does not provide complete bot verification. These integrations can be implemented later; this does not mean Workers cannot support them.
+The following upstream variables and integrations are not implemented, so setting them does not enable the corresponding feature (the `LOGIN` variable does not control the login feature): `LOGIN`, `SERVER_URL`, `GRAVATAR_STR`, `COMMENT_AUDIT`, `MARKDOWN_*`, `SMTP_*`, `SENDER_*`, `DISABLE_AUTHOR_NOTIFY`, `WEBHOOK`, server-side verification with `TURNSTILE_SECRET` / `RECAPTCHA_V3_SECRET`, and `IPQPS` environment-variable rate limiting. The project has its own `AUDIT` setting; it is different from the upstream `COMMENT_AUDIT` variable. Login, registration, and comment creation use Wrangler `ratelimits` bindings instead. The frontend Captcha key is currently injected only into the admin page and does not provide complete bot verification.
+
+### Registration and first-admin security
+
+- Public guest registration is disabled by default. Set `ALLOW_REGISTRATION` to `true` only when intentionally allowing new guest accounts.
+- An empty user table never grants administrator privileges through ordinary public registration. To create the first administrator, configure the Wrangler Secret `ADMIN_BOOTSTRAP_TOKEN` and send it in the `X-Admin-Bootstrap-Token` header to `POST /api/user`. A conditional database insert ensures only one concurrent request can initialize the account.
+- Never put the bootstrap token in `[vars]`, browser code, or the repository. Delete it after creating the first administrator; it is not needed for later guest registrations.
+- Rate limits are 10 login attempts/minute/IP, 5 registrations/minute/IP, and 10 comment creations/minute/IP. They are approximate and counted separately in each Cloudflare location, not a strict worldwide quota.
+- `wrangler.toml.example` sets `AUDIT = "true"` for a safer first launch. Until a default status is explicitly saved in Worker Settings, both anonymous and logged-in comments enter the review queue.
+
+After a Worker exists and deployment is explicitly approved, set `JWT_SECRET` and `ADMIN_BOOTSTRAP_TOKEN` with `pnpm exec wrangler secret put <SECRET_NAME>`. Use the bootstrap token once from a trusted client, then remove it with `pnpm exec wrangler secret delete ADMIN_BOOTSTRAP_TOKEN`. Do not deploy before public registration, CORS, rate limits, and review defaults have been verified.
 
 This backend uses D1. Upstream storage-driver variables such as `MONGO_*`, `MYSQL_*`, `PG_*` / `POSTGRES_*`, `LEAN_*`, `GITHUB_*`, and `TCB_*` do not switch this project to those databases. This is the current backend choice, not a claim that Workers cannot connect to other databases.
 

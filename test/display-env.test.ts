@@ -4,6 +4,7 @@ import {
 } from "cloudflare:test";
 import { env } from "cloudflare:workers";
 import { createComment, createUser } from "@tests/helpers/factories.js";
+import { testRateLimits } from "@tests/helpers/rate-limits.js";
 import { resetDB } from "@tests/helpers/setup.js";
 import { beforeEach, describe, expect, it } from "vitest";
 import type { Env } from "@/env.js";
@@ -34,20 +35,30 @@ beforeEach(async () => {
 async function request(
 	path: string,
 	overrides: Partial<Env> = {},
-	options: { method?: string; body?: unknown; authenticated?: boolean } = {},
+	options: {
+		method?: string;
+		body?: unknown;
+		authenticated?: boolean;
+		registrationEnabled?: boolean;
+	} = {},
 ) {
 	const ctx = createExecutionContext();
-	const response = await app.request(
-		path,
-		{
+	const response = await app.fetch(
+		new Request(`https://worker.example${path}`, {
 			method: options.method || "GET",
 			headers: {
 				"Content-Type": "application/json",
 				...(options.authenticated ? { Authorization: `Bearer ${token}` } : {}),
 			},
 			...(options.body ? { body: JSON.stringify(options.body) } : {}),
+		}),
+		{
+			...testRateLimits,
+			DB: db,
+			JWT_SECRET: "display-test",
+			...(options.registrationEnabled ? { ALLOW_REGISTRATION: "true" } : {}),
+			...overrides,
 		},
-		{ DB: db, JWT_SECRET: "display-test", ...overrides },
 		ctx,
 	);
 	await waitOnExecutionContext(ctx);
@@ -209,6 +220,7 @@ describe("avatar proxy through Workers/D1 responses", () => {
 		expectProxy(adminUsers.data.data[0].avatar, customAvatar);
 		const registered = await request("/api/user", settings, {
 			method: "POST",
+			registrationEnabled: true,
 			body: { email: "new@example.com", password: "password123" },
 		});
 		expectProxy(registered.data.avatar);

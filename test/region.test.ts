@@ -4,6 +4,7 @@ import {
 } from "cloudflare:test";
 import { env } from "cloudflare:workers";
 import { createComment, createUser } from "@tests/helpers/factories.js";
+import { testRateLimits } from "@tests/helpers/rate-limits.js";
 import { resetDB, setupDB } from "@tests/helpers/setup.js";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { Env } from "@/env.js";
@@ -50,6 +51,7 @@ async function request(
 	const response = await app.fetch(
 		input,
 		{
+			...testRateLimits,
 			DB: db,
 			JWT_SECRET: "region-test",
 			DISABLE_REGION: options.disabled,

@@ -17,8 +17,20 @@ beforeEach(async () => {
 // ─── POST /api/user — registration ───────────────────────────────────────────
 
 describe("POST /api/user — registration", () => {
-	it("first registered user is assigned administrator type", async () => {
+	it("rejects first-user initialization without the bootstrap secret", async () => {
 		const res = await api.post("/api/user", {
+			body: {
+				display_name: "Admin",
+				email: "admin@example.com",
+				password: "adminpass",
+			},
+		});
+		expect(res.status).toBe(403);
+	});
+
+	it("first registered user is administrator only with the bootstrap secret", async () => {
+		const res = await api.post("/api/user", {
+			bootstrapToken: "test-bootstrap-token",
 			body: {
 				display_name: "Admin",
 				email: "admin@example.com",
@@ -31,10 +43,41 @@ describe("POST /api/user — registration", () => {
 		expect(data.data.type).toBe("administrator");
 	});
 
-	it("subsequent users are assigned guest type", async () => {
+	it("allows only one concurrent first-admin initialization", async () => {
+		const responses = await Promise.all(
+			["first-admin@example.com", "racing-admin@example.com"].map((email) =>
+				api.post("/api/user", {
+					bootstrapToken: "test-bootstrap-token",
+					body: { email, password: "adminpass" },
+				}),
+			),
+		);
+		const statuses = responses.map((response) => response.status);
+		expect(statuses.filter((status) => status === 201)).toHaveLength(1);
+		expect(statuses.every((status) => [201, 403, 409].includes(status))).toBe(
+			true,
+		);
+		const result = await db
+			.prepare(
+				"SELECT COUNT(*) AS count FROM wl_Users WHERE type = 'administrator'",
+			)
+			.first<{ count: number }>();
+		expect(result?.count).toBe(1);
+	});
+
+	it("public registration stays closed by default after bootstrap", async () => {
+		await createUser(db, { email: "first@example.com" });
+		const res = await api.post("/api/user", {
+			body: { email: "second@example.com", password: "pass" },
+		});
+		expect(res.status).toBe(403);
+	});
+
+	it("creates later users as guests when registration is explicitly enabled", async () => {
 		await createUser(db, { email: "first@example.com" });
 		const data = await json(
 			await api.post("/api/user", {
+				env: { ALLOW_REGISTRATION: "true" },
 				body: { email: "second@example.com", password: "pass" },
 			}),
 		);
@@ -44,10 +87,23 @@ describe("POST /api/user — registration", () => {
 	it("rejects duplicate email with 409", async () => {
 		await createUser(db, { email: "taken@example.com" });
 		const res = await api.post("/api/user", {
+			env: { ALLOW_REGISTRATION: "true" },
 			body: { email: "taken@example.com", password: "pass" },
 		});
 		expect(res.status).toBe(409);
 		expect((await json(res)).errno).toBe(1);
+	});
+
+	it("does not reveal whether an account exists while registration is closed", async () => {
+		await createUser(db, { email: "taken@example.com" });
+		const duplicate = await api.post("/api/user", {
+			body: { email: "taken@example.com", password: "pass" },
+		});
+		const unknown = await api.post("/api/user", {
+			body: { email: "unknown@example.com", password: "pass" },
+		});
+		expect(duplicate.status).toBe(403);
+		expect(unknown.status).toBe(403);
 	});
 
 	it("returns 400 when email or password is missing", async () => {
@@ -61,8 +117,10 @@ describe("POST /api/user — registration", () => {
 	});
 
 	it("defaults display_name to email prefix when omitted", async () => {
+		await createUser(db, { email: "existing@example.com" });
 		const data = await json(
 			await api.post("/api/user", {
+				env: { ALLOW_REGISTRATION: "true" },
 				body: { email: "bob@example.com", password: "pass" },
 			}),
 		);

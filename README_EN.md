@@ -49,7 +49,7 @@ A [Waline](https://waline.js.org/) comment system backend implementation running
 - [x] LLM comment moderation (Embedded [waline-plugin-llm-reviewer-next](https://github.com/lsy-404/waline-plugin-llm-reviewer-next) design, supporting natural language safety policies)
 - [x] Comment default status control (Independent settings for anonymous and logged-in users)
 - [x] Admin dashboard (@waline/admin CDN + Worker settings page)
-- [x] IP rate limiting (IPQPS) can be directly configured via Cloudflare security rules
+- [x] Per-IP rate limiting for login, registration, and comment creation (Wrangler Rate Limiting bindings; approximate and location-local)
 - [x] Additional management panel to set default frontend versions, control default comment statuses, configure spam moderation strategies, and more
 - [ ] Email notifications (SMTP)
 - [ ] Webhook notifications
