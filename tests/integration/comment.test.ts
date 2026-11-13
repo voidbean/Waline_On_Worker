@@ -540,3 +540,24 @@ describe("board spoiler warnings", () => {
 		).toBe(true);
 	});
 });
+
+describe("board emoji comments", () => {
+	it("keeps editable shortcodes through create, admin edit and list", async () => {
+		const original = "🙂:ac-01:";
+		const edited = ":acnew-55::anon-40:";
+		const created = await json(await api.post("/api/comment", {
+			body: { url: "/emoji-test", comment: original },
+		}));
+		expect(created.data).toMatchObject({
+			orig: original, comment: expect.stringContaining('src="/emoji/ac/ac-01.png"'),
+		});
+		const res = await api.put(`/api/comment/${created.data.objectId}`, {
+			token: adminToken, body: { comment: edited },
+		});
+		expect(res.status).toBe(200);
+		const list = await json(await api.get("/api/comment", { params: { path: "/emoji-test" } }));
+		expect(list.data.data[0].orig).toBe(edited);
+		expect(list.data.data[0].comment).toContain('src="/emoji/acnew/acnew-55.png"');
+		expect(list.data.data[0].comment).toContain('src="/emoji/anon/anon-40.png"');
+	});
+});

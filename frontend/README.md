@@ -94,3 +94,14 @@ cannot prove ownership later; a moderator can mark their posts. RSS/recent
 feeds omit marked posts and children of marked roots. The full discussion
 API still returns public comment data; this is a reading preference on the
 Pages board, not access control.
+
+### 评论表情
+
+水楼保留基础表情，另有 AC 娘经典（54 张）、AC 娘新版（55 张）、匿名版（40 张）。
+三组 PNG 来自站点维护者提供的 AcFun QQ EIF，按包内目录顺序编号；不包含 QQ 缩略图。
+素材不因随代码提供而采用本项目的软件许可证，公开分发前请确认素材授权。
+AC 图片由 Pages 自身提供，不依赖图床或 R2；基础包沿用 Waline 固定版本的微博图片地址。
+
+点选会插入稳定短码（例如 `:ac-01:`、`:acnew-01:`、`:anon-01:`），不需要记编号。
+评论原文保存短码，预览和 Worker 使用相同的渲染器与清单。不要重排编号或移动已有图片。
+更新清单或渲染器后按 vendor/README.md 重建客户端，同时发布 Worker 和 Pages；不需要数据库迁移。

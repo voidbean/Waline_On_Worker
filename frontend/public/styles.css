@@ -168,3 +168,13 @@ h2 { margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -.035em; }
 #waline .board-spoiler-toggle[aria-expanded="true"]::after { transform: rotate(45deg); }
 #waline .board-spoiler-toggle:hover { background: #f3ebdf; border-color: #c7a98c; }
 #waline .board-spoiler-toggle:focus-visible { outline: 2px solid #925a36; outline-offset: 3px; }
+
+/* Four labeled packs must stay usable on a narrow phone. */
+#waline .wl-emoji-popup .wl-tabs { display: flex; flex-wrap: wrap; height: auto; }
+#waline .wl-emoji-popup .wl-tab {
+  display: inline-flex; align-items: center; gap: .25rem; width: auto; padding: .3rem .45rem;
+  font-size: .75rem; white-space: nowrap;
+}
+#waline .wl-content img.wl-emoji {
+  display: inline-block; width: auto; height: 2em; max-width: 3em; vertical-align: middle; margin: 0 .08em;
+}

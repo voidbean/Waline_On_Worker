@@ -76,3 +76,25 @@ describe("renderMarkdown — XSS sanitization", () => {
 		expect(out).not.toContain("<script");
 	});
 });
+
+describe("board emoji", () => {
+	it("renders all three packs, adjacent codes and the original basic pack", () => {
+		const html = renderMarkdown("🙂:ac-54::acnew-55::anon-40: :weibo_no_idea: :weibo_doge:");
+		for (const src of ["/emoji/ac/ac-54.png", "/emoji/acnew/acnew-55.png",
+			"/emoji/anon/anon-40.png", "/weibo/weibo_no_idea.png", "/weibo/weibo_doge.png"]) {
+			expect(html).toContain(src);
+		}
+		expect(html.match(/class="wl-emoji"/g)).toHaveLength(5);
+		expect(html).toContain("🙂");
+	});
+
+	it("does not expand unknown codes, code examples or link/image attributes", () => {
+		const input = ":ac-00: :anon-41: :constructor: `:ac-01:`\n\n```\n:acnew-01:\n```\n\n[link](/p/:ac-01:) ![:anon-01:](/img.png)";
+		const html = renderMarkdown(input);
+		expect(html).not.toContain('class="wl-emoji"');
+		expect(html).toContain(":anon-41:");
+		expect(html).toContain('href="/p/:ac-01:"');
+		expect(html).toContain('alt=":anon-01:"');
+		expect(html).toContain("<code>:ac-01:</code>");
+	});
+});

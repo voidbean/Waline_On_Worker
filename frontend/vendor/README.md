@@ -14,8 +14,11 @@ work="$(mktemp -d)"
 git clone https://github.com/walinejs/waline.git "$work/upstream"
 git -C "$work/upstream" checkout --detach eb28bc40bf91d5a488d680fc842fc0dd78c0a677
 git -C "$work/upstream" apply "$root/frontend/vendor/waline-spoilers.patch"
+git -C "$work/upstream" apply "$root/frontend/vendor/board-emoji.patch"
 mkdir "$work/build"
 cp -R "$work/upstream/packages/client/src" "$work/build/src"
+mkdir "$work/build/src/board"
+cp src/utils/{markdown.ts,board-emoji.json} "$work/build/src/board/"
 cp frontend/vendor/{build.mjs,package.json,pnpm-lock.yaml} "$work/build/"
 (cd "$work/build" && pnpm install --frozen-lockfile --ignore-scripts && node build.mjs)
 cp "$work/build/dist/"* frontend/public/vendor/

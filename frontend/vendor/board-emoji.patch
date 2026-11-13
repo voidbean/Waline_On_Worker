@@ -1,0 +1,72 @@
+diff --git a/packages/client/src/components/CommentBox.vue b/packages/client/src/components/CommentBox.vue
+index 8e2d2a7..ac83e9c 100644
+--- a/packages/client/src/components/CommentBox.vue
++++ b/packages/client/src/components/CommentBox.vue
+@@ -15,4 +15,5 @@ import {
+   useUserMeta,
+ } from '../composables/index.js';
++import { renderMarkdown } from '../board/markdown.js';
+ import { configKey } from '../config/index.js';
+ import type { WalineSearchResult } from '../typings/index.js';
+@@ -23,6 +24,4 @@ import {
+   getWordNumber,
+   isValidEmail,
+-  parseEmoji,
+-  parseMarkdown,
+   userAgent,
+ } from '../utils/index.js';
+@@ -280,6 +279,4 @@ const submitComment = async (): Promise<void> => {
+   }
+
+-  comment.comment = parseEmoji(comment.comment, emoji.value.map);
+-
+   if (props.replyId && props.rootId) {
+     comment.pid = props.replyId;
+@@ -521,12 +518,6 @@ onMounted(() => {
+     () => editor.value,
+     (value) => {
+-      const { highlighter, texRenderer } = config.value;
+-
+       content.value = value;
+-      previewText.value = parseMarkdown(value, {
+-        emojiMap: emoji.value.map,
+-        highlighter,
+-        texRenderer,
+-      });
++      previewText.value = renderMarkdown(value);
+       wordNumber.value = getWordNumber(value);
+
+@@ -805,4 +796,6 @@ onMounted(() => {
+               class="wl-tab"
+               :class="{ active: emojiTabIndex === index }"
++              :aria-pressed="emojiTabIndex === index"
++              :aria-label="emojiItem.name"
+               @click="emojiTabIndex = index"
+             >
+@@ -815,4 +808,5 @@ onMounted(() => {
+                 referrerPolicy="no-referrer"
+               />
++              <span>{{ emojiItem.name }}</span>
+             </button>
+           </div>
+diff --git a/packages/client/src/config/default.ts b/packages/client/src/config/default.ts
+index da7bb04..5cb72ab 100644
+--- a/packages/client/src/config/default.ts
++++ b/packages/client/src/config/default.ts
+@@ -1,7 +1,8 @@
+ import type { IGif } from '@giphy/js-types';
+ import mathml from '@webc.site/math';
++import boardEmoji from '../board/board-emoji.json';
+
+ import type {
+-  WalineEmojiPresets,
++  WalineEmojiInfo,
+   WalineMeta,
+   WalineSearchOptions,
+@@ -14,5 +15,5 @@ export const getMeta = (meta: WalineMeta[]): WalineMeta[] =>
+   meta.filter((item) => AVAILABLE_META.has(item));
+
+-export const DEFAULT_EMOJI: WalineEmojiPresets[] = ['//unpkg.com/@waline/emojis@1.1.0/weibo'];
++export const DEFAULT_EMOJI: WalineEmojiInfo[] = boardEmoji;
+
+ export const DEFAULT_REACTION = [

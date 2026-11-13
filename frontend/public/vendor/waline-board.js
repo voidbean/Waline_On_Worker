@@ -1,6 +1,6 @@
 // \0rolldown/runtime.js
 var e = (e, t) => () => (t || (e((t = { exports: {} }).exports, t, t.exports), e = null), t.exports);
-// node_modules/.pnpm/@vue+shared@3.5.44/node_modules/@vue/shared/dist/shared.esm-bundler.js
+// ../../tmp.l0U3LGVbQ1/small/node_modules/.pnpm/@vue+shared@3.5.44/node_modules/@vue/shared/dist/shared.esm-bundler.js
 // @__NO_SIDE_EFFECTS__
 function t(e) {
 	let t = /* @__PURE__ */ Object.create(null);
@@ -981,7 +981,7 @@ function bn(e, t = Infinity, n) {
 	}
 	return e;
 }
-// node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
+// ../../tmp.l0U3LGVbQ1/small/node_modules/.pnpm/@vue+runtime-core@3.5.44/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
 function xn(e, t, n, r) {
 	try {
 		return r ? e(...r) : e();
@@ -2890,7 +2890,7 @@ function Co(e) {
 function wo(e) {
 	return _(e) ? document.querySelector(e) : e;
 }
-// node_modules/.pnpm/@waline+api@1.1.2/node_modules/@waline/api/dist/index.js
+// ../../tmp.l0U3LGVbQ1/small/node_modules/.pnpm/@waline+api@1.1.2/node_modules/@waline/api/dist/index.js
 var To = { "Content-Type": "application/json" }, Eo = (e) => `${e.replace(/\/?$/u, "/")}api/`, Do = (e, t = "") => {
 	if (typeof e == "object" && e.errno) throw TypeError(`${t} failed with ${e.errno}: ${e.errmsg}`);
 	return e;
@@ -3355,18 +3355,51 @@ var Ns = "mrow", Ps = "left", Fs = "start", Is = [
 ], Zs = (e) => e ? e[0] <= 3 ? Ws(Hs[e[0]], e[1], e[2]) : Xs[e[0]](e) : "", Qs = (e, t) => {
 	let n = e.replace(/[\r\n]+/g, " ");
 	return X("math", X("semantics", qs(Ms(Ko(n), [0, 0])) + X("annotation", Us(n), " encoding=\"application/x-tex\"")), " xmlns=\"http://www.w3.org/1998/Math/MathML\"" + (t ? " display=\"block\"" : ""));
-}, $s = /* @__PURE__ */ new Set([
+}, $s = [
+	{
+		name: "AC 娘经典",
+		folder: "/emoji/ac",
+		prefix: "ac-",
+		type: "png",
+		icon: "01",
+		items: /* @__PURE__ */ "01.02.03.04.05.06.07.08.09.10.11.12.13.14.15.16.17.18.19.20.21.22.23.24.25.26.27.28.29.30.31.32.33.34.35.36.37.38.39.40.41.42.43.44.45.46.47.48.49.50.51.52.53.54".split(".")
+	},
+	{
+		name: "AC 娘新版",
+		folder: "/emoji/acnew",
+		prefix: "acnew-",
+		type: "png",
+		icon: "01",
+		items: /* @__PURE__ */ "01.02.03.04.05.06.07.08.09.10.11.12.13.14.15.16.17.18.19.20.21.22.23.24.25.26.27.28.29.30.31.32.33.34.35.36.37.38.39.40.41.42.43.44.45.46.47.48.49.50.51.52.53.54.55".split(".")
+	},
+	{
+		name: "匿名版",
+		folder: "/emoji/anon",
+		prefix: "anon-",
+		type: "png",
+		icon: "01",
+		items: /* @__PURE__ */ "01.02.03.04.05.06.07.08.09.10.11.12.13.14.15.16.17.18.19.20.21.22.23.24.25.26.27.28.29.30.31.32.33.34.35.36.37.38.39.40".split(".")
+	},
+	{
+		name: "基础表情",
+		prefix: "weibo_",
+		type: "png",
+		icon: "doge",
+		items: /* @__PURE__ */ "smile.lovely.blush.grin.laugh.joy.angry.bye.hammer.kiss.love.mask.money.quiet.rage.sad.shy.sick.slient.smirk.slap.antic.desire.longing.no_idea.look_down.clap.yum.sleep.dizzy_face.chuckle.disappointed.flushed.heart_eyes.no.shuai.suprised.think.vomit.scream.sleepy.sob.sunglasses.greddy.pick_nose.annoyed.awkward.confused.grievance.poor.wink.rolling_eyes.watermalon.annoyed_left.annoyed_right.yawn.hufen.doge.husky.dog_annoyed.dog_bye.dog_consider.dog_cry.dog_joy.dog_laugh.dog_sweat.dog_think.dog_yum.cat.cat_annoyed.cat_bye.cat_cry.cat_think.girl_annoyed.boy.girl.panda.pig.rabbit.ultraman.wool_group.yan.xi.soap.meng.jiong.geili.shenma.alpaca".split("."),
+		folder: "https://unpkg.com/@waline/emojis@1.1.0/weibo"
+	}
+], ec = /* @__PURE__ */ new Set([
 	"nick",
 	"mail",
 	"link"
-]), ec = (e) => e.filter((e) => $s.has(e)), tc = ["//unpkg.com/@waline/emojis@1.1.0/weibo"], nc = [
+]), tc = (e) => e.filter((e) => ec.has(e)), nc = $s, rc = [
 	"//unpkg.com/@waline/emojis/tieba/tieba_agree.png",
 	"//unpkg.com/@waline/emojis/tieba/tieba_look_down.png",
 	"//unpkg.com/@waline/emojis/tieba/tieba_sunglasses.png",
 	"//unpkg.com/@waline/emojis/tieba/tieba_pick_nose.png",
 	"//unpkg.com/@waline/emojis/tieba/tieba_awkward.png",
 	"//unpkg.com/@waline/emojis/tieba/tieba_sleep.png"
-], rc = (e) => new Promise((t, n) => {
+], ic = (e) => new Promise((t, n) => {
 	if (e.size > 128e3) {
 		n(/* @__PURE__ */ Error("File too large! File size limit 128KB"));
 		return;
@@ -3375,7 +3408,7 @@ var Ns = "mrow", Ps = "left", Fs = "start", Is = [
 	r.readAsDataURL(e), r.addEventListener("load", () => {
 		t(r.result);
 	}), r.addEventListener("error", n);
-}), ic = (e, t) => Qs(t, e), ac = (e) => {
+}), ac = (e, t) => Qs(t, e), oc = (e) => {
 	let t = (t, n = {}) => fetch(`https://api.giphy.com/v1/gifs/${t}?${new URLSearchParams({
 		lang: e,
 		limit: "20",
@@ -3397,7 +3430,7 @@ var Ns = "mrow", Ps = "left", Fs = "start", Is = [
 			offset: n.toString()
 		})
 	};
-}, oc = /* @__PURE__ */ RegExp("([\\u4E00-\\u9FFF\\u3400-\\u4DBF\\uF900-\\uFAFF\\u3040-\\u309F\\uAC00-\\uD7AF\\u0400-\\u04FF]+|\\w+|<)|((?:(?:^|\\s)\\/\\/(.+?)$)|(?:\\/\\*([\\S\\s]*?)\\*\\/))", "gmiu"), sc = [
+}, sc = /* @__PURE__ */ RegExp("([\\u4E00-\\u9FFF\\u3400-\\u4DBF\\uF900-\\uFAFF\\u3040-\\u309F\\uAC00-\\uD7AF\\u0400-\\u04FF]+|\\w+|<)|((?:(?:^|\\s)\\/\\/(.+?)$)|(?:\\/\\*([\\S\\s]*?)\\*\\/))", "gmiu"), cc = [
 	"23AC69",
 	"91C132",
 	"F19726",
@@ -3411,41 +3444,41 @@ var Ns = "mrow", Ps = "left", Fs = "start", Is = [
 	"E30B20",
 	"E30B20",
 	"A3338B"
-], cc = {}, lc = (e) => {
+], lc = {}, uc = (e) => {
 	let t = 0;
-	return e.replaceAll(oc, (e, n, r) => {
+	return e.replaceAll(sc, (e, n, r) => {
 		if (r) return `<span style="color: slategray">${r}</span>`;
 		if (n === "<") return "&lt;";
 		let i;
-		cc[n] ? i = cc[n] : (i = sc[t], cc[n] = i);
+		lc[n] ? i = lc[n] : (i = cc[t], lc[n] = i);
 		let a = `<span style="color: #${i}">${n}</span>`;
-		return t = ++t % sc.length, a;
+		return t = ++t % cc.length, a;
 	});
-}, uc = /* @__PURE__ */ "nick.nickError.mail.mailError.link.optional.placeholder.sofa.submit.like.cancelLike.reply.cancelReply.comment.refresh.more.preview.emoji.uploadImage.seconds.minutes.hours.days.now.uploading.login.logout.admin.sticky.word.wordHint.anonymous.level0.level1.level2.level3.level4.level5.gif.gifSearchPlaceholder.profile.approved.waiting.spam.unsticky.oldest.latest.hottest.reactionTitle.commentUnderReview.subPostComment.subSiteComment.subscribeToReplies".split("."), dc = (e) => Object.fromEntries(e.map((e, t) => [uc[t], e])), fc = dc(/* @__PURE__ */ "Benutzername,Der Benutzername darf nicht weniger als 3 Bytes umfassen.,E-Mail,Bitte bestätigen Sie Ihre E-Mail-Adresse.,Webseite,Optional,Kommentieren Sie hier...,Noch keine Kommentare.,Senden,Gefällt mir,Gefällt mir nicht mehr,Antworten,Antwort abbrechen,Kommentare,Aktualisieren,Mehr laden...,Vorschau,Emoji,Ein Bild hochladen,Vor einigen Sekunden,Vor einigen Minuten,Vor einigen Stunden,Vor einigen Tagen,Gerade eben,Hochladen läuft,Anmelden,Abmelden,Admin,Angeheftet,Wörter,Bitte geben Sie Kommentare zwischen $0 und $1 Wörtern ein! Aktuelle Anzahl der Wörter: $2,Anonym,Zwerge,Hobbits,Ents,Magier,Elfen,Maïar,GIF,Nach einem GIF suchen,Profil,Genehmigt,Ausstehend,Spam,Lösen,Älteste,Neueste,Am beliebtesten,Was denken Sie?,Ihr Kommentar wird überprüft und ist derzeit nur für Sie sichtbar. Nach der Genehmigung wird er öffentlich angezeigt.,Abonnieren Sie die Kommentare zu diesem Beitrag,Abonnieren Sie die Kommentare auf dieser Seite,Abonnieren Sie die Antworten auf Ihre Kommentare".split(",")), pc = dc(/* @__PURE__ */ "NickName,NickName cannot be less than 3 bytes.,E-Mail,Please confirm your email address.,Website,Optional,Comment here...,No comment yet.,Submit,Like,Cancel like,Reply,Cancel reply,Comments,Refresh,Load More...,Preview,Emoji,Upload Image,seconds ago,minutes ago,hours ago,days ago,just now,Uploading,Login,logout,Admin,Sticky,Words,Please input comments between $0 and $1 words!\n Current word number: $2,Anonymous,Dwarves,Hobbits,Ents,Wizards,Elves,Maiar,GIF,Search GIF,Profile,Approved,Waiting,Spam,Unsticky,Oldest,Latest,Hottest,What do you think?,Your comment is under review and is currently only visible to you. It will be publicly visible after approval.,Subscribe to comments of this post,Subscribe to comments of this site,Subscribe to replies of your comments".split(",")), mc = dc(/* @__PURE__ */ "Nombre de usuario,El nombre de usuario no puede tener menos de 3 bytes.,Correo electrónico,Por favor confirma tu dirección de correo electrónico.,Sitio web,Opcional,Comenta aquí...,Sin comentarios todavía.,Enviar,Like,Anular like,Responder,Anular respuesta,Comentarios,Recargar,Cargar Más...,Previsualizar,Emoji,Subir Imagen,segundos atrás,minutos atrás,horas atrás,días atrás,justo ahora,Subiendo,Iniciar sesión,cerrar sesión,Admin,Fijado,Palabras,Por favor escriba entre $0 y $1 palabras!\n El número actual de palabras: $2,Anónimo,Enanos,Hobbits,Ents,Magos,Elfos,Maiar,GIF,Buscar GIF,Perfil,Aprobado,Esperando,Spam,Desfijar,Más antiguos,Más recientes,Más vistos,¿Qué piensas?,Tu comentario está en revisión y actualmente solo es visible para ti. Será visible públicamente después de la aprobación.,Suscribirse a los comentarios de esta publicación,Suscribirse a los comentarios de este sitio,Suscribirse a las respuestas de tus comentarios".split(",")), hc = dc(/* @__PURE__ */ "Pseudo,Le pseudo ne peut pas faire moins de 3 octets.,E-mail,Veuillez confirmer votre adresse e-mail.,Site Web,Optionnel,Commentez ici...,Aucun commentaire pour l'instant.,Envoyer,J'aime,Annuler le j'aime,Répondre,Annuler la réponse,Commentaires,Actualiser,Charger plus...,Aperçu,Emoji,Télécharger une image,Il y a quelques secondes,Il y a quelques minutes,Il y a quelques heures,Il y a quelques jours,À l'instant,Téléchargement en cours,Connexion,Déconnexion,Admin,Épinglé,Mots,Veuillez saisir des commentaires entre $0 et $1 mots !\n Nombre actuel de mots : $2,Anonyme,Nains,Hobbits,Ents,Mages,Elfes,Maïar,GIF,Rechercher un GIF,Profil,Approuvé,En attente,Indésirable,Détacher,Le plus ancien,Dernier,Le plus populaire,Qu'en pensez-vous ?,Votre commentaire est en cours de révision et n'est actuellement visible que par vous. Il sera visible publiquement après approbation.,S’abonner aux commentaires de ce post,S’abonner aux commentaires de ce site,S’abonner aux réponses de vos commentaires".split(",")), gc = dc(/* @__PURE__ */ "Nama Panggilan,Nama Panggilan tidak boleh kurang dari 3 bita.,E-Mail,Silakan konfirmasi alamat email Anda.,Situs Web,Opsional,Tulis komentar di sini...,Belum ada komentar.,Kirim,Suka,Batal suka,Balas,Batal balas,Komentar,Segarkan,Muat Lebih Banyak...,Pratinjau,Emoji,Unggah Gambar,detik yang lalu,menit yang lalu,jam yang lalu,hari yang lalu,baru saja,Mengunggah,Masuk,Keluar,Admin,Sematkan,Kata,Silakan masukkan komentar antara $0 dan $1 kata!\n Jumlah kata saat ini: $2,Anonim,Kurcaci,Hobbit,Ent,Penyihir,Peri,Maiar,GIF,Cari GIF,Profil,Disetujui,Menunggu,Spam,Lepas Sematan,Terlama,Terbaru,Terpopuler,Apa yang Anda pikirkan?,Komentar Anda sedang ditinjau dan saat ini hanya terlihat oleh Anda. Komentar akan terlihat secara publik setelah disetujui.,Berlangganan komentar di postingan ini,Berlangganan komentar di situs ini,Berlangganan balasan komentar Anda".split(",")), _c = dc(/* @__PURE__ */ "Nickname,Il nickname non può avere meno di 3 caratteri.,E-mail,Per favore conferma il tuo indirizzo e-mail.,Sito web,Facoltativo,Scrivi un commento...,Ancora nessun commento.,Invia,Mi piace,Annulla mi piace,Rispondi,Annulla risposta,Commenti,Aggiorna,Carica altri...,Anteprima,Emoji,Carica immagine,secondi fa,minuti fa,ore fa,giorni fa,adesso,Caricamento in corso...,Accedi,Esci,Admin,In evidenza,Parole,Inserisci un commento tra $0 e $1 parole!\n Numero attuale di parole: $2,Anonimo,Nano,Hobbit,Ent,Mago,Elfo,Maiar,GIF,Cerca GIF,Profilo,Approvato,In attesa,Spam,Rimuovi evidenza,Più vecchi,Più recenti,Più popolari,Cosa ne pensi?,Il tuo commento è in fase di revisione ed è attualmente visibile solo a te. Sarà visibile pubblicamente dopo l'approvazione.,Iscriviti ai commenti di questo post,Iscriviti ai commenti di questo sito,Iscriviti alle risposte dei tuoi commenti".split(",")), vc = dc(/* @__PURE__ */ "ニックネーム,3バイト以上のニックネームをご入力ください.,メールアドレス,メールアドレスをご確認ください.,サイト,オプション,ここにコメント,コメントしましょう~,提出する,Like,Cancel like,返信する,キャンセル,コメント,更新,さらに読み込む,プレビュー,絵文字,画像をアップロード,秒前,分前,時間前,日前,たっだ今,アップロード,ログインする,ログアウト,管理者,トップに置く,ワード,コメントは $0 から $1 ワードの間でなければなりません!\n 現在の単語番号: $2,匿名,うえにん,なかにん,しもおし,特にしもおし,かげ,なぬし,GIF,探す GIF,個人情報,承認済み,待っている,スパム,べたつかない,逆順,正順,人気順,どう思いますか？,あなたのコメントは審査中で、現在はあなただけに表示されています。承認後に公開されます。,この投稿のコメントを購読する,このサイトのコメントを購読する,あなたのコメントの返信を購読する".split(",")), yc = dc(/* @__PURE__ */ "닉네임,닉네임은 3바이트 이상이어야 합니다.,이메일,이메일 주소를 확인해 주세요.,웹사이트,선택사항,여기에 댓글을 입력하세요...,아직 댓글이 없습니다.,제출,좋아요,좋아요 취소,답글,답글 취소,댓글,새로고침,더 보기...,미리보기,이모지,이미지 업로드,초 전,분 전,시간 전,일 전,방금 전,업로드 중,로그인,로그아웃,관리자,고정,글자 수,댓글은 $0자에서 $1자 사이여야 합니다!\n현재 글자 수: $2,익명,난쟁이,호빗,엔트,마법사,엘프,마이아,GIF,GIF 검색,프로필,승인됨,대기 중,스팸,고정 해제,오래된 순,최신 순,인기순,어떻게 생각하시나요?,댓글이 검토 중이며 현재 본인만 볼 수 있습니다. 승인 후 공개됩니다.,이 게시물의 댓글 구독,이 사이트의 댓글 구독,댓글에 대한 답글 구독".split(",")), bc = dc(/* @__PURE__ */ "Apelido(Apelido não pode ser menor que 3 bytes.(E-Mail(Por favor, confirme seu endereço de e-mail.(Website(Opcional(Comente aqui...(Nenhum comentário, ainda.(Enviar(Like(Cancel like(Responder(Cancelar resposta(Comentários(Refrescar(Carregar Mais...(Visualizar(Emoji(Enviar Imagem(segundos atrás(minutos atrás(horas atrás(dias atrás(agora mesmo(Enviando(Entrar(Sair(Admin(Sticky(Palavras(Favor enviar comentário com $0 a $1 palavras!\n Número de palavras atuais: $2(Anônimo(Dwarves(Hobbits(Ents(Wizards(Elves(Maiar(GIF(Pesquisar GIF(informação pessoal(Aprovado(Espera(Spam(Unsticky(Mais velho(Mais recentes(Mais quente(O que você acha?(Seu comentário está em revisão e atualmente está visível apenas para você. Ele será visível publicamente após a aprovação.(Assinar os comentários deste post(Assinar os comentários deste site(Assinar as respostas dos seus comentários".split("(")), xc = dc(/* @__PURE__ */ "Псевдоним(Никнейм не может быть меньше 3 байт.(Эл. адрес(Пожалуйста, подтвердите адрес вашей электронной почты.(Веб-сайт(Необязательный(Комментарий здесь...(Пока нет комментариев.(Отправить(Like(Cancel like(Отвечать(Отменить ответ(Комментарии(Обновить(Загрузи больше...(Превью(эмодзи(Загрузить изображение(секунд назад(несколько минут назад(несколько часов назад(дней назад(прямо сейчас(Загрузка(Авторизоваться(Выход из системы(Админ(Липкий(Слова(Пожалуйста, введите комментарии от $0 до $1 слов!\nНомер текущего слова: $2(Анонимный(Dwarves(Hobbits(Ents(Wizards(Elves(Maiar(GIF(Поиск GIF(Персональные данные(Одобренный(Ожидающий(Спам(Нелипкий(самый старый(последний(самый горячий(Что вы думаете?(Ваш комментарий находится на рассмотрении и в настоящее время виден только вам. После одобрения он станет общедоступным.(Подписаться на комментарии к этому посту(Подписаться на комментарии этого сайта(Подписаться на ответы ваших комментариев".split("(")), Sc = dc(/* @__PURE__ */ "Tên,Tên không được nhỏ hơn 3 ký tự.,E-Mail,Vui lòng xác nhập địa chỉ email của bạn.,Website,Tùy chọn,Hãy bình luận có văn hoá!,Chưa có bình luận,Gửi,Thích,Bỏ thích,Trả lời,Hủy bỏ,bình luận,Làm mới,Tải thêm...,Xem trước,Emoji,Tải lên hình ảnh,giây trước,phút trước,giờ trước,ngày trước,Vừa xong,Đang tải lên,Đăng nhập,đăng xuất,Quản trị viên,Dính,từ,Bình luận phải có độ dài giữa $0 và $1 từ!\n Số từ hiện tại: $2,Vô danh,Người lùn,Người tí hon,Thần rừng,Pháp sư,Tiên tộc,Maiar,Ảnh GIF,Tìm kiếm ảnh GIF,thông tin cá nhân,Đã được phê duyệt,Đang chờ đợi,Thư rác,Không dính,lâu đời nhất,muộn nhất,nóng nhất,What do you think?,Bình luận của bạn đang được xem xét và hiện chỉ hiển thị với bạn. Nó sẽ được công khai sau khi được phê duyệt.,Đăng ký nhận xét của bài viết này,Đăng ký nhận xét của trang web này,Đăng ký nhận xét của bạn".split(",")), Cc = dc(/* @__PURE__ */ "昵称,昵称不能少于3个字符,邮箱,请填写正确的邮件地址,网址,可选,欢迎评论,来发评论吧~,提交,喜欢,取消喜欢,回复,取消回复,评论,刷新,加载更多...,预览,表情,上传图片,秒前,分钟前,小时前,天前,刚刚,正在上传,登录,退出,博主,置顶,字,评论字数应在 $0 到 $1 字之间！\n当前字数：$2,匿名,潜水,冒泡,吐槽,活跃,话痨,传说,表情包,搜索表情包,个人资料,通过,待审核,垃圾,取消置顶,按倒序,按正序,按热度,你认为这篇文章怎么样？,评论正在审核中，当前仅自己可见，审核通过后公开可见。,订阅本文评论,订阅本站评论,订阅你的评论回复".split(",")), wc = dc(/* @__PURE__ */ "暱稱,暱稱不能少於3個字元,郵箱,請填寫正確的郵件地址,網址,可選,歡迎留言,來發留言吧~,送出,喜歡,取消喜歡,回覆,取消回覆,留言,重整,載入更多...,預覽,表情,上傳圖片,秒前,分鐘前,小時前,天前,剛剛,正在上傳,登入,登出,管理者,置頂,字,留言字數應在 $0 到 $1 字之間！\n目前字數：$2,匿名,潛水,冒泡,吐槽,活躍,多話,傳說,表情包,搜尋表情包,個人資料,通過,待審核,垃圾,取消置頂,最早,最新,熱門,你認為這篇文章怎麼樣？,您的評論正在審核中，目前僅您可見。審核通過後將公開顯示。,訂閱此文章的評論,訂閱本站的評論,訂閱您的評論回覆".split(",")), Tc = "en-US", Ec = {
-	zh: Cc,
-	"zh-cn": Cc,
-	"zh-tw": wc,
-	en: pc,
-	"en-us": pc,
-	fr: hc,
-	"fr-fr": hc,
-	id: gc,
-	"id-id": gc,
-	it: _c,
-	"it-it": _c,
-	jp: vc,
-	"jp-jp": vc,
-	ko: yc,
-	"ko-kr": yc,
-	"pt-br": bc,
-	ru: xc,
-	"ru-ru": xc,
-	vi: Sc,
-	"vi-vn": Sc,
-	de: fc,
-	es: mc,
-	"es-mx": mc
-}, Dc = (e) => e.trim().toLowerCase().replaceAll("_", "-"), Oc = {
+}, dc = /* @__PURE__ */ "nick.nickError.mail.mailError.link.optional.placeholder.sofa.submit.like.cancelLike.reply.cancelReply.comment.refresh.more.preview.emoji.uploadImage.seconds.minutes.hours.days.now.uploading.login.logout.admin.sticky.word.wordHint.anonymous.level0.level1.level2.level3.level4.level5.gif.gifSearchPlaceholder.profile.approved.waiting.spam.unsticky.oldest.latest.hottest.reactionTitle.commentUnderReview.subPostComment.subSiteComment.subscribeToReplies".split("."), fc = (e) => Object.fromEntries(e.map((e, t) => [dc[t], e])), pc = fc(/* @__PURE__ */ "Benutzername,Der Benutzername darf nicht weniger als 3 Bytes umfassen.,E-Mail,Bitte bestätigen Sie Ihre E-Mail-Adresse.,Webseite,Optional,Kommentieren Sie hier...,Noch keine Kommentare.,Senden,Gefällt mir,Gefällt mir nicht mehr,Antworten,Antwort abbrechen,Kommentare,Aktualisieren,Mehr laden...,Vorschau,Emoji,Ein Bild hochladen,Vor einigen Sekunden,Vor einigen Minuten,Vor einigen Stunden,Vor einigen Tagen,Gerade eben,Hochladen läuft,Anmelden,Abmelden,Admin,Angeheftet,Wörter,Bitte geben Sie Kommentare zwischen $0 und $1 Wörtern ein! Aktuelle Anzahl der Wörter: $2,Anonym,Zwerge,Hobbits,Ents,Magier,Elfen,Maïar,GIF,Nach einem GIF suchen,Profil,Genehmigt,Ausstehend,Spam,Lösen,Älteste,Neueste,Am beliebtesten,Was denken Sie?,Ihr Kommentar wird überprüft und ist derzeit nur für Sie sichtbar. Nach der Genehmigung wird er öffentlich angezeigt.,Abonnieren Sie die Kommentare zu diesem Beitrag,Abonnieren Sie die Kommentare auf dieser Seite,Abonnieren Sie die Antworten auf Ihre Kommentare".split(",")), mc = fc(/* @__PURE__ */ "NickName,NickName cannot be less than 3 bytes.,E-Mail,Please confirm your email address.,Website,Optional,Comment here...,No comment yet.,Submit,Like,Cancel like,Reply,Cancel reply,Comments,Refresh,Load More...,Preview,Emoji,Upload Image,seconds ago,minutes ago,hours ago,days ago,just now,Uploading,Login,logout,Admin,Sticky,Words,Please input comments between $0 and $1 words!\n Current word number: $2,Anonymous,Dwarves,Hobbits,Ents,Wizards,Elves,Maiar,GIF,Search GIF,Profile,Approved,Waiting,Spam,Unsticky,Oldest,Latest,Hottest,What do you think?,Your comment is under review and is currently only visible to you. It will be publicly visible after approval.,Subscribe to comments of this post,Subscribe to comments of this site,Subscribe to replies of your comments".split(",")), hc = fc(/* @__PURE__ */ "Nombre de usuario,El nombre de usuario no puede tener menos de 3 bytes.,Correo electrónico,Por favor confirma tu dirección de correo electrónico.,Sitio web,Opcional,Comenta aquí...,Sin comentarios todavía.,Enviar,Like,Anular like,Responder,Anular respuesta,Comentarios,Recargar,Cargar Más...,Previsualizar,Emoji,Subir Imagen,segundos atrás,minutos atrás,horas atrás,días atrás,justo ahora,Subiendo,Iniciar sesión,cerrar sesión,Admin,Fijado,Palabras,Por favor escriba entre $0 y $1 palabras!\n El número actual de palabras: $2,Anónimo,Enanos,Hobbits,Ents,Magos,Elfos,Maiar,GIF,Buscar GIF,Perfil,Aprobado,Esperando,Spam,Desfijar,Más antiguos,Más recientes,Más vistos,¿Qué piensas?,Tu comentario está en revisión y actualmente solo es visible para ti. Será visible públicamente después de la aprobación.,Suscribirse a los comentarios de esta publicación,Suscribirse a los comentarios de este sitio,Suscribirse a las respuestas de tus comentarios".split(",")), gc = fc(/* @__PURE__ */ "Pseudo,Le pseudo ne peut pas faire moins de 3 octets.,E-mail,Veuillez confirmer votre adresse e-mail.,Site Web,Optionnel,Commentez ici...,Aucun commentaire pour l'instant.,Envoyer,J'aime,Annuler le j'aime,Répondre,Annuler la réponse,Commentaires,Actualiser,Charger plus...,Aperçu,Emoji,Télécharger une image,Il y a quelques secondes,Il y a quelques minutes,Il y a quelques heures,Il y a quelques jours,À l'instant,Téléchargement en cours,Connexion,Déconnexion,Admin,Épinglé,Mots,Veuillez saisir des commentaires entre $0 et $1 mots !\n Nombre actuel de mots : $2,Anonyme,Nains,Hobbits,Ents,Mages,Elfes,Maïar,GIF,Rechercher un GIF,Profil,Approuvé,En attente,Indésirable,Détacher,Le plus ancien,Dernier,Le plus populaire,Qu'en pensez-vous ?,Votre commentaire est en cours de révision et n'est actuellement visible que par vous. Il sera visible publiquement après approbation.,S’abonner aux commentaires de ce post,S’abonner aux commentaires de ce site,S’abonner aux réponses de vos commentaires".split(",")), _c = fc(/* @__PURE__ */ "Nama Panggilan,Nama Panggilan tidak boleh kurang dari 3 bita.,E-Mail,Silakan konfirmasi alamat email Anda.,Situs Web,Opsional,Tulis komentar di sini...,Belum ada komentar.,Kirim,Suka,Batal suka,Balas,Batal balas,Komentar,Segarkan,Muat Lebih Banyak...,Pratinjau,Emoji,Unggah Gambar,detik yang lalu,menit yang lalu,jam yang lalu,hari yang lalu,baru saja,Mengunggah,Masuk,Keluar,Admin,Sematkan,Kata,Silakan masukkan komentar antara $0 dan $1 kata!\n Jumlah kata saat ini: $2,Anonim,Kurcaci,Hobbit,Ent,Penyihir,Peri,Maiar,GIF,Cari GIF,Profil,Disetujui,Menunggu,Spam,Lepas Sematan,Terlama,Terbaru,Terpopuler,Apa yang Anda pikirkan?,Komentar Anda sedang ditinjau dan saat ini hanya terlihat oleh Anda. Komentar akan terlihat secara publik setelah disetujui.,Berlangganan komentar di postingan ini,Berlangganan komentar di situs ini,Berlangganan balasan komentar Anda".split(",")), vc = fc(/* @__PURE__ */ "Nickname,Il nickname non può avere meno di 3 caratteri.,E-mail,Per favore conferma il tuo indirizzo e-mail.,Sito web,Facoltativo,Scrivi un commento...,Ancora nessun commento.,Invia,Mi piace,Annulla mi piace,Rispondi,Annulla risposta,Commenti,Aggiorna,Carica altri...,Anteprima,Emoji,Carica immagine,secondi fa,minuti fa,ore fa,giorni fa,adesso,Caricamento in corso...,Accedi,Esci,Admin,In evidenza,Parole,Inserisci un commento tra $0 e $1 parole!\n Numero attuale di parole: $2,Anonimo,Nano,Hobbit,Ent,Mago,Elfo,Maiar,GIF,Cerca GIF,Profilo,Approvato,In attesa,Spam,Rimuovi evidenza,Più vecchi,Più recenti,Più popolari,Cosa ne pensi?,Il tuo commento è in fase di revisione ed è attualmente visibile solo a te. Sarà visibile pubblicamente dopo l'approvazione.,Iscriviti ai commenti di questo post,Iscriviti ai commenti di questo sito,Iscriviti alle risposte dei tuoi commenti".split(",")), yc = fc(/* @__PURE__ */ "ニックネーム,3バイト以上のニックネームをご入力ください.,メールアドレス,メールアドレスをご確認ください.,サイト,オプション,ここにコメント,コメントしましょう~,提出する,Like,Cancel like,返信する,キャンセル,コメント,更新,さらに読み込む,プレビュー,絵文字,画像をアップロード,秒前,分前,時間前,日前,たっだ今,アップロード,ログインする,ログアウト,管理者,トップに置く,ワード,コメントは $0 から $1 ワードの間でなければなりません!\n 現在の単語番号: $2,匿名,うえにん,なかにん,しもおし,特にしもおし,かげ,なぬし,GIF,探す GIF,個人情報,承認済み,待っている,スパム,べたつかない,逆順,正順,人気順,どう思いますか？,あなたのコメントは審査中で、現在はあなただけに表示されています。承認後に公開されます。,この投稿のコメントを購読する,このサイトのコメントを購読する,あなたのコメントの返信を購読する".split(",")), bc = fc(/* @__PURE__ */ "닉네임,닉네임은 3바이트 이상이어야 합니다.,이메일,이메일 주소를 확인해 주세요.,웹사이트,선택사항,여기에 댓글을 입력하세요...,아직 댓글이 없습니다.,제출,좋아요,좋아요 취소,답글,답글 취소,댓글,새로고침,더 보기...,미리보기,이모지,이미지 업로드,초 전,분 전,시간 전,일 전,방금 전,업로드 중,로그인,로그아웃,관리자,고정,글자 수,댓글은 $0자에서 $1자 사이여야 합니다!\n현재 글자 수: $2,익명,난쟁이,호빗,엔트,마법사,엘프,마이아,GIF,GIF 검색,프로필,승인됨,대기 중,스팸,고정 해제,오래된 순,최신 순,인기순,어떻게 생각하시나요?,댓글이 검토 중이며 현재 본인만 볼 수 있습니다. 승인 후 공개됩니다.,이 게시물의 댓글 구독,이 사이트의 댓글 구독,댓글에 대한 답글 구독".split(",")), xc = fc(/* @__PURE__ */ "Apelido(Apelido não pode ser menor que 3 bytes.(E-Mail(Por favor, confirme seu endereço de e-mail.(Website(Opcional(Comente aqui...(Nenhum comentário, ainda.(Enviar(Like(Cancel like(Responder(Cancelar resposta(Comentários(Refrescar(Carregar Mais...(Visualizar(Emoji(Enviar Imagem(segundos atrás(minutos atrás(horas atrás(dias atrás(agora mesmo(Enviando(Entrar(Sair(Admin(Sticky(Palavras(Favor enviar comentário com $0 a $1 palavras!\n Número de palavras atuais: $2(Anônimo(Dwarves(Hobbits(Ents(Wizards(Elves(Maiar(GIF(Pesquisar GIF(informação pessoal(Aprovado(Espera(Spam(Unsticky(Mais velho(Mais recentes(Mais quente(O que você acha?(Seu comentário está em revisão e atualmente está visível apenas para você. Ele será visível publicamente após a aprovação.(Assinar os comentários deste post(Assinar os comentários deste site(Assinar as respostas dos seus comentários".split("(")), Sc = fc(/* @__PURE__ */ "Псевдоним(Никнейм не может быть меньше 3 байт.(Эл. адрес(Пожалуйста, подтвердите адрес вашей электронной почты.(Веб-сайт(Необязательный(Комментарий здесь...(Пока нет комментариев.(Отправить(Like(Cancel like(Отвечать(Отменить ответ(Комментарии(Обновить(Загрузи больше...(Превью(эмодзи(Загрузить изображение(секунд назад(несколько минут назад(несколько часов назад(дней назад(прямо сейчас(Загрузка(Авторизоваться(Выход из системы(Админ(Липкий(Слова(Пожалуйста, введите комментарии от $0 до $1 слов!\nНомер текущего слова: $2(Анонимный(Dwarves(Hobbits(Ents(Wizards(Elves(Maiar(GIF(Поиск GIF(Персональные данные(Одобренный(Ожидающий(Спам(Нелипкий(самый старый(последний(самый горячий(Что вы думаете?(Ваш комментарий находится на рассмотрении и в настоящее время виден только вам. После одобрения он станет общедоступным.(Подписаться на комментарии к этому посту(Подписаться на комментарии этого сайта(Подписаться на ответы ваших комментариев".split("(")), Cc = fc(/* @__PURE__ */ "Tên,Tên không được nhỏ hơn 3 ký tự.,E-Mail,Vui lòng xác nhập địa chỉ email của bạn.,Website,Tùy chọn,Hãy bình luận có văn hoá!,Chưa có bình luận,Gửi,Thích,Bỏ thích,Trả lời,Hủy bỏ,bình luận,Làm mới,Tải thêm...,Xem trước,Emoji,Tải lên hình ảnh,giây trước,phút trước,giờ trước,ngày trước,Vừa xong,Đang tải lên,Đăng nhập,đăng xuất,Quản trị viên,Dính,từ,Bình luận phải có độ dài giữa $0 và $1 từ!\n Số từ hiện tại: $2,Vô danh,Người lùn,Người tí hon,Thần rừng,Pháp sư,Tiên tộc,Maiar,Ảnh GIF,Tìm kiếm ảnh GIF,thông tin cá nhân,Đã được phê duyệt,Đang chờ đợi,Thư rác,Không dính,lâu đời nhất,muộn nhất,nóng nhất,What do you think?,Bình luận của bạn đang được xem xét và hiện chỉ hiển thị với bạn. Nó sẽ được công khai sau khi được phê duyệt.,Đăng ký nhận xét của bài viết này,Đăng ký nhận xét của trang web này,Đăng ký nhận xét của bạn".split(",")), wc = fc(/* @__PURE__ */ "昵称,昵称不能少于3个字符,邮箱,请填写正确的邮件地址,网址,可选,欢迎评论,来发评论吧~,提交,喜欢,取消喜欢,回复,取消回复,评论,刷新,加载更多...,预览,表情,上传图片,秒前,分钟前,小时前,天前,刚刚,正在上传,登录,退出,博主,置顶,字,评论字数应在 $0 到 $1 字之间！\n当前字数：$2,匿名,潜水,冒泡,吐槽,活跃,话痨,传说,表情包,搜索表情包,个人资料,通过,待审核,垃圾,取消置顶,按倒序,按正序,按热度,你认为这篇文章怎么样？,评论正在审核中，当前仅自己可见，审核通过后公开可见。,订阅本文评论,订阅本站评论,订阅你的评论回复".split(",")), Tc = fc(/* @__PURE__ */ "暱稱,暱稱不能少於3個字元,郵箱,請填寫正確的郵件地址,網址,可選,歡迎留言,來發留言吧~,送出,喜歡,取消喜歡,回覆,取消回覆,留言,重整,載入更多...,預覽,表情,上傳圖片,秒前,分鐘前,小時前,天前,剛剛,正在上傳,登入,登出,管理者,置頂,字,留言字數應在 $0 到 $1 字之間！\n目前字數：$2,匿名,潛水,冒泡,吐槽,活躍,多話,傳說,表情包,搜尋表情包,個人資料,通過,待審核,垃圾,取消置頂,最早,最新,熱門,你認為這篇文章怎麼樣？,您的評論正在審核中，目前僅您可見。審核通過後將公開顯示。,訂閱此文章的評論,訂閱本站的評論,訂閱您的評論回覆".split(",")), Ec = "en-US", Dc = {
+	zh: wc,
+	"zh-cn": wc,
+	"zh-tw": Tc,
+	en: mc,
+	"en-us": mc,
+	fr: gc,
+	"fr-fr": gc,
+	id: _c,
+	"id-id": _c,
+	it: vc,
+	"it-it": vc,
+	jp: yc,
+	"jp-jp": yc,
+	ko: bc,
+	"ko-kr": bc,
+	"pt-br": xc,
+	ru: Sc,
+	"ru-ru": Sc,
+	vi: Cc,
+	"vi-vn": Cc,
+	de: pc,
+	es: hc,
+	"es-mx": hc
+}, Oc = (e) => e.trim().toLowerCase().replaceAll("_", "-"), kc = {
 	ja: "jp",
 	"ja-jp": "jp",
 	pt: "pt-br",
@@ -3453,46 +3486,46 @@ var Ns = "mrow", Ps = "left", Fs = "start", Is = [
 	"zh-hans": "zh-cn",
 	"zh-hant": "zh-tw",
 	"zh-hk": "zh-tw"
-}, kc = (e) => {
-	let t = Dc(e);
-	if (t in Ec) return t;
-	let n = Oc[t];
+}, Ac = (e) => {
+	let t = Oc(e);
+	if (t in Dc) return t;
+	let n = kc[t];
 	if (n) return n;
 	let [r] = t.split("-");
-	return r in Ec ? r : Oc[r] ?? "en-us";
-}, Ac = (e) => Ec[kc(e)] ?? Ec["en-us"], jc = (e) => {
-	let t = Dc(e);
-	if (t in Ec) return e.trim();
-	let n = kc(t);
-	return n === "en-us" ? Tc : n;
-}, Mc = {
+	return r in Dc ? r : kc[r] ?? "en-us";
+}, jc = (e) => Dc[Ac(e)] ?? Dc["en-us"], Mc = (e) => {
+	let t = Oc(e);
+	if (t in Dc) return e.trim();
+	let n = Ac(t);
+	return n === "en-us" ? Ec : n;
+}, Nc = {
 	latest: "insertedAt_desc",
 	oldest: "insertedAt_asc",
 	hottest: "like_desc"
-}, Nc = Object.keys(Mc), Pc = Symbol("waline-config"), Fc = (e) => {
+}, Pc = Object.keys(Nc), Fc = Symbol("waline-config"), Ic = (e) => {
 	try {
 		return decodeURI(e);
 	} catch {
 		return e;
 	}
-}, Ic = (e = "") => e.replace(/\/$/u, ""), Lc = (e) => /^(?:https?:)?\/\//u.test(e), Rc = (e) => {
-	let t = Ic(e);
-	return Lc(t) ? t : `https://${t}`;
-}, zc = (e) => Array.isArray(e) ? e : typeof e == "number" && e > 0 && [0, e], Bc = (e, t) => e == null || e === !0 ? t : e === !1 ? null : e, Vc = ({ serverURL: e, path: t = location.pathname, lang: n = typeof navigator > "u" ? "en-US" : navigator.language, locale: r, meta: i = [
+}, Lc = (e = "") => e.replace(/\/$/u, ""), Rc = (e) => /^(?:https?:)?\/\//u.test(e), zc = (e) => {
+	let t = Lc(e);
+	return Rc(t) ? t : `https://${t}`;
+}, Bc = (e) => Array.isArray(e) ? e : typeof e == "number" && e > 0 && [0, e], Vc = (e, t) => e == null || e === !0 ? t : e === !1 ? null : e, Hc = ({ serverURL: e, path: t = location.pathname, lang: n = typeof navigator > "u" ? "en-US" : navigator.language, locale: r, meta: i = [
 	"nick",
 	"mail",
 	"link"
-], requiredMeta: a = [], dark: o = !1, pageSize: s = 10, wordLimit: c, noCopyright: l = !1, noRss: u = !1, login: d = "enable", recaptchaV3Key: f = "", turnstileKey: p = "", commentSorting: m = "latest", emoji: h = tc, imageUploader: g, highlighter: _, texRenderer: v, search: y, reaction: b, ...x }) => ({
-	serverURL: Rc(e),
-	path: Fc(t),
-	lang: jc(n),
+], requiredMeta: a = [], dark: o = !1, pageSize: s = 10, wordLimit: c, noCopyright: l = !1, noRss: u = !1, login: d = "enable", recaptchaV3Key: f = "", turnstileKey: p = "", commentSorting: m = "latest", emoji: h = nc, imageUploader: g, highlighter: _, texRenderer: v, search: y, reaction: b, ...x }) => ({
+	serverURL: zc(e),
+	path: Ic(t),
+	lang: Mc(n),
 	locale: {
-		...Ac(jc(n)),
+		...jc(Mc(n)),
 		...typeof r == "object" ? r : {}
 	},
-	wordLimit: zc(c),
-	meta: ec(i),
-	requiredMeta: ec(a),
+	wordLimit: Bc(c),
+	meta: tc(i),
+	requiredMeta: tc(a),
 	dark: o,
 	pageSize: s,
 	commentSorting: m,
@@ -3502,22 +3535,22 @@ var Ns = "mrow", Ps = "left", Fs = "start", Is = [
 	recaptchaV3Key: f,
 	turnstileKey: p,
 	...x,
-	reaction: b === !0 ? nc : b || null,
-	imageUploader: Bc(g, rc),
-	highlighter: Bc(_, lc),
-	texRenderer: Bc(v, ic),
-	emoji: Bc(h, tc),
-	search: Bc(y, ac(n))
-}), Hc = (e) => typeof e == "string", Uc = "{--waline-white:#000;--waline-light-grey:#666;--waline-dark-grey:#999;--waline-color:#888;--waline-bg-color:#1e1e1e;--waline-bg-color-light:#272727;--waline-bg-color-hover: #444;--waline-border-color:#333;--waline-disable-bg-color:#444;--waline-disable-color:#272727;--waline-bq-color:#272727;--waline-info-bg-color:#272727;--waline-info-color:#666}", Wc = (e) => Hc(e) ? e === "auto" ? `@media(prefers-color-scheme:dark){body${Uc}}` : `${e}${Uc}` : e === !0 ? `:root${Uc}` : "", Gc = (e, t) => {
+	reaction: b === !0 ? rc : b || null,
+	imageUploader: Vc(g, ic),
+	highlighter: Vc(_, uc),
+	texRenderer: Vc(v, ac),
+	emoji: Vc(h, nc),
+	search: Vc(y, oc(n))
+}), Uc = (e) => typeof e == "string", Wc = "{--waline-white:#000;--waline-light-grey:#666;--waline-dark-grey:#999;--waline-color:#888;--waline-bg-color:#1e1e1e;--waline-bg-color-light:#272727;--waline-bg-color-hover: #444;--waline-border-color:#333;--waline-disable-bg-color:#444;--waline-disable-color:#272727;--waline-bq-color:#272727;--waline-info-bg-color:#272727;--waline-info-color:#666}", Gc = (e) => Uc(e) ? e === "auto" ? `@media(prefers-color-scheme:dark){body${Wc}}` : `${e}${Wc}` : e === !0 ? `:root${Wc}` : "", Kc = (e, t) => {
 	let n = e.toString();
 	for (; n.length < t;) n = `0${n}`;
 	return n;
-}, Kc = (e) => {
-	let t = Gc(e.getDate(), 2), n = Gc(e.getMonth() + 1, 2);
-	return `${Gc(e.getFullYear(), 2)}-${n}-${t}`;
-}, qc = (e, t, n) => {
+}, qc = (e) => {
+	let t = Kc(e.getDate(), 2), n = Kc(e.getMonth() + 1, 2);
+	return `${Kc(e.getFullYear(), 2)}-${n}-${t}`;
+}, Jc = (e, t, n) => {
 	if (!e) return "";
-	let r = Hc(e) ? new Date(e.includes(" ") ? e.replaceAll("-", "/") : e) : e, i = t.getTime() - r.getTime(), a = Math.floor(i / 864e5);
+	let r = Uc(e) ? new Date(e.includes(" ") ? e.replaceAll("-", "/") : e) : e, i = t.getTime() - r.getTime(), a = Math.floor(i / 864e5);
 	if (a === 0) {
 		let e = i % 864e5, t = Math.floor(e / 36e5);
 		if (t === 0) {
@@ -3530,24 +3563,24 @@ var Ns = "mrow", Ps = "left", Fs = "start", Is = [
 		}
 		return `${t} ${n.hours}`;
 	}
-	return a < 0 ? n.now : a < 8 ? `${a} ${n.days}` : Kc(r);
-}, Jc = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/u, Yc = (e) => Jc.test(e);
-// node_modules/.pnpm/@vueuse+shared@15.0.0_vue@3.5.44_typescript@6.0.2_/node_modules/@vueuse/shared/dist/index.js
-function Xc(e, t) {
+	return a < 0 ? n.now : a < 8 ? `${a} ${n.days}` : qc(r);
+}, Yc = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/u, Xc = (e) => Yc.test(e);
+// ../../tmp.l0U3LGVbQ1/small/node_modules/.pnpm/@vueuse+shared@15.0.0_vue@3.5.44_typescript@6.0.2_/node_modules/@vueuse/shared/dist/index.js
+function Zc(e, t) {
 	return ke() ? (Ae(e, t), !0) : !1;
 }
-var Zc = typeof window < "u" && typeof document < "u";
+var Qc = typeof window < "u" && typeof document < "u";
 typeof WorkerGlobalScope < "u" && globalThis instanceof WorkerGlobalScope;
-var Qc = Object.prototype.toString, $c = (e) => Qc.call(e) === "[object Object]", el = () => {};
-function tl(...e) {
+var $c = Object.prototype.toString, el = (e) => $c.call(e) === "[object Object]", tl = () => {};
+function nl(...e) {
 	if (e.length !== 1) return /* @__PURE__ */ dn(...e);
 	let t = e[0];
 	return typeof t == "function" ? /* @__PURE__ */ Wt(cn(() => ({
 		get: t,
-		set: el
+		set: tl
 	}))) : /* @__PURE__ */ F(t);
 }
-function nl(e, t) {
+function rl(e, t) {
 	function n(...n) {
 		return new Promise((r, i) => {
 			Promise.resolve(e(() => t.apply(this, n), {
@@ -3563,10 +3596,10 @@ function nl(e, t) {
 		isPending: e.isPending
 	}), n;
 }
-var rl = (e) => e();
-function il(e, t = {}) {
-	let n, r, i = el, a = el, o = /* @__PURE__ */ en(!1), s = (e) => {
-		clearTimeout(e), i(), i = el;
+var il = (e) => e();
+function al(e, t = {}) {
+	let n, r, i = tl, a = tl, o = /* @__PURE__ */ en(!1), s = (e) => {
+		clearTimeout(e), i(), i = tl;
 	}, c;
 	return Object.assign((l) => {
 		let u = rn(e), d = rn(t.maxWait);
@@ -3579,20 +3612,20 @@ function il(e, t = {}) {
 		}));
 	}, {
 		cancel: () => {
-			n &&= (s(n), void 0), r &&= (s(r), void 0), o.value = !1, a = el;
+			n &&= (s(n), void 0), r &&= (s(r), void 0), o.value = !1, a = tl;
 		},
 		flush: () => {
 			if (o.value) {
 				n &&= (clearTimeout(n), void 0), r &&= (clearTimeout(r), void 0), o.value = !1;
 				let e = a;
-				i = el, a = el, e(c());
+				i = tl, a = tl, e(c());
 			}
 		},
 		isPending: /* @__PURE__ */ Gt(o)
 	});
 }
-function al(e = rl, t = {}) {
-	let { initialState: n = "active" } = t, r = tl(n === "active");
+function ol(e = il, t = {}) {
+	let { initialState: n = "active" } = t, r = nl(n === "active");
 	function i() {
 		r.value = !1;
 	}
@@ -3608,23 +3641,23 @@ function al(e = rl, t = {}) {
 		}
 	};
 }
-function ol(e) {
+function sl(e) {
 	return Array.isArray(e) ? e : [e];
 }
-function sl(e) {
+function cl(e) {
 	return e || Xi();
 }
-function cl(e, t = 200, n = {}) {
-	return nl(il(t, n), e);
-}
-function ll(e, t, n = {}) {
-	let { eventFilter: r = rl, ...i } = n;
-	return $n(e, nl(r, t), i);
+function ll(e, t = 200, n = {}) {
+	return rl(al(t, n), e);
 }
 function ul(e, t, n = {}) {
-	let { eventFilter: r, initialState: i = "active", ...a } = n, { eventFilter: o, pause: s, resume: c, isActive: l } = al(r, { initialState: i });
+	let { eventFilter: r = il, ...i } = n;
+	return $n(e, rl(r, t), i);
+}
+function dl(e, t, n = {}) {
+	let { eventFilter: r, initialState: i = "active", ...a } = n, { eventFilter: o, pause: s, resume: c, isActive: l } = ol(r, { initialState: i });
 	return {
-		stop: ll(e, t, {
+		stop: ul(e, t, {
 			...a,
 			eventFilter: o
 		}),
@@ -3633,45 +3666,45 @@ function ul(e, t, n = {}) {
 		isActive: l
 	};
 }
-function dl(e, t = !0, n) {
-	sl(n) ? yr(e, n) : t ? e() : jn(e);
+function fl(e, t = !0, n) {
+	cl(n) ? yr(e, n) : t ? e() : jn(e);
 }
-function fl(e, t) {
-	sl(t) && xr(e, t);
+function pl(e, t) {
+	cl(t) && xr(e, t);
 }
-function pl(e, t, n) {
+function ml(e, t, n) {
 	return $n(e, t, {
 		...n,
 		immediate: !0
 	});
 }
-// node_modules/.pnpm/@vueuse+core@15.0.0_vue@3.5.44_typescript@6.0.2_/node_modules/@vueuse/core/dist/index.js
-var ml = Zc ? window : void 0, hl = Zc ? window.document : void 0;
-Zc && window.navigator, Zc && window.location;
-function gl(e) {
+// ../../tmp.l0U3LGVbQ1/small/node_modules/.pnpm/@vueuse+core@15.0.0_vue@3.5.44_typescript@6.0.2_/node_modules/@vueuse/core/dist/index.js
+var hl = Qc ? window : void 0, gl = Qc ? window.document : void 0;
+Qc && window.navigator, Qc && window.location;
+function _l(e) {
 	let t = rn(e);
 	return t?.$el ?? t;
 }
-function _l(...e) {
+function vl(...e) {
 	let t = (e, t, n, r) => (e.addEventListener(t, n, r), () => e.removeEventListener(t, n, r)), n = K(() => {
-		let t = ol(rn(e[0])).filter((e) => e != null);
+		let t = sl(rn(e[0])).filter((e) => e != null);
 		return t.every((e) => typeof e != "string") ? t : void 0;
 	});
-	return pl(() => [
-		n.value?.map((e) => gl(e)) ?? [ml].filter((e) => e != null),
-		ol(rn(n.value ? e[1] : e[0])),
-		ol(I(n.value ? e[2] : e[1])),
+	return ml(() => [
+		n.value?.map((e) => _l(e)) ?? [hl].filter((e) => e != null),
+		sl(rn(n.value ? e[1] : e[0])),
+		sl(I(n.value ? e[2] : e[1])),
 		rn(n.value ? e[3] : e[2])
 	], ([e, n, r, i], a, o) => {
 		if (!e?.length || !n?.length || !r?.length) return;
-		let s = $c(i) ? { ...i } : i, c = e.flatMap((e) => n.flatMap((n) => r.map((r) => t(e, n, r, s))));
+		let s = el(i) ? { ...i } : i, c = e.flatMap((e) => n.flatMap((n) => r.map((r) => t(e, n, r, s))));
 		o(() => {
 			c.forEach((e) => e());
 		});
 	}, { flush: "post" });
 }
-function vl(e, t = {}) {
-	let { immediate: n = !0, fpsLimit: r = null, window: i = ml, once: a = !1 } = t, o = /* @__PURE__ */ en(!1), s = K(() => {
+function yl(e, t = {}) {
+	let { immediate: n = !0, fpsLimit: r = null, window: i = hl, once: a = !1 } = t, o = /* @__PURE__ */ en(!1), s = K(() => {
 		let e = rn(r);
 		return e ? 1e3 / e : null;
 	}), c = 0, l = null;
@@ -3690,23 +3723,23 @@ function vl(e, t = {}) {
 	function f() {
 		o.value = !1, l != null && i && (i.cancelAnimationFrame(l), l = null);
 	}
-	return n && d(), Xc(f), {
+	return n && d(), Zc(f), {
 		isActive: /* @__PURE__ */ Gt(o),
 		pause: f,
 		resume: d
 	};
 }
-var yl = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, bl = "__vueuse_ssr_handlers__", xl = /* #__PURE__ */ Sl();
-function Sl() {
-	return bl in yl || (yl[bl] = yl[bl] || {}), yl[bl];
+var bl = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, xl = "__vueuse_ssr_handlers__", Sl = /* #__PURE__ */ Cl();
+function Cl() {
+	return xl in bl || (bl[xl] = bl[xl] || {}), bl[xl];
 }
-function Cl(e, t) {
-	return xl[e] || t;
+function wl(e, t) {
+	return Sl[e] || t;
 }
-function wl(e) {
+function Tl(e) {
 	return e == null ? "any" : e instanceof Set ? "set" : e instanceof Map ? "map" : e instanceof Date ? "date" : typeof e == "boolean" ? "boolean" : typeof e == "string" ? "string" : typeof e == "object" ? "object" : Number.isNaN(e) ? "any" : "number";
 }
-var Tl = {
+var El = {
 	boolean: {
 		read: (e) => e === "true",
 		write: (e) => String(e)
@@ -3739,29 +3772,29 @@ var Tl = {
 		read: (e) => new Date(e),
 		write: (e) => e.toISOString()
 	}
-}, El = "vueuse-storage";
-function Dl(e, t, n, r = {}) {
-	let { flush: i = "pre", deep: a = !0, listenToStorageChanges: o = !0, writeDefaults: s = !0, mergeDefaults: c = !1, shallow: l, window: u = ml, eventFilter: d, onError: f = (e) => {
+}, Dl = "vueuse-storage";
+function Ol(e, t, n, r = {}) {
+	let { flush: i = "pre", deep: a = !0, listenToStorageChanges: o = !0, writeDefaults: s = !0, mergeDefaults: c = !1, shallow: l, window: u = hl, eventFilter: d, onError: f = (e) => {
 		console.error(e);
 	}, initOnMounted: p } = r, m = (l ? en : F)(typeof t == "function" ? t() : t), h = K(() => rn(e));
 	if (!n) try {
-		n = Cl("getDefaultStorage", () => ml?.localStorage)();
+		n = wl("getDefaultStorage", () => hl?.localStorage)();
 	} catch (e) {
 		f(e);
 	}
 	if (!n) return m;
-	let g = rn(t), _ = wl(g), v = r.serializer ?? Tl[_], { pause: y, resume: b } = ul(m, (e) => C(e), {
+	let g = rn(t), _ = Tl(g), v = r.serializer ?? El[_], { pause: y, resume: b } = dl(m, (e) => C(e), {
 		flush: i,
 		deep: a,
 		eventFilter: d
 	});
 	$n(h, () => te(), { flush: i });
 	let x = !1;
-	u && o && (n instanceof Storage ? _l(u, "storage", (e) => {
+	u && o && (n instanceof Storage ? vl(u, "storage", (e) => {
 		(!p || x) && te(e);
-	}, { passive: !0 }) : _l(u, El, (e) => {
+	}, { passive: !0 }) : vl(u, Dl, (e) => {
 		(!p || x) && ne(e);
-	})), p ? dl(() => {
+	})), p ? fl(() => {
 		x = !0, te();
 	}) : te();
 	function S(e, t) {
@@ -3772,7 +3805,7 @@ function Dl(e, t, n, r = {}) {
 				newValue: t,
 				storageArea: n
 			};
-			u.dispatchEvent(n instanceof Storage ? new StorageEvent("storage", r) : new CustomEvent(El, { detail: r }));
+			u.dispatchEvent(n instanceof Storage ? new StorageEvent("storage", r) : new CustomEvent(Dl, { detail: r }));
 		}
 	}
 	function C(e) {
@@ -3821,15 +3854,15 @@ function Dl(e, t, n, r = {}) {
 	return m;
 }
 /* @__NO_SIDE_EFFECTS__ */
-function Ol(e = {}) {
-	let { controls: t = !1, scheduler: n = vl } = e, r = /* @__PURE__ */ en(/* @__PURE__ */ new Date()), i = n(() => r.value = /* @__PURE__ */ new Date());
+function kl(e = {}) {
+	let { controls: t = !1, scheduler: n = yl } = e, r = /* @__PURE__ */ en(/* @__PURE__ */ new Date()), i = n(() => r.value = /* @__PURE__ */ new Date());
 	return t ? {
 		now: r,
 		...i
 	} : r;
 }
-function kl(e, t = el, n = {}) {
-	let { immediate: r = !0, manual: i = !1, type: a = "text/javascript", async: o = !0, crossOrigin: s, referrerPolicy: c, noModule: l, defer: u, document: d = hl, attrs: f = {}, nonce: p = void 0 } = n, m = /* @__PURE__ */ en(null), h = null, g = (n) => new Promise((r, i) => {
+function Al(e, t = tl, n = {}) {
+	let { immediate: r = !0, manual: i = !1, type: a = "text/javascript", async: o = !0, crossOrigin: s, referrerPolicy: c, noModule: l, defer: u, document: d = gl, attrs: f = {}, nonce: p = void 0 } = n, m = /* @__PURE__ */ en(null), h = null, g = (n) => new Promise((r, i) => {
 		let h = (e) => (m.value = e, r(e), e);
 		if (!d) {
 			r(!1);
@@ -3838,7 +3871,7 @@ function kl(e, t = el, n = {}) {
 		let g = !1, _ = d.querySelector(`script[src="${rn(e)}"]`);
 		_ ? _.hasAttribute("data-loaded") && h(_) : (_ = d.createElement("script"), _.type = a, _.async = o, _.src = rn(e), u && (_.defer = u), s && (_.crossOrigin = s), l && (_.noModule = l), c && (_.referrerPolicy = c), p && (_.nonce = p), Object.entries(f).forEach(([e, t]) => _?.setAttribute(e, t)), g = !0);
 		let v = { passive: !0 };
-		_l(_, "error", (e) => i(e), v), _l(_, "abort", (e) => i(e), v), _l(_, "load", () => {
+		vl(_, "error", (e) => i(e), v), vl(_, "abort", (e) => i(e), v), vl(_, "load", () => {
 			_.setAttribute("data-loaded", "true"), t(_), h(_);
 		}, v), g && (_ = d.head.appendChild(_)), n || h(_);
 	}), _ = (e = !0) => (h ||= g(e), h), v = () => {
@@ -3847,18 +3880,18 @@ function kl(e, t = el, n = {}) {
 		let t = d.querySelector(`script[src="${rn(e)}"]`);
 		t && d.head.removeChild(t);
 	};
-	return r && !i && dl(_), i || fl(v), {
+	return r && !i && fl(_), i || pl(v), {
 		scriptTag: m,
 		load: _,
 		unload: v
 	};
 }
-var Al = 0, jl = /* @__PURE__ */ new WeakMap();
-function Ml(e, t = {}) {
-	let n = /* @__PURE__ */ en(!1), { document: r = hl, immediate: i = !0, manual: a = !1, id: o = `vueuse_styletag_${++Al}` } = t, s = /* @__PURE__ */ en(e), c = () => {}, l = () => {
+var jl = 0, Ml = /* @__PURE__ */ new WeakMap();
+function Nl(e, t = {}) {
+	let n = /* @__PURE__ */ en(!1), { document: r = gl, immediate: i = !0, manual: a = !1, id: o = `vueuse_styletag_${++jl}` } = t, s = /* @__PURE__ */ en(e), c = () => {}, l = () => {
 		if (!r) return;
 		let e = r.getElementById(o) || r.createElement("style");
-		e.isConnected || (e.id = o, t.nonce && (e.nonce = t.nonce), t.media && (e.media = t.media), r.head.appendChild(e)), n.value ||= (jl.set(e, (jl.get(e) ?? 0) + 1), c = $n(s, (t) => {
+		e.isConnected || (e.id = o, t.nonce && (e.nonce = t.nonce), t.media && (e.media = t.media), r.head.appendChild(e)), n.value ||= (Ml.set(e, (Ml.get(e) ?? 0) + 1), c = $n(s, (t) => {
 			e.textContent = t;
 		}, { immediate: !0 }), !0);
 	}, u = () => {
@@ -3866,12 +3899,12 @@ function Ml(e, t = {}) {
 		c();
 		let e = r.getElementById(o);
 		if (e) {
-			let t = (jl.get(e) ?? 1) - 1;
-			t <= 0 ? (jl.delete(e), r.head.removeChild(e)) : jl.set(e, t);
+			let t = (Ml.get(e) ?? 1) - 1;
+			t <= 0 ? (Ml.delete(e), r.head.removeChild(e)) : Ml.set(e, t);
 		}
 		n.value = !1;
 	};
-	return i && !a && dl(l), a || Xc(u), {
+	return i && !a && fl(l), a || Zc(u), {
 		id: o,
 		css: s,
 		unload: u,
@@ -3880,10 +3913,10 @@ function Ml(e, t = {}) {
 	};
 }
 // src/utils/emoji.ts
-var Nl = Dl("WALINE_EMOJI", {}), Pl = (e) => /@[0-9]+\.[0-9]+\.[0-9]+/u.test(e), Fl = (e) => {
-	let t = Pl(e);
+var Pl = Ol("WALINE_EMOJI", {}), Fl = (e) => /@[0-9]+\.[0-9]+\.[0-9]+/u.test(e), Il = (e) => {
+	let t = Fl(e);
 	if (t) {
-		let t = Nl.value[e];
+		let t = Pl.value[e];
 		if (t) return Promise.resolve(t);
 	}
 	return fetch(`${e}/info.json`).then((e) => e.json()).then((n) => {
@@ -3891,9 +3924,9 @@ var Nl = Dl("WALINE_EMOJI", {}), Pl = (e) => /@[0-9]+\.[0-9]+\.[0-9]+/u.test(e),
 			folder: e,
 			...n
 		};
-		return t && (Nl.value[e] = r), r;
+		return t && (Pl.value[e] = r), r;
 	});
-}, Il = (e, t = "", n = "", r = "") => `${t ? `${t}/` : ""}${n}${e}${r ? `.${r}` : ""}`, Ll = (e) => Promise.all(e ? e.map((e) => Hc(e) ? Fl(Ic(e)) : Promise.resolve(e)) : []).then((e) => {
+}, Ll = (e, t = "", n = "", r = "") => `${t ? `${t}/` : ""}${n}${e}${r ? `.${r}` : ""}`, Rl = (e) => Promise.all(e ? e.map((e) => Uc(e) ? Il(Lc(e)) : Promise.resolve(e)) : []).then((e) => {
 	let t = {
 		tabs: [],
 		map: {}
@@ -3902,21 +3935,21 @@ var Nl = Dl("WALINE_EMOJI", {}), Pl = (e) => /@[0-9]+\.[0-9]+\.[0-9]+/u.test(e),
 		let { name: n, folder: r, icon: i, prefix: a = "", type: o, items: s } = e;
 		t.tabs.push({
 			name: n,
-			icon: Il(i, r, a, o),
+			icon: Ll(i, r, a, o),
 			items: s.map((e) => {
 				let n = `${a}${e}`;
-				return t.map[n] = Il(e, r, a, o), n;
+				return t.map[n] = Ll(e, r, a, o), n;
 			})
 		});
 	}), t;
-}), Rl = (e) => {
+}), zl = (e) => {
 	e.name !== "AbortError" && console.error(e.message);
-}, zl = (e) => e instanceof HTMLElement ? e : Hc(e) ? document.querySelector(e) : null, Bl = (e) => {
+}, Bl = (e) => e instanceof HTMLElement ? e : Uc(e) ? document.querySelector(e) : null, Vl = (e) => {
 	let t = [...e].find((e) => e.type.includes("image"));
 	return t ? t.getAsFile() : null;
 };
-// node_modules/.pnpm/marked@18.1.2/node_modules/marked/lib/marked.esm.js
-function Vl() {
+// ../../tmp.l0U3LGVbQ1/small/node_modules/.pnpm/marked@18.1.2/node_modules/marked/lib/marked.esm.js
+function Hl() {
 	return {
 		async: !1,
 		breaks: !1,
@@ -3930,12 +3963,12 @@ function Vl() {
 		walkTokens: null
 	};
 }
-var Hl = Vl();
-function Ul(e) {
-	Hl = e;
+var Ul = Hl();
+function Wl(e) {
+	Ul = e;
 }
-var Wl = { exec: () => null };
-function Gl(e) {
+var Gl = { exec: () => null };
+function Kl(e) {
 	let t = [];
 	return (n) => {
 		let r = Math.max(0, Math.min(3, n - 1)), i = t[r];
@@ -3952,7 +3985,7 @@ function Z(e, t = "") {
 	};
 	return r;
 }
-var Kl = ((e = "") => {
+var ql = ((e = "") => {
 	try {
 		return !!RegExp("(?<=1)(?<!1)" + e);
 	} catch {
@@ -4014,114 +4047,114 @@ var Kl = ((e = "") => {
 	notSpaceStart: /^\S*/,
 	endingNewline: /\n$/,
 	listItemRegex: (e) => RegExp(`^( {0,3}${e})((?:[	 ][^\\n]*)?(?:\\n|$))`),
-	nextBulletRegex: Gl((e) => RegExp(`^ {0,${e}}(?:[*+-]|\\d{1,9}[.)])((?:[ 	][^\\n]*)?(?:\\n|$))`)),
-	hrRegex: Gl((e) => RegExp(`^ {0,${e}}((?:-[ 	]*){3,}|(?:_[ 	]*){3,}|(?:\\*[ 	]*){3,})(?:\\n+|$)`)),
-	fencesBeginRegex: Gl((e) => RegExp(`^ {0,${e}}(?:\`\`\`|~~~)`)),
-	headingBeginRegex: Gl((e) => RegExp(`^ {0,${e}}#{1,6}(?:\\s|$)`)),
-	pedanticHeadingBeginRegex: Gl((e) => RegExp(`^ {0,${e}}#`)),
-	htmlBeginRegex: Gl((e) => RegExp(`^ {0,${e}}(?:</?(?:${su})(?: +|$|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)`, "i")),
-	blockquoteBeginRegex: Gl((e) => RegExp(`^ {0,${e}}>`))
-}, ql = /^(?:[ \t]*(?:\n|$))+/, Jl = /^((?: {4}| {0,3}\t)[^\n]+(?:\n(?:[ \t]*(?:\n|$))*)?)+/, Yl = /^ {0,3}(`{3,}(?=[^`\n]*(?:\n|$))|~{3,})([^\n]*)(?:\n|$)(?:|([\s\S]*?)(?:\n|$))(?: {0,3}\1[~`]* *(?=\n|$)|$)/, Xl = /^ {0,3}((?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/, Zl = /^ {0,3}(#{1,6})(?=\s|$)(.*)(?:\n+|$)/, Ql = / {0,3}(?:[*+-]|\d{1,9}[.)])/, $l = /^(?!bull |blockCode|fences|blockquote|heading|html|table)((?:.|\n(?!\s*?\n|bull |fences|blockquote|heading|hr|html|table))+?)\n {0,3}(=+|-+) *(?:\n+|$)/, eu = Z($l).replace(/bull/g, Ql).replace(/blockCode/g, /(?: {4}| {0,3}\t)/).replace(/fences/g, / {0,3}(?:`{3,}|~{3,})/).replace(/blockquote/g, / {0,3}>/).replace(/heading/g, / {0,3}#{1,6}(?:\s|$)/).replace(/hr/g, / {0,3}(?:(?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/).replace(/html/g, / {0,3}<[^\n>]+>\n/).replace(/\|table/g, "").getRegex(), tu = Z($l).replace(/bull/g, Ql).replace(/blockCode/g, /(?: {4}| {0,3}\t)/).replace(/fences/g, / {0,3}(?:`{3,}|~{3,})/).replace(/blockquote/g, / {0,3}>/).replace(/heading/g, / {0,3}#{1,6}(?:\s|$)/).replace(/hr/g, / {0,3}(?:(?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/).replace(/html/g, / {0,3}<[^\n>]+>\n/).replace(/table/g, / {0,3}\|?(?:[:\- ]*\|)+[\:\- ]*\n/).getRegex(), nu = /^([^\n]+(?:\n(?!hr|heading|lheading|blockquote|fences|list|html|table|[ \t]+\n)[^\n]+)*)/, ru = /^[^\n]+/, iu = /(?!\s*\])(?:\\[\s\S]|[^\[\]\\])+/, au = Z(/^ {0,3}\[(label)\]: *(?:\n[ \t]*)?([^<\s][^\s]*|<.*?>)(?:(?: +(?:\n[ \t]*)?| *\n[ \t]*)(title))? *(?:\n+|$)/).replace("label", iu).replace("title", /(?:"(?:\\"?|[^"\\])*"|'[^'\n]*(?:\n[^'\n]+)*\n?'|\([^()]*\))/).getRegex(), ou = Z(/^(bull)([ \t][^\n]*?)?(?:\n|$)/).replace(/bull/g, Ql).getRegex(), su = "address|article|aside|base|basefont|blockquote|body|caption|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption|figure|footer|form|frame|frameset|h[1-6]|head|header|hr|html|iframe|legend|li|link|main|menu|menuitem|meta|nav|noframes|ol|optgroup|option|p|param|search|section|summary|table|tbody|td|tfoot|th|thead|title|tr|track|ul", cu = /<!--(?:-?>|[\s\S]*?(?:-->|$))/, lu = Z("^ {0,3}(?:<(script|pre|style|textarea)[\\s>][\\s\\S]*?(?:</\\1>[^\\n]*\\n*|$)|comment[^\\n]*(\\n+|$)|<\\?[\\s\\S]*?(?:\\?>[^\\n]*\\n*|$)|<![A-Z][\\s\\S]*?(?:>[^\\n]*\\n*|$)|<!\\[CDATA\\[[\\s\\S]*?(?:\\]\\]>[^\\n]*\\n*|$)|</?(tag)(?:[ \\t]+|\\n|/?>|$)[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$)|<(?!(?:script|pre|style|textarea)(?![a-z0-9-]))([a-z][a-z0-9-]*)(?:attribute)*? */?>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$)|</[a-z][a-z0-9-]*\\s*>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$))", "i").replace("comment", cu).replace("tag", su).replace("attribute", / +[a-zA-Z:_][\w.:-]*(?: *= *"[^"\n]*"| *= *'[^'\n]*'| *= *[^\s"'=<>`]+)?/).getRegex(), uu = (e) => Z(nu).replace("hr", Xl).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("|table", "").replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*(?:\\n|$))|~~~)[^\\n]*(?:\\n|$)").replace("list", e).replace("html", " {0,3}(?:</?(?:tag)(?: +|\\n|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)").replace("tag", su).getRegex(), du = uu(/ {0,3}(?:[*+-]|1[.)])[ \t]+[^ \t\n]/), fu = uu(/ {0,3}(?:[*+-]|\d{1,9}[.)])(?:[ \t]|\n|$)/), pu = {
-	blockquote: Z(/^( {0,3}> ?(?:(?![ \t]*(?:\n|$))(paragraph)|[^\n]*)(?:\n|$))+/).replace("paragraph", fu).getRegex(),
-	code: Jl,
-	def: au,
-	fences: Yl,
-	heading: Zl,
-	hr: Xl,
-	html: lu,
-	lheading: eu,
-	list: ou,
-	newline: ql,
-	paragraph: du,
-	table: Wl,
-	text: ru
-}, mu = Z("^ *([^\\n ].*)\\n {0,3}((?:\\| *)?:?-+:? *(?:\\| *:?-+:? *)*(?:\\| *)?)(?:\\n((?:(?! *\\n|hr|heading|blockquote|code|fences|list|html).*(?:\\n|$))*)\\n*|$)").replace("hr", Xl).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("blockquote", " {0,3}>").replace("code", "(?: {4}| {0,3}	)[^\\n]").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*(?:\\n|$))|~~~)[^\\n]*(?:\\n|$)").replace("list", " {0,3}(?:[*+-]|1[.)])[ \\t]").replace("html", " {0,3}(?:</?(?:tag)(?: +|\\n|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)").replace("tag", su).getRegex(), hu = {
-	...pu,
+	nextBulletRegex: Kl((e) => RegExp(`^ {0,${e}}(?:[*+-]|\\d{1,9}[.)])((?:[ 	][^\\n]*)?(?:\\n|$))`)),
+	hrRegex: Kl((e) => RegExp(`^ {0,${e}}((?:-[ 	]*){3,}|(?:_[ 	]*){3,}|(?:\\*[ 	]*){3,})(?:\\n+|$)`)),
+	fencesBeginRegex: Kl((e) => RegExp(`^ {0,${e}}(?:\`\`\`|~~~)`)),
+	headingBeginRegex: Kl((e) => RegExp(`^ {0,${e}}#{1,6}(?:\\s|$)`)),
+	pedanticHeadingBeginRegex: Kl((e) => RegExp(`^ {0,${e}}#`)),
+	htmlBeginRegex: Kl((e) => RegExp(`^ {0,${e}}(?:</?(?:${cu})(?: +|$|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)`, "i")),
+	blockquoteBeginRegex: Kl((e) => RegExp(`^ {0,${e}}>`))
+}, Jl = /^(?:[ \t]*(?:\n|$))+/, Yl = /^((?: {4}| {0,3}\t)[^\n]+(?:\n(?:[ \t]*(?:\n|$))*)?)+/, Xl = /^ {0,3}(`{3,}(?=[^`\n]*(?:\n|$))|~{3,})([^\n]*)(?:\n|$)(?:|([\s\S]*?)(?:\n|$))(?: {0,3}\1[~`]* *(?=\n|$)|$)/, Zl = /^ {0,3}((?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/, Ql = /^ {0,3}(#{1,6})(?=\s|$)(.*)(?:\n+|$)/, $l = / {0,3}(?:[*+-]|\d{1,9}[.)])/, eu = /^(?!bull |blockCode|fences|blockquote|heading|html|table)((?:.|\n(?!\s*?\n|bull |fences|blockquote|heading|hr|html|table))+?)\n {0,3}(=+|-+) *(?:\n+|$)/, tu = Z(eu).replace(/bull/g, $l).replace(/blockCode/g, /(?: {4}| {0,3}\t)/).replace(/fences/g, / {0,3}(?:`{3,}|~{3,})/).replace(/blockquote/g, / {0,3}>/).replace(/heading/g, / {0,3}#{1,6}(?:\s|$)/).replace(/hr/g, / {0,3}(?:(?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/).replace(/html/g, / {0,3}<[^\n>]+>\n/).replace(/\|table/g, "").getRegex(), nu = Z(eu).replace(/bull/g, $l).replace(/blockCode/g, /(?: {4}| {0,3}\t)/).replace(/fences/g, / {0,3}(?:`{3,}|~{3,})/).replace(/blockquote/g, / {0,3}>/).replace(/heading/g, / {0,3}#{1,6}(?:\s|$)/).replace(/hr/g, / {0,3}(?:(?:-[\t ]*){3,}|(?:_[ \t]*){3,}|(?:\*[ \t]*){3,})(?:\n+|$)/).replace(/html/g, / {0,3}<[^\n>]+>\n/).replace(/table/g, / {0,3}\|?(?:[:\- ]*\|)+[\:\- ]*\n/).getRegex(), ru = /^([^\n]+(?:\n(?!hr|heading|lheading|blockquote|fences|list|html|table|[ \t]+\n)[^\n]+)*)/, iu = /^[^\n]+/, au = /(?!\s*\])(?:\\[\s\S]|[^\[\]\\])+/, ou = Z(/^ {0,3}\[(label)\]: *(?:\n[ \t]*)?([^<\s][^\s]*|<.*?>)(?:(?: +(?:\n[ \t]*)?| *\n[ \t]*)(title))? *(?:\n+|$)/).replace("label", au).replace("title", /(?:"(?:\\"?|[^"\\])*"|'[^'\n]*(?:\n[^'\n]+)*\n?'|\([^()]*\))/).getRegex(), su = Z(/^(bull)([ \t][^\n]*?)?(?:\n|$)/).replace(/bull/g, $l).getRegex(), cu = "address|article|aside|base|basefont|blockquote|body|caption|center|col|colgroup|dd|details|dialog|dir|div|dl|dt|fieldset|figcaption|figure|footer|form|frame|frameset|h[1-6]|head|header|hr|html|iframe|legend|li|link|main|menu|menuitem|meta|nav|noframes|ol|optgroup|option|p|param|search|section|summary|table|tbody|td|tfoot|th|thead|title|tr|track|ul", lu = /<!--(?:-?>|[\s\S]*?(?:-->|$))/, uu = Z("^ {0,3}(?:<(script|pre|style|textarea)[\\s>][\\s\\S]*?(?:</\\1>[^\\n]*\\n*|$)|comment[^\\n]*(\\n+|$)|<\\?[\\s\\S]*?(?:\\?>[^\\n]*\\n*|$)|<![A-Z][\\s\\S]*?(?:>[^\\n]*\\n*|$)|<!\\[CDATA\\[[\\s\\S]*?(?:\\]\\]>[^\\n]*\\n*|$)|</?(tag)(?:[ \\t]+|\\n|/?>|$)[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$)|<(?!(?:script|pre|style|textarea)(?![a-z0-9-]))([a-z][a-z0-9-]*)(?:attribute)*? */?>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$)|</[a-z][a-z0-9-]*\\s*>(?=[ \\t]*(?:\\n|$))[\\s\\S]*?(?:(?:\\n[ 	]*)+\\n|$))", "i").replace("comment", lu).replace("tag", cu).replace("attribute", / +[a-zA-Z:_][\w.:-]*(?: *= *"[^"\n]*"| *= *'[^'\n]*'| *= *[^\s"'=<>`]+)?/).getRegex(), du = (e) => Z(ru).replace("hr", Zl).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("|table", "").replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*(?:\\n|$))|~~~)[^\\n]*(?:\\n|$)").replace("list", e).replace("html", " {0,3}(?:</?(?:tag)(?: +|\\n|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)").replace("tag", cu).getRegex(), fu = du(/ {0,3}(?:[*+-]|1[.)])[ \t]+[^ \t\n]/), pu = du(/ {0,3}(?:[*+-]|\d{1,9}[.)])(?:[ \t]|\n|$)/), mu = {
+	blockquote: Z(/^( {0,3}> ?(?:(?![ \t]*(?:\n|$))(paragraph)|[^\n]*)(?:\n|$))+/).replace("paragraph", pu).getRegex(),
+	code: Yl,
+	def: ou,
+	fences: Xl,
+	heading: Ql,
+	hr: Zl,
+	html: uu,
 	lheading: tu,
-	table: mu,
-	paragraph: Z(nu).replace("hr", Xl).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("table", mu).replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*(?:\\n|$))|~~~)[^\\n]*(?:\\n|$)").replace("list", " {0,3}(?:[*+-]|1[.)])[ \\t]+[^ \\t\\n]").replace("html", " {0,3}(?:</?(?:tag)(?: +|\\n|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)").replace("tag", su).getRegex()
-}, gu = {
-	...pu,
-	html: Z("^ *(?:comment *(?:\\n|\\s*$)|<(tag)[\\s\\S]+?</\\1> *(?:\\n{2,}|\\s*$)|<tag(?:\"[^\"]*\"|'[^']*'|\\s[^'\"/>\\s]*)*?/?> *(?:\\n{2,}|\\s*$))").replace("comment", cu).replace(/tag/g, "(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:|[^\\w\\s@]*@)\\b").getRegex(),
+	list: su,
+	newline: Jl,
+	paragraph: fu,
+	table: Gl,
+	text: iu
+}, hu = Z("^ *([^\\n ].*)\\n {0,3}((?:\\| *)?:?-+:? *(?:\\| *:?-+:? *)*(?:\\| *)?)(?:\\n((?:(?! *\\n|hr|heading|blockquote|code|fences|list|html).*(?:\\n|$))*)\\n*|$)").replace("hr", Zl).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("blockquote", " {0,3}>").replace("code", "(?: {4}| {0,3}	)[^\\n]").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*(?:\\n|$))|~~~)[^\\n]*(?:\\n|$)").replace("list", " {0,3}(?:[*+-]|1[.)])[ \\t]").replace("html", " {0,3}(?:</?(?:tag)(?: +|\\n|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)").replace("tag", cu).getRegex(), gu = {
+	...mu,
+	lheading: nu,
+	table: hu,
+	paragraph: Z(ru).replace("hr", Zl).replace("heading", " {0,3}#{1,6}(?:\\s|$)").replace("|lheading", "").replace("table", hu).replace("blockquote", " {0,3}>").replace("fences", " {0,3}(?:`{3,}(?=[^`\\n]*(?:\\n|$))|~~~)[^\\n]*(?:\\n|$)").replace("list", " {0,3}(?:[*+-]|1[.)])[ \\t]+[^ \\t\\n]").replace("html", " {0,3}(?:</?(?:tag)(?: +|\\n|/?>)|<(?:(?:script|pre|style|textarea)(?:[\\s>]|$)|!--)|<\\?|<![A-Za-z]|<!\\[CDATA\\[)").replace("tag", cu).getRegex()
+}, _u = {
+	...mu,
+	html: Z("^ *(?:comment *(?:\\n|\\s*$)|<(tag)[\\s\\S]+?</\\1> *(?:\\n{2,}|\\s*$)|<tag(?:\"[^\"]*\"|'[^']*'|\\s[^'\"/>\\s]*)*?/?> *(?:\\n{2,}|\\s*$))").replace("comment", lu).replace(/tag/g, "(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:|[^\\w\\s@]*@)\\b").getRegex(),
 	def: /^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +(["(][^\n]+[")]))? *(?:\n+|$)/,
 	heading: /^(#{1,6})(.*)(?:\n+|$)/,
-	fences: Wl,
+	fences: Gl,
 	lheading: /^(.+?)\n {0,3}(=+|-+) *(?:\n+|$)/,
-	paragraph: Z(nu).replace("hr", Xl).replace("heading", " *#{1,6} *[^\n]").replace("lheading", eu).replace("|table", "").replace("blockquote", " {0,3}>").replace("|fences", "").replace("|list", "").replace("|html", "").replace("|tag", "").getRegex()
-}, _u = /^\\([!"#$%&'()*+,\-./:;<=>?@\[\]\\^_`{|}~])/, vu = /^(`+)([^`]|[^`][\s\S]*?[^`])\1(?!`)/, yu = /^( {2,}|\\)\n(?!\s*$)[ \t]*/, bu = /^(`+|[^`])(?:(?= {2,}\n)|[\s\S]*?(?:(?=[\\<!\[`*_]|\b_|$)|[^ ](?= {2,}\n)))/, xu = /[\p{P}\p{S}]/u, Su = /[\s\p{P}\p{S}]/u, Cu = /[^\s\p{P}\p{S}]/u, wu = Z(/^((?![*_])punctSpace)/, "u").replace(/punctSpace/g, Su).getRegex(), Tu = /[\p{Pi}\p{Ps}"']/u, Eu = /(?!~)[\p{P}\p{S}]/u, Du = /(?!~)[\s\p{P}\p{S}]/u, Ou = /(?:[^\s\p{P}\p{S}]|~)/u, ku = Z(/link|precode-code|html/, "g").replace("link", /\[(?:[^\[\]`]|(?<a>`+)[^`]+\k<a>(?!`))*?\]\((?:\\[\s\S]|[^\\\(\)]|\((?:\\[\s\S]|[^\\\(\)])*\))*\)/).replace("precode-", Kl ? "(?<!`)()" : "(^^|[^`])").replace("code", /(?<b>`+)[^`]+\k<b>(?!`)/).replace("html", /<(?! )[^<>]*?>/).getRegex(), Au = /^(?:\*+(?:((?!\*)punct)|([^\s*]))?)|^_+(?:((?!_)punct)|([^\s_]))?/, ju = Z(Au, "u").replace(/punct/g, xu).getRegex(), Mu = Z(Au, "u").replace(/punct/g, Eu).getRegex(), Nu = Z(/^(?:\*+(?:((?!\*)(?!openQuote)punct)|([^\s*]))?)|^_+(?:((?!_)(?!openQuote)punct)|([^\s_]))?/, "u").replace(/openQuote/g, Tu).replace(/punct/g, xu).getRegex(), Pu = "^[^_*]*?__[^_*]*?\\*[^_*]*?(?=__)|[^*]+(?=[^*])|(?!\\*)punct(\\*+)(?=[\\s]|$)|notPunctSpace(\\*+)(?!\\*)(?=punctSpace|$)|(?!\\*)punctSpace(\\*+)(?=notPunctSpace)|[\\s](\\*+)(?!\\*)(?=punct)|(?!\\*)punct(\\*+)(?!\\*)(?=punct)|notPunctSpace(\\*+)(?=notPunctSpace)", Fu = Z(Pu, "gu").replace(/notPunctSpace/g, Cu).replace(/punctSpace/g, Su).replace(/punct/g, xu).getRegex(), Iu = Z(Pu, "gu").replace(/notPunctSpace/g, Ou).replace(/punctSpace/g, Du).replace(/punct/g, Eu).getRegex(), Lu = Z("^[^_*]*?__[^_*]*?\\*[^_*]*?(?=__)|[^*]+(?=[^*])|(?!\\*)punct(\\*+)(?=[\\s]|$)|notPunctSpace(\\*+)(?!\\*)(?=punctSpace|$)|(?!\\*)[\\s](\\*+)(?=notPunctSpace)|[\\s](\\*+)(?!\\*)(?=punct)|(?!\\*)punct(\\*+)(?!\\*)(?=punct)|(?:(?!\\*)punct|notPunctSpace)(\\*+)(?!\\*)(?=notPunctSpace)", "gu").replace(/notPunctSpace/g, Cu).replace(/punctSpace/g, Su).replace(/punct/g, xu).getRegex(), Ru = Z("^[^_*]*?\\*\\*[^_*]*?_[^_*]*?(?=\\*\\*)|[^_]+(?=[^_])|(?!_)punct(_+)(?=[\\s]|$)|notPunctSpace(_+)(?!_)(?=punctSpace|$)|(?!_)punctSpace(_+)(?=notPunctSpace)|[\\s](_+)(?!_)(?=punct)|(?!_)punct(_+)(?!_)(?=punct)", "gu").replace(/notPunctSpace/g, Cu).replace(/punctSpace/g, Su).replace(/punct/g, xu).getRegex(), zu = Z("^[^_*]*?\\*\\*[^_*]*?_[^_*]*?(?=\\*\\*)|[^_]+(?=[^_])|(?!_)punct(_+)(?=[\\s]|$)|notPunctSpace(_+)(?!_)(?=punctSpace|$)|(?!_)[\\s](_+)(?=notPunctSpace)|[\\s](_+)(?!_)(?=punct)|(?!_)punct(_+)(?!_)(?=punct)|(?:(?!_)punct|notPunctSpace)(_+)(?!_)(?=notPunctSpace)", "gu").replace(/notPunctSpace/g, Cu).replace(/punctSpace/g, Su).replace(/punct/g, xu).getRegex(), Bu = Z(/^~~?(?:((?!~)punct)|[^\s~])/, "u").replace(/punct/g, xu).getRegex(), Vu = Z("^[^~]+(?=[^~])|(?!~)punct(~~?)(?=[\\s]|$)|notPunctSpace(~~?)(?!~)(?=punctSpace|$)|(?!~)punctSpace(~~?)(?=notPunctSpace)|[\\s](~~?)(?!~)(?=punct)|(?!~)punct(~~?)(?!~)(?=punct)|notPunctSpace(~~?)(?=notPunctSpace)", "gu").replace(/notPunctSpace/g, Cu).replace(/punctSpace/g, Su).replace(/punct/g, xu).getRegex(), Hu = Z(/\\(punct)/, "gu").replace(/punct/g, xu).getRegex(), Uu = Z(/(`+)(?:[^`]|[^`][\s\S]*?[^`])\1(?!`)|`+|\\(punct)/, "gu").replace(/punct/g, xu).getRegex(), Wu = Z(/^<(scheme:[^\s\x00-\x1f<>]*|email)>/).replace("scheme", /[a-zA-Z][a-zA-Z0-9+.-]{1,31}/).replace("email", /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(@)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(?![-_])/).getRegex(), Gu = Z(cu).replace("(?:-->|$)", "-->").getRegex(), Ku = Z("^comment|^</[a-zA-Z][a-zA-Z0-9-]*\\s*>|^<[a-zA-Z][a-zA-Z0-9-]*(?:attribute)*?\\s*/?>|^<\\?[\\s\\S]*?\\?>|^<![a-zA-Z]+\\s[\\s\\S]*?>|^<!\\[CDATA\\[[\\s\\S]*?\\]\\]>").replace("comment", Gu).replace("attribute", /\s+[a-zA-Z:_][\w.:-]*(?:\s*=\s*"[^"]*"|\s*=\s*'[^']*'|\s*=\s*[^\s"'=<>`]+)?/).getRegex(), qu = /\[(?:\\[\s\S]|[^\[\]\\])*\]/, Ju = Z(/(?:\[(?:brackets|\\[\s\S]|[^\[\]\\])*\]|\\[\s\S]|`+(?!`)[^`]*?`+(?!`)|``+(?=\])|[^\[\]\\`])*?/).replace("brackets", qu).getRegex(), Yu = Z(/^!?\[(label)\]\([ \t\n]*(href)(?:(?:[ \t]+(?:\n[ \t]*)?|\n[ \t]*)(title))?[ \t\n]*\)/).replace("label", Ju).replace("href", /<(?:\\.|[^\n<>\\])+>|[^ \t\n\x00-\x1f]+|(?=\))/).replace("title", /"(?:\\"?|[^"\\])*"|'(?:\\'?|[^'\\])*'|\((?:\\\)?|[^)\\])*\)/).getRegex(), Xu = Z(/^!?\[(label)\]\[(ref)\]/).replace("label", Ju).replace("ref", iu).getRegex(), Zu = Z(/^!?\[(ref)\](?:\[\])?/).replace("ref", iu).getRegex(), Qu = /(?!\s*\])(?:\\[\s\S]|[^\[\]\\]){1,999}/, $u = Z(/(?:[^\[\]\\`]*(?:\[(?:brackets|\\[\s\S]|[^\[\]\\])*\]|\\[\s\S]|`+(?!`)[^`]*?`+(?!`)|``+(?=\]))){0,999}?[^\[\]\\`]*?/).replace("brackets", qu).getRegex(), ed = Z("reflink|nolink(?!\\()", "g").replace("reflink", Z(/^!?\[(label)\]\[(ref)\]/).replace("label", $u).replace("ref", Qu).getRegex()).replace("nolink", Z(/^!?\[(ref)\](?:\[\])?/).replace("ref", Qu).getRegex()).getRegex(), td = /[hH][tT][tT][pP][sS]?|[fF][tT][pP]/, nd = Z(/(?:mailto:email|xmpp:email(?:\/[A-Za-z0-9@.]+)?)/).replace(/email/g, /[A-Za-z0-9._+-]+@[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![\w-])/).getRegex(), rd = {
-	_backpedal: Wl,
-	anyPunctuation: Hu,
-	anyPunctuationOutsideCode: Uu,
-	autolink: Wu,
-	blockSkip: ku,
-	br: yu,
-	code: vu,
-	del: Wl,
-	delLDelim: Wl,
-	delRDelim: Wl,
-	emStrongLDelim: ju,
-	emStrongRDelimAst: Fu,
-	emStrongRDelimUnd: Ru,
-	escape: _u,
-	link: Yu,
-	nolink: Zu,
-	punctuation: wu,
-	reflink: Xu,
-	reflinkSearch: ed,
-	tag: Ku,
-	text: bu,
-	url: Wl
-}, id = {
-	...rd,
-	emStrongLDelim: Nu,
-	emStrongRDelimAst: Lu,
-	emStrongRDelimUnd: zu,
-	link: Z(/^!?\[(label)\]\((.*?)\)/).replace("label", Ju).getRegex(),
-	reflink: Z(/^!?\[(label)\]\s*\[([^\]]*)\]/).replace("label", Ju).getRegex()
-}, ad = {
-	...rd,
-	emStrongRDelimAst: Iu,
+	paragraph: Z(ru).replace("hr", Zl).replace("heading", " *#{1,6} *[^\n]").replace("lheading", tu).replace("|table", "").replace("blockquote", " {0,3}>").replace("|fences", "").replace("|list", "").replace("|html", "").replace("|tag", "").getRegex()
+}, vu = /^\\([!"#$%&'()*+,\-./:;<=>?@\[\]\\^_`{|}~])/, yu = /^(`+)([^`]|[^`][\s\S]*?[^`])\1(?!`)/, bu = /^( {2,}|\\)\n(?!\s*$)[ \t]*/, xu = /^(`+|[^`])(?:(?= {2,}\n)|[\s\S]*?(?:(?=[\\<!\[`*_]|\b_|$)|[^ ](?= {2,}\n)))/, Su = /[\p{P}\p{S}]/u, Cu = /[\s\p{P}\p{S}]/u, wu = /[^\s\p{P}\p{S}]/u, Tu = Z(/^((?![*_])punctSpace)/, "u").replace(/punctSpace/g, Cu).getRegex(), Eu = /[\p{Pi}\p{Ps}"']/u, Du = /(?!~)[\p{P}\p{S}]/u, Ou = /(?!~)[\s\p{P}\p{S}]/u, ku = /(?:[^\s\p{P}\p{S}]|~)/u, Au = Z(/link|precode-code|html/, "g").replace("link", /\[(?:[^\[\]`]|(?<a>`+)[^`]+\k<a>(?!`))*?\]\((?:\\[\s\S]|[^\\\(\)]|\((?:\\[\s\S]|[^\\\(\)])*\))*\)/).replace("precode-", ql ? "(?<!`)()" : "(^^|[^`])").replace("code", /(?<b>`+)[^`]+\k<b>(?!`)/).replace("html", /<(?! )[^<>]*?>/).getRegex(), ju = /^(?:\*+(?:((?!\*)punct)|([^\s*]))?)|^_+(?:((?!_)punct)|([^\s_]))?/, Mu = Z(ju, "u").replace(/punct/g, Su).getRegex(), Nu = Z(ju, "u").replace(/punct/g, Du).getRegex(), Pu = Z(/^(?:\*+(?:((?!\*)(?!openQuote)punct)|([^\s*]))?)|^_+(?:((?!_)(?!openQuote)punct)|([^\s_]))?/, "u").replace(/openQuote/g, Eu).replace(/punct/g, Su).getRegex(), Fu = "^[^_*]*?__[^_*]*?\\*[^_*]*?(?=__)|[^*]+(?=[^*])|(?!\\*)punct(\\*+)(?=[\\s]|$)|notPunctSpace(\\*+)(?!\\*)(?=punctSpace|$)|(?!\\*)punctSpace(\\*+)(?=notPunctSpace)|[\\s](\\*+)(?!\\*)(?=punct)|(?!\\*)punct(\\*+)(?!\\*)(?=punct)|notPunctSpace(\\*+)(?=notPunctSpace)", Iu = Z(Fu, "gu").replace(/notPunctSpace/g, wu).replace(/punctSpace/g, Cu).replace(/punct/g, Su).getRegex(), Lu = Z(Fu, "gu").replace(/notPunctSpace/g, ku).replace(/punctSpace/g, Ou).replace(/punct/g, Du).getRegex(), Ru = Z("^[^_*]*?__[^_*]*?\\*[^_*]*?(?=__)|[^*]+(?=[^*])|(?!\\*)punct(\\*+)(?=[\\s]|$)|notPunctSpace(\\*+)(?!\\*)(?=punctSpace|$)|(?!\\*)[\\s](\\*+)(?=notPunctSpace)|[\\s](\\*+)(?!\\*)(?=punct)|(?!\\*)punct(\\*+)(?!\\*)(?=punct)|(?:(?!\\*)punct|notPunctSpace)(\\*+)(?!\\*)(?=notPunctSpace)", "gu").replace(/notPunctSpace/g, wu).replace(/punctSpace/g, Cu).replace(/punct/g, Su).getRegex(), zu = Z("^[^_*]*?\\*\\*[^_*]*?_[^_*]*?(?=\\*\\*)|[^_]+(?=[^_])|(?!_)punct(_+)(?=[\\s]|$)|notPunctSpace(_+)(?!_)(?=punctSpace|$)|(?!_)punctSpace(_+)(?=notPunctSpace)|[\\s](_+)(?!_)(?=punct)|(?!_)punct(_+)(?!_)(?=punct)", "gu").replace(/notPunctSpace/g, wu).replace(/punctSpace/g, Cu).replace(/punct/g, Su).getRegex(), Bu = Z("^[^_*]*?\\*\\*[^_*]*?_[^_*]*?(?=\\*\\*)|[^_]+(?=[^_])|(?!_)punct(_+)(?=[\\s]|$)|notPunctSpace(_+)(?!_)(?=punctSpace|$)|(?!_)[\\s](_+)(?=notPunctSpace)|[\\s](_+)(?!_)(?=punct)|(?!_)punct(_+)(?!_)(?=punct)|(?:(?!_)punct|notPunctSpace)(_+)(?!_)(?=notPunctSpace)", "gu").replace(/notPunctSpace/g, wu).replace(/punctSpace/g, Cu).replace(/punct/g, Su).getRegex(), Vu = Z(/^~~?(?:((?!~)punct)|[^\s~])/, "u").replace(/punct/g, Su).getRegex(), Hu = Z("^[^~]+(?=[^~])|(?!~)punct(~~?)(?=[\\s]|$)|notPunctSpace(~~?)(?!~)(?=punctSpace|$)|(?!~)punctSpace(~~?)(?=notPunctSpace)|[\\s](~~?)(?!~)(?=punct)|(?!~)punct(~~?)(?!~)(?=punct)|notPunctSpace(~~?)(?=notPunctSpace)", "gu").replace(/notPunctSpace/g, wu).replace(/punctSpace/g, Cu).replace(/punct/g, Su).getRegex(), Uu = Z(/\\(punct)/, "gu").replace(/punct/g, Su).getRegex(), Wu = Z(/(`+)(?:[^`]|[^`][\s\S]*?[^`])\1(?!`)|`+|\\(punct)/, "gu").replace(/punct/g, Su).getRegex(), Gu = Z(/^<(scheme:[^\s\x00-\x1f<>]*|email)>/).replace("scheme", /[a-zA-Z][a-zA-Z0-9+.-]{1,31}/).replace("email", /[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(@)[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(?![-_])/).getRegex(), Ku = Z(lu).replace("(?:-->|$)", "-->").getRegex(), qu = Z("^comment|^</[a-zA-Z][a-zA-Z0-9-]*\\s*>|^<[a-zA-Z][a-zA-Z0-9-]*(?:attribute)*?\\s*/?>|^<\\?[\\s\\S]*?\\?>|^<![a-zA-Z]+\\s[\\s\\S]*?>|^<!\\[CDATA\\[[\\s\\S]*?\\]\\]>").replace("comment", Ku).replace("attribute", /\s+[a-zA-Z:_][\w.:-]*(?:\s*=\s*"[^"]*"|\s*=\s*'[^']*'|\s*=\s*[^\s"'=<>`]+)?/).getRegex(), Ju = /\[(?:\\[\s\S]|[^\[\]\\])*\]/, Yu = Z(/(?:\[(?:brackets|\\[\s\S]|[^\[\]\\])*\]|\\[\s\S]|`+(?!`)[^`]*?`+(?!`)|``+(?=\])|[^\[\]\\`])*?/).replace("brackets", Ju).getRegex(), Xu = Z(/^!?\[(label)\]\([ \t\n]*(href)(?:(?:[ \t]+(?:\n[ \t]*)?|\n[ \t]*)(title))?[ \t\n]*\)/).replace("label", Yu).replace("href", /<(?:\\.|[^\n<>\\])+>|[^ \t\n\x00-\x1f]+|(?=\))/).replace("title", /"(?:\\"?|[^"\\])*"|'(?:\\'?|[^'\\])*'|\((?:\\\)?|[^)\\])*\)/).getRegex(), Zu = Z(/^!?\[(label)\]\[(ref)\]/).replace("label", Yu).replace("ref", au).getRegex(), Qu = Z(/^!?\[(ref)\](?:\[\])?/).replace("ref", au).getRegex(), $u = /(?!\s*\])(?:\\[\s\S]|[^\[\]\\]){1,999}/, ed = Z(/(?:[^\[\]\\`]*(?:\[(?:brackets|\\[\s\S]|[^\[\]\\])*\]|\\[\s\S]|`+(?!`)[^`]*?`+(?!`)|``+(?=\]))){0,999}?[^\[\]\\`]*?/).replace("brackets", Ju).getRegex(), td = Z("reflink|nolink(?!\\()", "g").replace("reflink", Z(/^!?\[(label)\]\[(ref)\]/).replace("label", ed).replace("ref", $u).getRegex()).replace("nolink", Z(/^!?\[(ref)\](?:\[\])?/).replace("ref", $u).getRegex()).getRegex(), nd = /[hH][tT][tT][pP][sS]?|[fF][tT][pP]/, rd = Z(/(?:mailto:email|xmpp:email(?:\/[A-Za-z0-9@.]+)?)/).replace(/email/g, /[A-Za-z0-9._+-]+@[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![\w-])/).getRegex(), id = {
+	_backpedal: Gl,
+	anyPunctuation: Uu,
+	anyPunctuationOutsideCode: Wu,
+	autolink: Gu,
+	blockSkip: Au,
+	br: bu,
+	code: yu,
+	del: Gl,
+	delLDelim: Gl,
+	delRDelim: Gl,
 	emStrongLDelim: Mu,
-	delLDelim: Bu,
-	delRDelim: Vu,
-	url: Z(/^emailProtocol|^((?:protocol):\/\/|www\.)(?:[a-zA-Z0-9\-]+\.?)+[^\s<]*|^email/).replace("emailProtocol", nd).replace("protocol", td).replace("email", /[A-Za-z0-9._+-]+(@)[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![\w-])/).getRegex(),
+	emStrongRDelimAst: Iu,
+	emStrongRDelimUnd: zu,
+	escape: vu,
+	link: Xu,
+	nolink: Qu,
+	punctuation: Tu,
+	reflink: Zu,
+	reflinkSearch: td,
+	tag: qu,
+	text: xu,
+	url: Gl
+}, ad = {
+	...id,
+	emStrongLDelim: Pu,
+	emStrongRDelimAst: Ru,
+	emStrongRDelimUnd: Bu,
+	link: Z(/^!?\[(label)\]\((.*?)\)/).replace("label", Yu).getRegex(),
+	reflink: Z(/^!?\[(label)\]\s*\[([^\]]*)\]/).replace("label", Yu).getRegex()
+}, od = {
+	...id,
+	emStrongRDelimAst: Lu,
+	emStrongLDelim: Nu,
+	delLDelim: Vu,
+	delRDelim: Hu,
+	url: Z(/^emailProtocol|^((?:protocol):\/\/|www\.)(?:[a-zA-Z0-9\-]+\.?)+[^\s<]*|^email/).replace("emailProtocol", rd).replace("protocol", nd).replace("email", /[A-Za-z0-9._+-]+(@)[a-zA-Z0-9-_]+(?:\.[a-zA-Z0-9-_]*[a-zA-Z0-9])+(?![\w-])/).getRegex(),
 	_backpedal: /(?:[^?!.,:;*_'"~()&]+|\([^)]*\)|&(?![a-zA-Z0-9]+;$)|[?!.,:;*_'"~)]+(?!$))+/,
 	del: /^(~~?)(?=[^\s~])((?:\\[\s\S]|[^\\])*?(?:\\[\s\S]|[^\s~\\]))\1(?=[^~]|$)/,
-	text: Z(/^(?:[^a-zA-Z0-9](?=emailProtocol)|(`+|~+|[^`~])(?:(?=[`~])|(?= {2,}\n)|(?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@)|[\s\S]*?(?:(?=[\\<!\[`*~_]|\b_|protocol:\/\/|www\.|$)|[^ ](?= {2,}\n)|[^a-zA-Z0-9](?=emailProtocol)|[^a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-](?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@))))/).replace("protocol", td).replace(/emailProtocol/g, /(?:mailto|xmpp):/).getRegex()
-}, od = {
-	...ad,
-	br: Z(yu).replace("{2,}", "*").getRegex(),
-	text: Z(ad.text).replace("\\b_", "\\b_| {2,}\\n").replace(/\{2,\}/g, "*").getRegex()
+	text: Z(/^(?:[^a-zA-Z0-9](?=emailProtocol)|(`+|~+|[^`~])(?:(?=[`~])|(?= {2,}\n)|(?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@)|[\s\S]*?(?:(?=[\\<!\[`*~_]|\b_|protocol:\/\/|www\.|$)|[^ ](?= {2,}\n)|[^a-zA-Z0-9](?=emailProtocol)|[^a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-](?=[a-zA-Z0-9.!#$%&'*+\/=?_`{\|}~-]+@))))/).replace("protocol", nd).replace(/emailProtocol/g, /(?:mailto|xmpp):/).getRegex()
 }, sd = {
-	normal: pu,
-	gfm: hu,
-	pedantic: gu
+	...od,
+	br: Z(bu).replace("{2,}", "*").getRegex(),
+	text: Z(od.text).replace("\\b_", "\\b_| {2,}\\n").replace(/\{2,\}/g, "*").getRegex()
 }, cd = {
-	normal: rd,
-	gfm: ad,
-	breaks: od,
-	pedantic: id
+	normal: mu,
+	gfm: gu,
+	pedantic: _u
 }, ld = {
+	normal: id,
+	gfm: od,
+	breaks: sd,
+	pedantic: ad
+}, ud = {
 	"&": "&amp;",
 	"<": "&lt;",
 	">": "&gt;",
 	"\"": "&quot;",
 	"'": "&#39;"
-}, ud = (e) => ld[e];
-function dd(e, t) {
+}, dd = (e) => ud[e];
+function fd(e, t) {
 	if (t) {
-		if (Q.escapeTest.test(e)) return e.replace(Q.escapeReplace, ud);
-	} else if (Q.escapeTestNoEncode.test(e)) return e.replace(Q.escapeReplaceNoEncode, ud);
+		if (Q.escapeTest.test(e)) return e.replace(Q.escapeReplace, dd);
+	} else if (Q.escapeTestNoEncode.test(e)) return e.replace(Q.escapeReplaceNoEncode, dd);
 	return e;
 }
-function fd(e) {
+function pd(e) {
 	return Q.numericCharacterReference.test(e) ? e.replace(Q.numericCharacterReferenceOrAmpersand, (e, t, n) => {
 		if (t === void 0 && n === void 0) return "&amp;";
 		let r = t === void 0 ? Number.parseInt(n, 16) : Number.parseInt(t, 10);
 		return r === 0 || r > 1114111 || r >= 55296 && r <= 57343 ? "�" : r === 38 ? "&amp;" : String.fromCodePoint(r);
 	}) : e;
 }
-function pd(e) {
+function md(e) {
 	try {
 		e = encodeURI(e).replace(Q.percentDecode, "%");
 	} catch {
@@ -4129,7 +4162,7 @@ function pd(e) {
 	}
 	return e;
 }
-function md(e, t) {
+function hd(e, t) {
 	let n = e.replace(Q.findPipe, (e, t, n) => {
 		let r = !1, i = t;
 		for (; --i >= 0 && n[i] === "\\";) r = !r;
@@ -4142,7 +4175,7 @@ function md(e, t) {
 	for (; r < n.length; r++) n[r] = n[r].trim().replace(Q.slashPipe, "|");
 	return n;
 }
-function hd(e, t, n) {
+function gd(e, t, n) {
 	let r = e.length;
 	if (r === 0) return "";
 	let i = 0;
@@ -4154,15 +4187,15 @@ function hd(e, t, n) {
 	}
 	return e.slice(0, r - i);
 }
-function gd(e) {
+function _d(e) {
 	let t = e.split("\n"), n = t.length - 1;
 	for (; n >= 0 && Q.blankLine.test(t[n]);) n--;
 	return t.length - n <= 2 ? e : t.slice(0, n + 1).join("\n");
 }
-function _d(e) {
+function vd(e) {
 	return e.trim().toLowerCase().toUpperCase().toLowerCase();
 }
-function vd(e, t) {
+function yd(e, t) {
 	if (e.indexOf(t[0]) === -1 && e.indexOf(t[1]) === -1) return -1;
 	let n = 0;
 	for (let r = 0; r < e.length; r++) if (e[r] === "\\") r++;
@@ -4170,7 +4203,7 @@ function vd(e, t) {
 	else if (e[r] === t[1] && (n--, n < 0)) return r;
 	return n > 0 ? -2 : -1;
 }
-function yd(e, t = 0) {
+function bd(e, t = 0) {
 	let n = t, r = "";
 	for (let t of e) if (t === "	") {
 		let e = 4 - n % 4;
@@ -4178,7 +4211,7 @@ function yd(e, t = 0) {
 	} else r += t, n++;
 	return r;
 }
-function bd(e, t, n, r, i) {
+function xd(e, t, n, r, i) {
 	let a = t.href, o = t.title || null, s = e[1].replace(i.other.outputLinkReplace, "$1"), c = e[0].charAt(0) === "!", l = r.state.inLink, u = r.state.linkEmitted, d = r.state.inRawBlock;
 	r.state.inLink = !0, r.state.linkEmitted = !1;
 	let f = r.inlineTokens(s), p = r.state.linkEmitted;
@@ -4198,7 +4231,7 @@ function bd(e, t, n, r, i) {
 		tokens: f
 	};
 }
-function xd(e, t, n) {
+function Sd(e, t, n) {
 	let r = e.match(n.other.indentCodeCompensation);
 	if (r === null) return t;
 	let i = r[1];
@@ -4209,7 +4242,7 @@ function xd(e, t, n) {
 		return e.slice(Math.min(r.length, i.length));
 	}).join("\n");
 }
-function Sd(e, t, n, r) {
+function Cd(e, t, n, r) {
 	if (!t.includes("<")) return !1;
 	for (let i = 0; i < t.length; i++) {
 		if (t[i] === "\\") {
@@ -4232,12 +4265,12 @@ function Sd(e, t, n, r) {
 	}
 	return !1;
 }
-var Cd = class {
+var wd = class {
 	options;
 	rules;
 	lexer;
 	constructor(e) {
-		this.options = e || Hl;
+		this.options = e || Ul;
 	}
 	space(e) {
 		let t = this.rules.block.newline.exec(e);
@@ -4249,7 +4282,7 @@ var Cd = class {
 	code(e) {
 		let t = this.rules.block.code.exec(e);
 		if (t) {
-			let e = this.options.pedantic ? t[0] : gd(t[0]);
+			let e = this.options.pedantic ? t[0] : _d(t[0]);
 			return {
 				type: "code",
 				raw: e,
@@ -4261,7 +4294,7 @@ var Cd = class {
 	fences(e) {
 		let t = this.rules.block.fences.exec(e);
 		if (t) {
-			let e = t[0], n = xd(e, t[3] || "", this.rules);
+			let e = t[0], n = Sd(e, t[3] || "", this.rules);
 			return {
 				type: "code",
 				raw: e,
@@ -4275,12 +4308,12 @@ var Cd = class {
 		if (t) {
 			let e = t[2].trim();
 			if (this.rules.other.endingHash.test(e)) {
-				let t = hd(e, "#");
+				let t = gd(e, "#");
 				(this.options.pedantic || !t || this.rules.other.endingSpaceTabChar.test(t)) && (e = t.trim());
 			}
 			return {
 				type: "heading",
-				raw: hd(t[0], "\n"),
+				raw: gd(t[0], "\n"),
 				depth: t[1].length,
 				text: e,
 				tokens: this.lexer.inline(e)
@@ -4291,20 +4324,20 @@ var Cd = class {
 		let t = this.rules.block.hr.exec(e);
 		if (t) return {
 			type: "hr",
-			raw: hd(t[0], "\n")
+			raw: gd(t[0], "\n")
 		};
 	}
 	blockquote(e) {
 		let t = this.rules.block.blockquote.exec(e);
 		if (t) {
-			let e = hd(t[0], "\n").split("\n"), n = "", r = "", i = [];
+			let e = gd(t[0], "\n").split("\n"), n = "", r = "", i = [];
 			for (; e.length > 0;) {
 				let t = !1, a = [], o = 0;
 				for (; o < e.length; o++) if (this.rules.other.blockquoteStart.test(e[o])) a.push(e[o]), t = !0;
 				else if (!t) a.push(e[o]);
 				else break;
 				e = e.slice(o);
-				let s = a.join("\n"), c = s.replace(this.rules.other.blockquoteMarkerWhitespace, (e, t, n) => t + yd(n, t.length)).replace(this.rules.other.blockquoteSetextReplace, "\n    $1").replace(this.rules.other.blockquoteSetextReplace2, "");
+				let s = a.join("\n"), c = s.replace(this.rules.other.blockquoteMarkerWhitespace, (e, t, n) => t + bd(n, t.length)).replace(this.rules.other.blockquoteSetextReplace, "\n    $1").replace(this.rules.other.blockquoteSetextReplace2, "");
 				n = n ? `${n}
 ${s}` : s, r = r ? `${r}
 ${c}` : c;
@@ -4359,12 +4392,12 @@ ${t}`;
 				if (!(t = s.exec(e)) || this.rules.block.hr.test(e)) break;
 				let l = r();
 				e = e.substring(t[0].length);
-				let u = t[2].split("\n", 1)[0], d = t[1].length, f = this.options.pedantic ? yd(u, d) : u.replace(this.rules.other.leadingSpaceTab, (e) => yd(e, d)), p = e.split("\n", 1)[0], m = !f.trim(), h = 0;
+				let u = t[2].split("\n", 1)[0], d = t[1].length, f = this.options.pedantic ? bd(u, d) : u.replace(this.rules.other.leadingSpaceTab, (e) => bd(e, d)), p = e.split("\n", 1)[0], m = !f.trim(), h = 0;
 				if (this.options.pedantic ? (h = 2, a = f.trimStart()) : m ? h = d + 1 : (h = f.search(this.rules.other.nonSpaceChar), h = h > 4 ? 1 : h, a = f.slice(h), h += d), m && this.rules.other.blankLine.test(p) && (e = e.substring(p.length + 1), i = !0), !i) {
 					let t = this.rules.other.nextBulletRegex(h), n = this.rules.other.hrRegex(h), r = this.rules.other.fencesBeginRegex(h), i = this.options.pedantic ? this.rules.other.pedanticHeadingBeginRegex(h) : this.rules.other.headingBeginRegex(h), o = this.rules.other.htmlBeginRegex(h), s = this.rules.other.blockquoteBeginRegex(h);
 					for (; e;) {
 						let c = e.split("\n", 1)[0], l;
-						if (p = c, this.options.pedantic ? (p = p.replace(this.rules.other.listReplaceNesting, "  "), l = p) : l = p.replace(this.rules.other.leadingSpaceTab, (e) => yd(e)), r.test(p) || i.test(p) || o.test(p) || s.test(p) || t.test(p) || n.test(p)) break;
+						if (p = c, this.options.pedantic ? (p = p.replace(this.rules.other.listReplaceNesting, "  "), l = p) : l = p.replace(this.rules.other.leadingSpaceTab, (e) => bd(e)), r.test(p) || i.test(p) || o.test(p) || s.test(p) || t.test(p) || n.test(p)) break;
 						if (l.search(this.rules.other.nonSpaceChar) >= h || !p.trim()) a += "\n" + l.slice(h);
 						else {
 							if (m || f.replace(this.rules.other.tabCharGlobal, "    ").search(this.rules.other.nonSpaceChar) >= 4 || r.test(f) || i.test(f) || n.test(f)) break;
@@ -4427,7 +4460,7 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 	html(e) {
 		let t = this.rules.block.html.exec(e);
 		if (t) {
-			let e = gd(t[0]);
+			let e = _d(t[0]);
 			return {
 				type: "html",
 				block: !0,
@@ -4440,12 +4473,12 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 	def(e) {
 		let t = this.rules.block.def.exec(e);
 		if (t) {
-			if (!this.rules.other.startAngleBracket.test(t[2]) && vd(t[2], "()") !== -1) return;
-			let e = _d(t[1]).replace(this.rules.other.multipleSpaceGlobal, " "), n = t[2] ? t[2].replace(this.rules.other.hrefBrackets, "$1").replace(this.rules.inline.anyPunctuation, "$1") : "", r = t[3] ? t[3].substring(1, t[3].length - 1).replace(this.rules.inline.anyPunctuation, "$1") : t[3];
+			if (!this.rules.other.startAngleBracket.test(t[2]) && yd(t[2], "()") !== -1) return;
+			let e = vd(t[1]).replace(this.rules.other.multipleSpaceGlobal, " "), n = t[2] ? t[2].replace(this.rules.other.hrefBrackets, "$1").replace(this.rules.inline.anyPunctuation, "$1") : "", r = t[3] ? t[3].substring(1, t[3].length - 1).replace(this.rules.inline.anyPunctuation, "$1") : t[3];
 			return {
 				type: "def",
 				tag: e,
-				raw: hd(t[0], "\n"),
+				raw: gd(t[0], "\n"),
 				href: n,
 				title: r
 			};
@@ -4454,9 +4487,9 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 	table(e) {
 		let t = this.rules.block.table.exec(e);
 		if (!t || !this.rules.other.tableDelimiter.test(t[2])) return;
-		let n = md(t[1]), r = t[2].replace(this.rules.other.tableAlignChars, "").split("|"), i = t[3]?.trim() ? t[3].replace(this.rules.other.tableRowBlankLine, "").split("\n") : [], a = {
+		let n = hd(t[1]), r = t[2].replace(this.rules.other.tableAlignChars, "").split("|"), i = t[3]?.trim() ? t[3].replace(this.rules.other.tableRowBlankLine, "").split("\n") : [], a = {
 			type: "table",
-			raw: hd(t[0], "\n"),
+			raw: gd(t[0], "\n"),
 			header: [],
 			align: [],
 			rows: []
@@ -4469,7 +4502,7 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 				header: !0,
 				align: a.align[e]
 			});
-			for (let e of i) a.rows.push(md(e, a.header.length).map((e, t) => ({
+			for (let e of i) a.rows.push(hd(e, a.header.length).map((e, t) => ({
 				text: e,
 				tokens: this.lexer.inline(e),
 				header: !1,
@@ -4484,7 +4517,7 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 			let e = t[1].trim();
 			return {
 				type: "heading",
-				raw: hd(t[0], "\n"),
+				raw: gd(t[0], "\n"),
 				depth: t[2].charAt(0) === "=" ? 1 : 2,
 				text: e,
 				tokens: this.lexer.inline(e)
@@ -4536,14 +4569,14 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 		let t = this.rules.inline.link.exec(e);
 		if (t) {
 			let n = t[0].charAt(0) === "!" ? 2 : 1;
-			if (!this.options.pedantic && Sd(e, t[1], n, this.rules)) return;
+			if (!this.options.pedantic && Cd(e, t[1], n, this.rules)) return;
 			let r = t[2].trim();
 			if (!this.options.pedantic && this.rules.other.startAngleBracket.test(r)) {
 				if (!this.rules.other.endAngleBracket.test(r)) return;
-				let e = hd(r.slice(0, -1), "\\");
+				let e = gd(r.slice(0, -1), "\\");
 				if ((r.length - e.length) % 2 == 0) return;
 			} else {
-				let e = vd(t[2], "()");
+				let e = yd(t[2], "()");
 				if (e === -2) return;
 				if (e > -1) {
 					let n = (t[0].indexOf("!") === 0 ? 5 : 4) + t[1].length + e;
@@ -4555,7 +4588,7 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 				let e = this.rules.other.pedanticHrefTitle.exec(i);
 				e && (i = e[1], a = e[3]);
 			} else a = t[3] ? t[3].slice(1, -1) : "";
-			return i = i.trim(), this.rules.other.startAngleBracket.test(i) && (i = this.options.pedantic && !this.rules.other.endAngleBracket.test(r) ? i.slice(1) : i.slice(1, -1)), bd(t, {
+			return i = i.trim(), this.rules.other.startAngleBracket.test(i) && (i = this.options.pedantic && !this.rules.other.endAngleBracket.test(r) ? i.slice(1) : i.slice(1, -1)), xd(t, {
 				href: i && i.replace(this.rules.inline.anyPunctuation, "$1"),
 				title: a && a.replace(this.rules.inline.anyPunctuation, "$1")
 			}, t[0], this.lexer, this.rules);
@@ -4565,8 +4598,8 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 		let n;
 		if ((n = this.rules.inline.reflink.exec(e)) || (n = this.rules.inline.nolink.exec(e))) {
 			let r = n[0].charAt(0) === "!" ? 2 : 1;
-			if (!this.options.pedantic && Sd(e, n[1], r, this.rules)) return;
-			let i = t[_d((n[2] || n[1]).replace(this.rules.other.multipleSpaceGlobal, " "))];
+			if (!this.options.pedantic && Cd(e, n[1], r, this.rules)) return;
+			let i = t[vd((n[2] || n[1]).replace(this.rules.other.multipleSpaceGlobal, " "))];
 			if (!i) {
 				let e = n[0].charAt(0);
 				return {
@@ -4575,7 +4608,7 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 					text: e
 				};
 			}
-			return bd(n, i, n[0], this.lexer, this.rules);
+			return xd(n, i, n[0], this.lexer, this.rules);
 		}
 	}
 	emStrong(e, t, n = "") {
@@ -4716,19 +4749,19 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 			return {
 				type: "text",
 				raw: t[0],
-				text: e ? t[0] : fd(t[0]),
+				text: e ? t[0] : pd(t[0]),
 				escaped: e
 			};
 		}
 	}
-}, wd = class e {
+}, Td = class e {
 	tokens;
 	options;
 	state;
 	inlineQueue;
 	tokenizer;
 	constructor(e) {
-		this.tokens = [], this.tokens.links = Object.create(null), this.options = e || Hl, this.options.tokenizer = this.options.tokenizer || new Cd(), this.tokenizer = this.options.tokenizer, this.tokenizer.options = this.options, this.tokenizer.lexer = this, this.inlineQueue = [], this.state = {
+		this.tokens = [], this.tokens.links = Object.create(null), this.options = e || Ul, this.options.tokenizer = this.options.tokenizer || new wd(), this.tokenizer = this.options.tokenizer, this.tokenizer.options = this.options, this.tokenizer.lexer = this, this.inlineQueue = [], this.state = {
 			inLink: !1,
 			inRawBlock: !1,
 			linkEmitted: !1,
@@ -4737,15 +4770,15 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 		};
 		let t = {
 			other: Q,
-			block: sd.normal,
-			inline: cd.normal
+			block: cd.normal,
+			inline: ld.normal
 		};
-		this.options.pedantic ? (t.block = sd.pedantic, t.inline = cd.pedantic) : this.options.gfm && (t.block = sd.gfm, t.inline = this.options.breaks ? cd.breaks : cd.gfm), this.tokenizer.rules = t;
+		this.options.pedantic ? (t.block = cd.pedantic, t.inline = ld.pedantic) : this.options.gfm && (t.block = cd.gfm, t.inline = this.options.breaks ? ld.breaks : ld.gfm), this.tokenizer.rules = t;
 	}
 	static get rules() {
 		return {
-			block: sd,
-			inline: cd
+			block: cd,
+			inline: ld
 		};
 	}
 	static lex(t, n) {
@@ -4835,7 +4868,7 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 		for (let n of e.matchAll(this.tokenizer.rules.inline.blockSkip)) if (t.test(n[0]) && e.charAt(n.index - 1) !== "!") return !0;
 		for (let t of e.matchAll(this.tokenizer.rules.inline.reflinkSearch)) {
 			let e = t[0], n = e.lastIndexOf("[");
-			if (e.charAt(0) !== "!" && Object.hasOwn(this.tokens.links, _d(e.slice(n + 1, -1))) && !(n > 1 && this.linkInText(e.slice(1, n - 1)))) return !0;
+			if (e.charAt(0) !== "!" && Object.hasOwn(this.tokens.links, vd(e.slice(n + 1, -1))) && !(n > 1 && this.linkInText(e.slice(1, n - 1)))) return !0;
 		}
 		return !1;
 	}
@@ -4850,7 +4883,7 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 		}
 	}
 	#e(e, t) {
-		let n = e.includes("*") || e.includes("_") || e.includes("~") || this.options.hooks?.emStrongMask || this.tokenizer.emStrong !== Cd.prototype.emStrong || this.tokenizer.del !== Cd.prototype.del ? this.#t(e) : e, r = !1, i = "", a = 1 / 0;
+		let n = e.includes("*") || e.includes("_") || e.includes("~") || this.options.hooks?.emStrongMask || this.tokenizer.emStrong !== wd.prototype.emStrong || this.tokenizer.del !== wd.prototype.del ? this.#t(e) : e, r = !1, i = "", a = 1 / 0;
 		for (; e;) {
 			if (e.length < a) a = e.length;
 			else {
@@ -4897,7 +4930,7 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 		if (this.tokens.links && e.includes("[")) {
 			let e = this.tokenizer.rules.inline.reflinkSearch, n = (t) => {
 				let r = t.lastIndexOf("[");
-				if (!Object.hasOwn(this.tokens.links, _d(t.slice(r + 1, -1)))) return t;
+				if (!Object.hasOwn(this.tokens.links, vd(t.slice(r + 1, -1)))) return t;
 				if (r > 1 && t.charAt(0) !== "!") {
 					let i = t.slice(1, r - 1);
 					if (this.linkInText(i)) return "[" + i.replace(e, n) + "][" + "a".repeat(t.length - r - 2) + "]";
@@ -4916,18 +4949,18 @@ ${p}`) ? `    ${l.replace(/^ {0,3}/, "")}` : p;
 		if (this.options.silent) console.error(t);
 		else throw Error(t);
 	}
-}, Td = class {
+}, Ed = class {
 	options;
 	parser;
 	constructor(e) {
-		this.options = e || Hl;
+		this.options = e || Ul;
 	}
 	space(e) {
 		return "";
 	}
 	code({ text: e, lang: t, escaped: n }) {
 		let r = (t || "").match(Q.notSpaceStart)?.[0], i = e ? e.replace(Q.endingNewline, "") + "\n" : "";
-		return r ? "<pre><code class=\"language-" + dd(r) + "\">" + (n ? i : dd(i, !0)) + "</code></pre>\n" : "<pre><code>" + (n ? i : dd(i, !0)) + "</code></pre>\n";
+		return r ? "<pre><code class=\"language-" + fd(r) + "\">" + (n ? i : fd(i, !0)) + "</code></pre>\n" : "<pre><code>" + (n ? i : fd(i, !0)) + "</code></pre>\n";
 	}
 	blockquote({ tokens: e }) {
 		return `<blockquote>
@@ -4997,7 +5030,7 @@ ${e}</tr>
 		return `<em>${this.parser.parseInline(e)}</em>`;
 	}
 	codespan({ text: e }) {
-		return `<code>${dd(e, !0)}</code>`;
+		return `<code>${fd(e, !0)}</code>`;
 	}
 	br(e) {
 		return "<br>";
@@ -5006,24 +5039,24 @@ ${e}</tr>
 		return `<del>${this.parser.parseInline(e)}</del>`;
 	}
 	link({ href: e, title: t, text: n, tokens: r, autolink: i }) {
-		let a = i ? dd(n, !0) : this.parser.parseInline(r), o = pd(e);
+		let a = i ? fd(n, !0) : this.parser.parseInline(r), o = md(e);
 		if (o === null) return a;
-		e = dd(o, i);
+		e = fd(o, i);
 		let s = "<a href=\"" + e + "\"";
-		return t && (s += " title=\"" + dd(t) + "\""), s += ">" + a + "</a>", s;
+		return t && (s += " title=\"" + fd(t) + "\""), s += ">" + a + "</a>", s;
 	}
 	image({ href: e, title: t, text: n, tokens: r }) {
 		r && (n = this.parser.parseInline(r, this.parser.textRenderer));
-		let i = pd(e);
-		if (i === null) return dd(n);
+		let i = md(e);
+		if (i === null) return fd(n);
 		e = i;
-		let a = `<img src="${dd(e)}" alt="${dd(n)}"`;
-		return t && (a += ` title="${dd(t)}"`), a += ">", a;
+		let a = `<img src="${fd(e)}" alt="${fd(n)}"`;
+		return t && (a += ` title="${fd(t)}"`), a += ">", a;
 	}
 	text(e) {
-		return "tokens" in e && e.tokens ? this.parser.parseInline(e.tokens) : "escaped" in e && e.escaped ? e.text : dd(e.text);
+		return "tokens" in e && e.tokens ? this.parser.parseInline(e.tokens) : "escaped" in e && e.escaped ? e.text : fd(e.text);
 	}
-}, Ed = class {
+}, Dd = class {
 	parser;
 	strong({ text: e, tokens: t }) {
 		return t ? this.parser.parseInline(t, this) : e;
@@ -5055,12 +5088,12 @@ ${e}</tr>
 	checkbox({ raw: e }) {
 		return e;
 	}
-}, Dd = class e {
+}, Od = class e {
 	options;
 	renderer;
 	textRenderer;
 	constructor(e) {
-		this.options = e || Hl, this.options.renderer = this.options.renderer || new Td(), this.renderer = this.options.renderer, this.renderer.options = this.options, this.renderer.parser = this, this.textRenderer = new Ed(), this.textRenderer.parser = this;
+		this.options = e || Ul, this.options.renderer = this.options.renderer || new Ed(), this.renderer = this.options.renderer, this.renderer.options = this.options, this.renderer.parser = this, this.textRenderer = new Dd(), this.textRenderer.parser = this;
 	}
 	static parse(t, n) {
 		return new e(n).parse(t);
@@ -5208,11 +5241,11 @@ ${e}</tr>
 		}
 		return n;
 	}
-}, Od = class {
+}, kd = class {
 	options;
 	block;
 	constructor(e) {
-		this.options = e || Hl;
+		this.options = e || Ul;
 	}
 	static passThroughHooks = /* @__PURE__ */ new Set([
 		"preprocess",
@@ -5238,50 +5271,50 @@ ${e}</tr>
 		return e;
 	}
 	provideLexer(e = this.block) {
-		return e ? wd.lex : wd.lexInline;
+		return e ? Td.lex : Td.lexInline;
 	}
 	provideParser(e = this.block) {
-		return e ? Dd.parse : Dd.parseInline;
+		return e ? Od.parse : Od.parseInline;
 	}
 };
-function kd(e, t) {
+function Ad(e, t) {
 	if (Array.isArray(t)) for (let n = 0; n < t.length; n++) e.push(t[n]);
 	else e.push(t);
 }
-var Ad = class {
-	defaults = Vl();
+var jd = new class {
+	defaults = Hl();
 	options = this.setOptions;
 	parse = this.parseMarkdown(!0);
 	parseInline = this.parseMarkdown(!1);
-	Parser = Dd;
-	Renderer = Td;
-	TextRenderer = Ed;
-	Lexer = wd;
-	Tokenizer = Cd;
-	Hooks = Od;
+	Parser = Od;
+	Renderer = Ed;
+	TextRenderer = Dd;
+	Lexer = Td;
+	Tokenizer = wd;
+	Hooks = kd;
 	constructor(...e) {
 		this.use(...e);
 	}
 	walkTokens(e, t) {
 		let n = [];
-		for (let r of e) switch (kd(n, t.call(this, r)), r.type) {
+		for (let r of e) switch (Ad(n, t.call(this, r)), r.type) {
 			case "table": {
 				let e = r;
-				for (let r of e.header) kd(n, this.walkTokens(r.tokens, t));
-				for (let r of e.rows) for (let e of r) kd(n, this.walkTokens(e.tokens, t));
+				for (let r of e.header) Ad(n, this.walkTokens(r.tokens, t));
+				for (let r of e.rows) for (let e of r) Ad(n, this.walkTokens(e.tokens, t));
 				break;
 			}
 			case "list": {
 				let e = r;
-				kd(n, this.walkTokens(e.items, t));
+				Ad(n, this.walkTokens(e.items, t));
 				break;
 			}
 			default: {
 				let e = r;
 				this.defaults.extensions?.childTokens?.[e.type] ? this.defaults.extensions.childTokens[e.type].forEach((r) => {
 					let i = e[r].flat(1 / 0);
-					kd(n, this.walkTokens(i, t));
-				}) : e.tokens && kd(n, this.walkTokens(e.tokens, t));
+					Ad(n, this.walkTokens(i, t));
+				}) : e.tokens && Ad(n, this.walkTokens(e.tokens, t));
 			}
 		}
 		return n;
@@ -5309,7 +5342,7 @@ var Ad = class {
 				}
 				"childTokens" in e && e.childTokens && (t.childTokens[e.name] = e.childTokens);
 			}), n.extensions = t), e.renderer) {
-				let t = this.defaults.renderer || new Td(this.defaults);
+				let t = this.defaults.renderer || new Ed(this.defaults);
 				for (let n in e.renderer) {
 					if (!(n in t)) throw Error(`renderer '${n}' does not exist`);
 					if (["options", "parser"].includes(n)) continue;
@@ -5322,7 +5355,7 @@ var Ad = class {
 				n.renderer = t;
 			}
 			if (e.tokenizer) {
-				let t = this.defaults.tokenizer || new Cd(this.defaults);
+				let t = this.defaults.tokenizer || new wd(this.defaults);
 				for (let n in e.tokenizer) {
 					if (!(n in t)) throw Error(`tokenizer '${n}' does not exist`);
 					if ([
@@ -5339,13 +5372,13 @@ var Ad = class {
 				n.tokenizer = t;
 			}
 			if (e.hooks) {
-				let t = this.defaults.hooks || new Od();
+				let t = this.defaults.hooks || new kd();
 				for (let n in e.hooks) {
 					if (!(n in t)) throw Error(`hook '${n}' does not exist`);
 					if (["options", "block"].includes(n)) continue;
 					let r = n, i = e.hooks[r], a = t[r];
-					t[r] = Od.passThroughHooks.has(n) ? (e) => {
-						if (t.options.async && Od.passThroughHooksRespectAsync.has(n)) return (async () => {
+					t[r] = kd.passThroughHooks.has(n) ? (e) => {
+						if (t.options.async && kd.passThroughHooksRespectAsync.has(n)) return (async () => {
 							let n = await i.call(t, e);
 							return a.call(t, n);
 						})();
@@ -5366,7 +5399,7 @@ var Ad = class {
 				let t = this.defaults.walkTokens, r = e.walkTokens;
 				n.walkTokens = function(e) {
 					let n = [];
-					return n.push(r.call(this, e)), t && kd(n, t.call(this, e)), n;
+					return n.push(r.call(this, e)), t && Ad(n, t.call(this, e)), n;
 				};
 			}
 			this.defaults = {
@@ -5382,10 +5415,10 @@ var Ad = class {
 		}, this;
 	}
 	lexer(e, t) {
-		return wd.lex(e, t ?? this.defaults);
+		return Td.lex(e, t ?? this.defaults);
 	}
 	parser(e, t) {
-		return Dd.parse(e, t ?? this.defaults);
+		return Od.parse(e, t ?? this.defaults);
 	}
 	parseMarkdown(e) {
 		return (t, n) => {
@@ -5397,16 +5430,16 @@ var Ad = class {
 			if (typeof t > "u" || t === null) return a(/* @__PURE__ */ Error("marked(): input parameter is undefined or null"));
 			if (typeof t != "string") return a(/* @__PURE__ */ Error("marked(): input parameter is of type " + Object.prototype.toString.call(t) + ", string expected"));
 			if (i.hooks && (i.hooks.options = i, i.hooks.block = e), i.async) return (async () => {
-				let n = i.hooks ? await i.hooks.preprocess(t) : t, r = await (i.hooks ? await i.hooks.provideLexer(e) : e ? wd.lex : wd.lexInline)(n, i), a = i.hooks ? await i.hooks.processAllTokens(r) : r;
+				let n = i.hooks ? await i.hooks.preprocess(t) : t, r = await (i.hooks ? await i.hooks.provideLexer(e) : e ? Td.lex : Td.lexInline)(n, i), a = i.hooks ? await i.hooks.processAllTokens(r) : r;
 				i.walkTokens && await Promise.all(this.walkTokens(a, i.walkTokens));
-				let o = await (i.hooks ? await i.hooks.provideParser(e) : e ? Dd.parse : Dd.parseInline)(a, i);
+				let o = await (i.hooks ? await i.hooks.provideParser(e) : e ? Od.parse : Od.parseInline)(a, i);
 				return i.hooks ? await i.hooks.postprocess(o) : o;
 			})().catch(a);
 			try {
 				i.hooks && (t = i.hooks.preprocess(t));
-				let n = (i.hooks ? i.hooks.provideLexer(e) : e ? wd.lex : wd.lexInline)(t, i);
+				let n = (i.hooks ? i.hooks.provideLexer(e) : e ? Td.lex : Td.lexInline)(t, i);
 				i.hooks && (n = i.hooks.processAllTokens(n)), i.walkTokens && this.walkTokens(n, i.walkTokens);
-				let r = (i.hooks ? i.hooks.provideParser(e) : e ? Dd.parse : Dd.parseInline)(n, i);
+				let r = (i.hooks ? i.hooks.provideParser(e) : e ? Od.parse : Od.parseInline)(n, i);
 				return i.hooks && (r = i.hooks.postprocess(r)), r;
 			} catch (e) {
 				return a(e);
@@ -5416,111 +5449,35 @@ var Ad = class {
 	onError(e, t) {
 		return (n) => {
 			if (n.message += "\nPlease report this to https://github.com/markedjs/marked.", e) {
-				let e = "<p>An error occurred:</p><pre>" + dd(n.message + "", !0) + "</pre>";
+				let e = "<p>An error occurred:</p><pre>" + fd(n.message + "", !0) + "</pre>";
 				return t ? Promise.resolve(e) : e;
 			}
 			if (t) return Promise.reject(n);
 			throw n;
 		};
 	}
-}, jd = new Ad();
+}();
 function $(e, t) {
 	return jd.parse(e, t);
 }
 $.options = $.setOptions = function(e) {
-	return jd.setOptions(e), $.defaults = jd.defaults, Ul($.defaults), $;
-}, $.getDefaults = Vl, $.defaults = Hl;
+	return jd.setOptions(e), $.defaults = jd.defaults, Wl($.defaults), $;
+}, $.getDefaults = Hl, $.defaults = Ul;
 function Md(...e) {
-	return jd.use(...e), $.defaults = jd.defaults, Ul($.defaults), $;
+	return jd.use(...e), $.defaults = jd.defaults, Wl($.defaults), $;
 }
 $.use = Md, $.walkTokens = function(e, t) {
 	return jd.walkTokens(e, t);
-}, $.parseInline = jd.parseInline, $.Parser = Dd, $.parser = Dd.parse, $.Renderer = Td, $.TextRenderer = Ed, $.Lexer = wd, $.lexer = wd.lex, $.Tokenizer = Cd, $.Hooks = Od, $.parse = $, $.options, $.setOptions, $.walkTokens, $.parseInline, Dd.parse, wd.lex;
-// node_modules/.pnpm/marked-highlight@2.2.4_marked@18.1.2/node_modules/marked-highlight/src/index.js
-function Nd(e) {
-	if (typeof e == "function" && (e = { highlight: e }), !e || typeof e.highlight != "function") throw Error("Must provide highlight function");
-	return typeof e.langPrefix != "string" && (e.langPrefix = "language-"), typeof e.emptyLangClass != "string" && (e.emptyLangClass = ""), {
-		async: !!e.async,
-		walkTokens(t) {
-			if (t.type !== "code") return;
-			let n = Pd(t.lang);
-			if (e.async) return Promise.resolve(e.highlight(t.text, n, t.lang || "")).then(Fd(t));
-			let r = e.highlight(t.text, n, t.lang || "");
-			if (r instanceof Promise) throw Error("markedHighlight is not set to async but the highlight function is async. Set the async option to true on markedHighlight to await the async highlight function.");
-			Fd(t)(r);
-		},
-		useNewRenderer: !0,
-		renderer: { code(t, n, r) {
-			// istanbul ignore next
-			typeof t == "object" && (r = t.escaped, n = t.lang, t = t.text);
-			let i = Pd(n), a = i ? e.langPrefix + Hd(i) : e.emptyLangClass, o = a ? ` class="${a}"` : "";
-			return t = t.replace(/\n$/, ""), `<pre><code${o}>${r ? t : Hd(t, !0)}\n</code></pre>`;
-		} }
-	};
-}
-function Pd(e) {
-	return (e || "").match(/\S*/)[0];
-}
-function Fd(e) {
-	return (t) => {
-		typeof t == "string" && t !== e.text && (e.escaped = !0, e.text = t);
-	};
-}
-var Id = /[&<>"']/, Ld = new RegExp(Id.source, "g"), Rd = /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/, zd = new RegExp(Rd.source, "g"), Bd = {
-	"&": "&amp;",
-	"<": "&lt;",
-	">": "&gt;",
-	"\"": "&quot;",
-	"'": "&#39;"
-}, Vd = (e) => Bd[e];
-function Hd(e, t) {
-	if (t) {
-		if (Id.test(e)) return e.replace(Ld, Vd);
-	} else if (Rd.test(e)) return e.replace(zd, Vd);
-	return e;
-}
-// src/utils/markedMathExtension.ts
-var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n])+?)\n{0,1}\$\$/u, Kd = (e) => [{
-	name: "blockMath",
-	level: "block",
-	tokenizer(t) {
-		let n = Gd.exec(t);
-		if (n != null) return {
-			type: "html",
-			raw: n[0],
-			text: e(!0, n[1])
-		};
-	}
-}, {
-	name: "inlineMath",
-	level: "inline",
-	start(e) {
-		let t = e.search(Ud);
-		return t === -1 ? e.length : t;
-	},
-	tokenizer(t) {
-		let n = Wd.exec(t);
-		if (n != null) return {
-			type: "html",
-			raw: n[0],
-			text: e(!1, n[1])
-		};
-	}
-}], qd = (e = "", t = {}) => e.replaceAll(/:(.+?):/gu, (e, n) => t[n] ? `<img class="wl-emoji" src="${t[n]}" alt="${n}">` : e), Jd = (e, { emojiMap: t, highlighter: n, texRenderer: r }) => {
-	let i = new Ad();
-	if (i.setOptions({ breaks: !0 }), n && i.use(Nd({ highlight: n })), r) {
-		let e = Kd(r);
-		i.use({ extensions: e });
-	}
-	return i.parse(qd(e, t));
-}, Yd = (e) => {
+}, $.parseInline = jd.parseInline, $.Parser = Od, $.parser = Od.parse, $.Renderer = Ed, $.TextRenderer = Dd, $.Lexer = Td, $.lexer = Td.lex, $.Tokenizer = wd, $.Hooks = kd, $.parse = $, $.options, $.setOptions, $.walkTokens, $.parseInline, Od.parse, Td.lex;
+// src/utils/query.ts
+var Nd = (e) => {
 	let { path: t } = e.dataset;
 	return t?.length ? t : null;
-}, Xd = (e) => e.match(/[\w\d\s,.\u00C0-\u024F\u0400-\u04FF]+/giu), Zd = (e) => e.match(/[\u4E00-\u9FD5]/gu), Qd = (e) => (Xd(e)?.reduce((e, t) => e + ([
+}, Pd = (e) => e.match(/[\w\d\s,.\u00C0-\u024F\u0400-\u04FF]+/giu), Fd = (e) => e.match(/[\u4E00-\u9FD5]/gu), Id = (e) => (Pd(e)?.reduce((e, t) => e + ([
 	"",
 	",",
 	"."
-].includes(t.trim()) ? 0 : t.trim().split(/\s+/u).length), 0) ?? 0) + (Zd(e)?.length ?? 0), $d = async () => {
+].includes(t.trim()) ? 0 : t.trim().split(/\s+/u).length), 0) ?? 0) + (Fd(e)?.length ?? 0), Ld = async () => {
 	let { userAgentData: e } = navigator, t = navigator.userAgent;
 	if (!e) return t;
 	let { platformVersion: n } = await e.getHighEntropyValues(["platformVersion"]);
@@ -5530,23 +5487,23 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 		(r > 10 || r === 10 && i >= 15) && (t = t.replace("Mac OS X 10_15_7", `Mac OS X ${n.replaceAll(".", "_")}`));
 	}
 	return t;
-}, ef = ({ serverURL: e, path: t = window.location.pathname, selector: n = ".waline-comment-count", lang: r = navigator.language }) => {
+}, Rd = ({ serverURL: e, path: t = window.location.pathname, selector: n = ".waline-comment-count", lang: r = navigator.language }) => {
 	let i = new AbortController(), a = document.querySelectorAll(n);
 	return a.length > 0 && Po({
-		serverURL: Rc(e),
-		paths: Array.from(a, (e) => Fc(Yd(e) ?? t)),
+		serverURL: zc(e),
+		paths: Array.from(a, (e) => Ic(Nd(e) ?? t)),
 		lang: r,
 		signal: i.signal
 	}).then((e) => {
 		a.forEach((t, n) => {
 			t.textContent = e[n].toString();
 		});
-	}).catch(Rl), i.abort.bind(i);
-}, tf = () => Dl("WALINE_USER_META", {
+	}).catch(zl), i.abort.bind(i);
+}, zd = () => Ol("WALINE_USER_META", {
 	nick: "",
 	mail: "",
 	link: ""
-}), nf = () => Dl("WALINE_COMMENT_BOX_EDITOR", ""), rf = Dl("WALINE_LIKE", []), af = () => rf, of = Dl("WALINE_REACTION", {}), sf = () => of, cf = /* @__PURE__ */ e(((e, t, n) => {
+}), Bd = () => Ol("WALINE_COMMENT_BOX_EDITOR", ""), Vd = Ol("WALINE_LIKE", []), Hd = () => Vd, Ud = Ol("WALINE_REACTION", {}), Wd = () => Ud, Gd = /* @__PURE__ */ e(((e, t, n) => {
 	var r = n && n.__awaiter || function(e, t, n, r) {
 		function i(e) {
 			return e instanceof n ? e : new n(function(t) {
@@ -5672,7 +5629,7 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 			this.styleContainer !== null && (document.head.removeChild(this.styleContainer), this.styleContainer = null);
 		}, e;
 	}();
-})), lf = /* @__PURE__ */ e(((e, t, n) => {
+})), Kd = /* @__PURE__ */ e(((e, t, n) => {
 	var r = n && n.__assign || function() {
 		return r = Object.assign || function(e) {
 			for (var t, n = 1, r = arguments.length; n < r; n++) for (var i in t = arguments[n], t) Object.prototype.hasOwnProperty.call(t, i) && (e[i] = t[i]);
@@ -5680,7 +5637,7 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 		}, r.apply(this, arguments);
 	};
 	Object.defineProperty(e, "__esModule", { value: !0 }), e.getInstance = e.load = void 0;
-	var i = cf(), a;
+	var i = Gd(), a;
 	(function(e) {
 		e[e.NOT_LOADED = 0] = "NOT_LOADED", e[e.LOADING = 1] = "LOADING", e[e.LOADED = 2] = "LOADED";
 	})(a ||= {});
@@ -5755,9 +5712,9 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 		}, e.loadingState = null, e.instance = null, e.instanceSiteKey = null, e.successfulLoadingConsumers = [], e.errorLoadingRunnable = [], e.SCRIPT_LOAD_DELAY = 25, e;
 	}();
 	e.load = o.load, e.getInstance = o.getInstance;
-})), uf = (/* @__PURE__ */ e(((e) => {
+})), qd = (/* @__PURE__ */ e(((e) => {
 	Object.defineProperty(e, "__esModule", { value: !0 }), e.ReCaptchaInstance = e.getInstance = e.load = void 0;
-	var t = lf();
+	var t = Kd();
 	Object.defineProperty(e, "load", {
 		enumerable: !0,
 		get: function() {
@@ -5769,39 +5726,39 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 			return t.getInstance;
 		}
 	});
-	var n = cf();
+	var n = Gd();
 	Object.defineProperty(e, "ReCaptchaInstance", {
 		enumerable: !0,
 		get: function() {
 			return n.ReCaptchaInstance;
 		}
 	});
-})))(), df = {}, ff = (e) => {
-	let t = df[e] ??= (0, uf.load)(e, {
+})))(), Jd = {}, Yd = (e) => {
+	let t = Jd[e] ??= (0, qd.load)(e, {
 		useRecaptchaNet: !0,
 		autoHideBadge: !0
 	});
 	return { execute: (e) => t.then((t) => t.execute(e)) };
-}, pf = "https://challenges.cloudflare.com/turnstile/v0/api.js", mf = 1e4, hf = null, gf = async () => {
+}, Xd = "https://challenges.cloudflare.com/turnstile/v0/api.js", Zd = 1e4, Qd = null, $d = async () => {
 	if (typeof window > "u") throw TypeError("Turnstile requires a browser environment");
 	if (!window.turnstile) {
-		if (!hf) {
-			let { load: e } = kl(pf, void 0, {
+		if (!Qd) {
+			let { load: e } = Al(Xd, void 0, {
 				async: !1,
 				immediate: !1
 			});
-			hf = (async () => {
+			Qd = (async () => {
 				try {
 					return await e();
 				} catch (e) {
-					throw hf = null, e;
+					throw Qd = null, e;
 				}
 			})();
 		}
-		await hf;
+		await Qd;
 	}
-}, _f = (e) => ({ execute: async (t) => {
-	await gf();
+}, ef = (e) => ({ execute: async (t) => {
+	await $d();
 	let { turnstile: n } = window;
 	if (!n) throw Error("Turnstile failed to load");
 	let r = document.querySelector(".wl-captcha-container");
@@ -5812,7 +5769,7 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 		};
 		o.timer = setTimeout(() => {
 			s(void 0, /* @__PURE__ */ Error("Turnstile render timed out"));
-		}, mf);
+		}, Zd);
 		try {
 			n.ready(() => {
 				if (!o.settled) try {
@@ -5835,7 +5792,7 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 			s(void 0, e instanceof Error ? e : /* @__PURE__ */ Error("Turnstile render failed"));
 		}
 	});
-} }), vf = Dl("WALINE_USER", {}), yf = () => vf, bf = "3.16.2", xf = ({ size: e }) => q("svg", {
+} }), tf = Ol("WALINE_USER", {}), nf = () => tf, rf = "3.16.2", af = ({ size: e }) => q("svg", {
 	class: "wl-close-icon",
 	viewBox: "0 0 1024 1024",
 	width: e,
@@ -5846,21 +5803,21 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 }), q("path", {
 	d: "m640.683 587.52-75.947-75.861 75.904-75.862a37.29 37.29 0 0 0 0-52.778 37.205 37.205 0 0 0-52.779 0l-75.946 75.818-75.862-75.946a37.419 37.419 0 0 0-52.821 0 37.419 37.419 0 0 0 0 52.821l75.947 75.947-75.776 75.733a37.29 37.29 0 1 0 52.778 52.821l75.776-75.776 75.947 75.947a37.376 37.376 0 0 0 52.779-52.821z",
 	fill: "#888"
-})]), Sf = () => q("svg", {
+})]), of = () => q("svg", {
 	viewBox: "0 0 1024 1024",
 	width: "24",
 	height: "24"
 }, q("path", {
 	d: "m341.013 394.667 27.755 393.45h271.83l27.733-393.45h64.106l-28.01 397.952a64 64 0 0 1-63.83 59.498H368.768a64 64 0 0 1-63.83-59.52l-28.053-397.93h64.128zm139.307 19.818v298.667h-64V414.485h64zm117.013 0v298.667h-64V414.485h64zM181.333 288h640v64h-640v-64zm453.483-106.667v64h-256v-64h256z",
 	fill: "red"
-})), Cf = () => q("svg", {
+})), sf = () => q("svg", {
 	viewBox: "0 0 1024 1024",
 	width: "24",
 	height: "24"
 }, q("path", {
 	d: "M563.2 463.3 677 540c1.7 1.2 3.7 1.8 5.8 1.8.7 0 1.4-.1 2-.2 2.7-.5 5.1-2.1 6.6-4.4l25.3-37.8c1.5-2.3 2.1-5.1 1.6-7.8s-2.1-5.1-4.4-6.6l-73.6-49.1 73.6-49.1c2.3-1.5 3.9-3.9 4.4-6.6.5-2.7 0-5.5-1.6-7.8l-25.3-37.8a10.1 10.1 0 0 0-6.6-4.4c-.7-.1-1.3-.2-2-.2-2.1 0-4.1.6-5.8 1.8l-113.8 76.6c-9.2 6.2-14.7 16.4-14.7 27.5.1 11 5.5 21.3 14.7 27.4zM387 348.8h-45.5c-5.7 0-10.4 4.7-10.4 10.4v153.3c0 5.7 4.7 10.4 10.4 10.4H387c5.7 0 10.4-4.7 10.4-10.4V359.2c0-5.7-4.7-10.4-10.4-10.4zm333.8 241.3-41-20a10.3 10.3 0 0 0-8.1-.5c-2.6.9-4.8 2.9-5.9 5.4-30.1 64.9-93.1 109.1-164.4 115.2-5.7.5-9.9 5.5-9.5 11.2l3.9 45.5c.5 5.3 5 9.5 10.3 9.5h.9c94.8-8 178.5-66.5 218.6-152.7 2.4-5 .3-11.2-4.8-13.6zm186-186.1c-11.9-42-30.5-81.4-55.2-117.1-24.1-34.9-53.5-65.6-87.5-91.2-33.9-25.6-71.5-45.5-111.6-59.2-41.2-14-84.1-21.1-127.8-21.1h-1.2c-75.4 0-148.8 21.4-212.5 61.7-63.7 40.3-114.3 97.6-146.5 165.8-32.2 68.1-44.3 143.6-35.1 218.4 9.3 74.8 39.4 145 87.3 203.3.1.2.3.3.4.5l36.2 38.4c1.1 1.2 2.5 2.1 3.9 2.6 73.3 66.7 168.2 103.5 267.5 103.5 73.3 0 145.2-20.3 207.7-58.7 37.3-22.9 70.3-51.5 98.1-85 27.1-32.7 48.7-69.5 64.2-109.1 15.5-39.7 24.4-81.3 26.6-123.8 2.4-43.6-2.5-87-14.5-129zm-60.5 181.1c-8.3 37-22.8 72-43 104-19.7 31.1-44.3 58.6-73.1 81.7-28.8 23.1-61 41-95.7 53.4-35.6 12.7-72.9 19.1-110.9 19.1-82.6 0-161.7-30.6-222.8-86.2l-34.1-35.8c-23.9-29.3-42.4-62.2-55.1-97.7-12.4-34.7-18.8-71-19.2-107.9-.4-36.9 5.4-73.3 17.1-108.2 12-35.8 30-69.2 53.4-99.1 31.7-40.4 71.1-72 117.2-94.1 44.5-21.3 94-32.6 143.4-32.6 49.3 0 97 10.8 141.8 32 34.3 16.3 65.3 38.1 92 64.8 26.1 26 47.5 56 63.6 89.2 16.2 33.2 26.6 68.5 31 105.1 4.6 37.5 2.7 75.3-5.6 112.3z",
 	fill: "currentColor"
-})), wf = () => q("svg", {
+})), cf = () => q("svg", {
 	viewBox: "0 0 1024 1024",
 	width: "24",
 	height: "24"
@@ -5870,14 +5827,14 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 }), q("path", {
 	d: "M352 480c52.8 0 96-43.2 96-96s-43.2-96-96-96-96 43.2-96 96 43.2 96 96 96zm0-128c17.6 0 32 14.4 32 32s-14.4 32-32 32-32-14.4-32-32 14.4-32 32-32zm462.4 379.2-3.2-3.2-177.6-177.6c-25.6-25.6-65.6-25.6-91.2 0l-80 80-36.8-36.8c-25.6-25.6-65.6-25.6-91.2 0L200 728c-4.8 6.4-8 14.4-8 24 0 17.6 14.4 32 32 32 9.6 0 16-3.2 22.4-9.6L380.8 640l134.4 134.4c6.4 6.4 14.4 9.6 24 9.6 17.6 0 32-14.4 32-32 0-9.6-4.8-17.6-9.6-24l-52.8-52.8 80-80L769.6 776c6.4 4.8 12.8 8 20.8 8 17.6 0 32-14.4 32-32 0-8-3.2-16-8-20.8z",
 	fill: "currentColor"
-})]), Tf = ({ active: e = !1 }) => q("svg", {
+})]), lf = ({ active: e = !1 }) => q("svg", {
 	viewBox: "0 0 1024 1024",
 	width: "24",
 	height: "24"
 }, [q("path", {
 	d: `M850.654 323.804c-11.042-25.625-26.862-48.532-46.885-68.225-20.022-19.61-43.258-34.936-69.213-45.73-26.78-11.124-55.124-16.727-84.375-16.727-40.622 0-80.256 11.123-114.698 32.135A214.79 214.79 0 0 0 512 241.819a214.79 214.79 0 0 0-23.483-16.562c-34.442-21.012-74.076-32.135-114.698-32.135-29.25 0-57.595 5.603-84.375 16.727-25.872 10.711-49.19 26.12-69.213 45.73-20.105 19.693-35.843 42.6-46.885 68.225-11.453 26.615-17.303 54.877-17.303 83.963 0 27.439 5.603 56.03 16.727 85.117 9.31 24.307 22.659 49.52 39.715 74.981 27.027 40.293 64.188 82.316 110.33 124.915 76.465 70.615 152.189 119.394 155.402 121.371l19.528 12.525c8.652 5.52 19.776 5.52 28.427 0l19.529-12.525c3.213-2.06 78.854-50.756 155.401-121.371 46.143-42.6 83.304-84.622 110.33-124.915 17.057-25.46 30.487-50.674 39.716-74.981 11.124-29.087 16.727-57.678 16.727-85.117.082-29.086-5.768-57.348-17.221-83.963z${e ? "" : "M512 761.5S218.665 573.55 218.665 407.767c0-83.963 69.461-152.023 155.154-152.023 60.233 0 112.473 33.618 138.181 82.727 25.708-49.109 77.948-82.727 138.18-82.727 85.694 0 155.155 68.06 155.155 152.023C805.335 573.551 512 761.5 512 761.5z"}`,
 	fill: e ? "red" : "currentColor"
-})]), Ef = () => q("svg", {
+})]), uf = () => q("svg", {
 	viewBox: "0 0 1024 1024",
 	width: "24",
 	height: "24"
@@ -5887,28 +5844,28 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 }), q("path", {
 	d: "M703.319 121.603H321.03c-109.8 0-199.469 89.146-199.469 199.38v382.034c0 109.796 89.236 199.38 199.469 199.38h207.397c20.653 0 37.384-16.645 37.384-37.299 0-20.649-16.731-37.296-37.384-37.296H321.03c-68.582 0-124.352-55.77-124.352-124.267V321.421c0-68.496 55.77-124.267 124.352-124.267h382.289c68.582 0 124.352 55.771 124.352 124.267V524.72c0 20.654 16.736 37.299 37.385 37.299 20.654 0 37.384-16.645 37.384-37.299V320.549c-.085-109.8-89.321-198.946-199.121-198.946zm0 0",
 	fill: "currentColor"
-})]), Df = () => q("svg", {
+})]), df = () => q("svg", {
 	width: "16",
 	height: "16",
 	ariaHidden: "true"
 }, q("path", {
 	d: "M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z",
 	fill: "currentColor"
-})), Of = () => q("svg", {
+})), ff = () => q("svg", {
 	viewBox: "0 0 1024 1024",
 	width: "24",
 	height: "24"
 }, q("path", {
 	d: "M810.667 213.333a64 64 0 0 1 64 64V704a64 64 0 0 1-64 64H478.336l-146.645 96.107a21.333 21.333 0 0 1-33.024-17.856V768h-85.334a64 64 0 0 1-64-64V277.333a64 64 0 0 1 64-64h597.334zm0 64H213.333V704h149.334v63.296L459.243 704h351.424V277.333zm-271.36 213.334v64h-176.64v-64h176.64zm122.026-128v64H362.667v-64h298.666z",
 	fill: "currentColor"
-})), kf = () => q("svg", {
+})), pf = () => q("svg", {
 	viewBox: "0 0 1024 1024",
 	width: "24",
 	height: "24"
 }, q("path", {
 	d: "M813.039 318.772L480.53 651.278H360.718V531.463L693.227 198.961C697.904 194.284 704.027 192 710.157 192C716.302 192 722.436 194.284 727.114 198.961L813.039 284.88C817.72 289.561 820 295.684 820 301.825C820 307.95 817.72 314.093 813.039 318.772ZM710.172 261.888L420.624 551.431V591.376H460.561L750.109 301.825L710.172 261.888ZM490.517 291.845H240.906V771.09H720.156V521.479C720.156 504.947 733.559 491.529 750.109 491.529C766.653 491.529 780.063 504.947 780.063 521.479V791.059C780.063 813.118 762.18 831 740.125 831H220.937C198.882 831 181 813.118 181 791.059V271.872C181 249.817 198.882 231.935 220.937 231.935H490.517C507.06 231.935 520.47 245.352 520.47 261.888C520.47 278.424 507.06 291.845 490.517 291.845Z",
 	fill: "currentColor"
-})), Af = () => q("svg", {
+})), mf = () => q("svg", {
 	class: "verified-icon",
 	viewBox: "0 0 1024 1024",
 	width: "14",
@@ -5916,7 +5873,7 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 }, q("path", {
 	d: "m894.4 461.56-54.4-63.2c-10.4-12-18.8-34.4-18.8-50.4v-68c0-42.4-34.8-77.2-77.2-77.2h-68c-15.6 0-38.4-8.4-50.4-18.8l-63.2-54.4c-27.6-23.6-72.8-23.6-100.8 0l-62.8 54.8c-12 10-34.8 18.4-50.4 18.4h-69.2c-42.4 0-77.2 34.8-77.2 77.2v68.4c0 15.6-8.4 38-18.4 50l-54 63.6c-23.2 27.6-23.2 72.4 0 100l54 63.6c10 12 18.4 34.4 18.4 50v68.4c0 42.4 34.8 77.2 77.2 77.2h69.2c15.6 0 38.4 8.4 50.4 18.8l63.2 54.4c27.6 23.6 72.8 23.6 100.8 0l63.2-54.4c12-10.4 34.4-18.8 50.4-18.8h68c42.4 0 77.2-34.8 77.2-77.2v-68c0-15.6 8.4-38.4 18.8-50.4l54.4-63.2c23.2-27.6 23.2-73.2-.4-100.8zm-216-25.2-193.2 193.2a30 30 0 0 1-42.4 0l-96.8-96.8a30.16 30.16 0 0 1 0-42.4c11.6-11.6 30.8-11.6 42.4 0l75.6 75.6 172-172c11.6-11.6 30.8-11.6 42.4 0 11.6 11.6 11.6 30.8 0 42.4z",
 	fill: "#27ae60"
-})), jf = () => q("svg", {
+})), hf = () => q("svg", {
 	class: "administrator-icon",
 	viewBox: "0 0 1024 1024",
 	width: "14",
@@ -5924,7 +5881,7 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 }, [q("path", {
 	d: "M461.6 129.56C489.6 105.96 534.8 105.96 562.4 129.56L625.6 183.96C637.6 194.36 660.4 202.76 676 202.76H744C786.4 202.76 821.2 237.56 821.2 279.96V347.96C821.2 363.96 829.6 386.36 840 398.36L894.4 461.56C918 489.16 918 534.76 894.8 562.36L840.4 625.56C830 637.56 821.6 660.36 821.6 675.96V743.96C821.6 786.36 786.8 821.16 744.4 821.16H676.4C660.4 821.16 638 829.56 626 839.96L562.8 894.36C534.8 917.96 489.6 917.96 462 894.36L398.8 839.96C386.8 829.56 364 821.16 348.4 821.16H279.2C236.8 821.16 202 786.36 202 743.96V675.56C201.999 659.96 193.6 637.56 183.6 625.56L129.6 561.96C106.4 534.36 106.4 489.56 129.6 461.96L183.6 398.36C193.6 386.359 202 363.959 202 348.36V279.96C202 237.56 236.8 202.76 279.2 202.76H348.4C364 202.76 386.8 194.36 398.8 184.36L461.6 129.56ZM549.567 331.896C530.047 303.082 486.645 306.12 471.433 337.412L442.175 396.526C435.587 409.848 422.856 419.097 408.146 421.226L342.706 430.726C340.776 431 338.884 431.397 336.993 431.946C303.482 441.361 292.756 483.493 317.671 507.812L364.975 553.96C375.623 564.321 380.507 579.299 377.991 593.954L366.917 659.102C366.595 661.03 366.355 662.967 366.279 664.923C364.906 699.688 401.683 722.937 432.514 706.738L491.05 675.966C504.217 669.068 519.954 669.069 533.121 675.966L591.675 706.738C593.406 707.645 595.174 708.432 597.028 709.104C629.666 721.205 663.139 693.382 657.273 659.102L646.069 593.954C643.42 579.176 648.24 564.083 659.001 553.6L706.315 507.461C707.687 506.118 708.994 504.66 710.215 503.127C731.779 475.809 715.737 435.41 681.281 430.365L615.839 420.874C601.13 418.745 588.4 409.486 581.821 396.174L552.562 337.052C551.644 335.284 550.674 333.551 549.567 331.896Z",
 	fill: "#f59831"
-})]), Mf = ({ size: e = 100 }) => q("svg", {
+})]), gf = ({ size: e = 100 }) => q("svg", {
 	width: e,
 	height: e,
 	viewBox: "0 0 100 100",
@@ -5944,7 +5901,7 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 	dur: "1s",
 	values: "0 50 50;360 50 50",
 	keyTimes: "0;1"
-}))), Nf = () => q("svg", {
+}))), _f = () => q("svg", {
 	width: 24,
 	height: 24,
 	fill: "currentcolor",
@@ -5952,7 +5909,7 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 }, [q("path", {
 	style: "transform: translateY(0.5px)",
 	d: "M18.968 10.5H15.968V11.484H17.984V12.984H15.968V15H14.468V9H18.968V10.5V10.5ZM8.984 9C9.26533 9 9.49967 9.09367 9.687 9.281C9.87433 9.46833 9.968 9.70267 9.968 9.984V10.5H6.499V13.5H8.468V12H9.968V14.016C9.968 14.2973 9.87433 14.5317 9.687 14.719C9.49967 14.9063 9.26533 15 8.984 15H5.984C5.70267 15 5.46833 14.9063 5.281 14.719C5.09367 14.5317 5 14.2973 5 14.016V9.985C5 9.70367 5.09367 9.46933 5.281 9.282C5.46833 9.09467 5.70267 9.001 5.984 9.001H8.984V9ZM11.468 9H12.968V15H11.468V9V9Z"
-}), q("path", { d: "M18.5 3H5.75C3.6875 3 2 4.6875 2 6.75V18C2 20.0625 3.6875 21.75 5.75 21.75H18.5C20.5625 21.75 22.25 20.0625 22.25 18V6.75C22.25 4.6875 20.5625 3 18.5 3ZM20.75 18C20.75 19.2375 19.7375 20.25 18.5 20.25H5.75C4.5125 20.25 3.5 19.2375 3.5 18V6.75C3.5 5.5125 4.5125 4.5 5.75 4.5H18.5C19.7375 4.5 20.75 5.5125 20.75 6.75V18Z" })]), Pf = () => q("svg", {
+}), q("path", { d: "M18.5 3H5.75C3.6875 3 2 4.6875 2 6.75V18C2 20.0625 3.6875 21.75 5.75 21.75H18.5C20.5625 21.75 22.25 20.0625 22.25 18V6.75C22.25 4.6875 20.5625 3 18.5 3ZM20.75 18C20.75 19.2375 19.7375 20.25 18.5 20.25H5.75C4.5125 20.25 3.5 19.2375 3.5 18V6.75C3.5 5.5125 4.5125 4.5 5.75 4.5H18.5C19.7375 4.5 20.75 5.5125 20.75 6.75V18Z" })]), vf = () => q("svg", {
 	width: "16",
 	height: "16",
 	viewBox: "0 0 24 24"
@@ -5974,19 +5931,19 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 		d: "m5 1033.4v2.3c6.443 0 11.667 5.2 11.667 11.7h2.333c0-7.8-6.268-14-14-14zm0 4.6v2.4c3.866 0 7 3.1 7 7h2.333c0-5.2-4.178-9.4-9.333-9.4zm2.0417 5.3c-1.1276 0-2.0417 0.9-2.0417 2s0.9141 2.1 2.0417 2.1c1.1275 0 2.0416-1 2.0416-2.1s-0.9141-2-2.0416-2z",
 		fill: "#ecf0f1"
 	})
-]))), Ff = () => q("svg", {
+]))), yf = () => q("svg", {
 	fill: "currentColor",
 	width: "24",
 	height: "24",
 	viewBox: "-3 0 19 19",
 	class: "cf-icon-svg"
-}, q("path", { d: "M.926 12.818a1.403 1.403 0 1 1 0 1.984 1.402 1.402 0 0 1 0-1.984zm10.531 2.357a1.03 1.03 0 0 1-1.029-1.03 8.775 8.775 0 0 0-.694-3.438A8.826 8.826 0 0 0 1.591 5.31a1.03 1.03 0 1 1 0-2.059 10.817 10.817 0 0 1 4.24.857 10.893 10.893 0 0 1 3.463 2.334 10.867 10.867 0 0 1 3.19 7.703 1.027 1.027 0 0 1-1.027 1.029zm-4.538 0a1.03 1.03 0 0 1-1.029-1.03 4.297 4.297 0 0 0-4.299-4.298 1.03 1.03 0 0 1 0-2.059 6.362 6.362 0 0 1 5.857 3.883 6.298 6.298 0 0 1 .5 2.475 1.03 1.03 0 0 1-1.029 1.029z" })), If = {
+}, q("path", { d: "M.926 12.818a1.403 1.403 0 1 1 0 1.984 1.402 1.402 0 0 1 0-1.984zm10.531 2.357a1.03 1.03 0 0 1-1.029-1.03 8.775 8.775 0 0 0-.694-3.438A8.826 8.826 0 0 0 1.591 5.31a1.03 1.03 0 1 1 0-2.059 10.817 10.817 0 0 1 4.24.857 10.893 10.893 0 0 1 3.463 2.334 10.867 10.867 0 0 1 3.19 7.703 1.027 1.027 0 0 1-1.027 1.029zm-4.538 0a1.03 1.03 0 0 1-1.029-1.03 4.297 4.297 0 0 0-4.299-4.298 1.03 1.03 0 0 1 0-2.059 6.362 6.362 0 0 1 5.857 3.883 6.298 6.298 0 0 1 .5 2.475 1.03 1.03 0 0 1-1.029 1.029z" })), bf = {
 	key: 0,
 	class: "wl-reaction"
-}, Lf = ["textContent"], Rf = { class: "wl-reaction-list" }, zf = ["onClick"], Bf = { class: "wl-reaction-img" }, Vf = ["src", "alt"], Hf = ["textContent"], Uf = ["textContent"], Wf = /* @__PURE__ */ cr({
+}, xf = ["textContent"], Sf = { class: "wl-reaction-list" }, Cf = ["onClick"], wf = { class: "wl-reaction-img" }, Tf = ["src", "alt"], Ef = ["textContent"], Df = ["textContent"], Of = /* @__PURE__ */ cr({
 	__name: "ArticleReaction",
 	setup(e) {
-		let t = sf(), n = Yn(Pc), r = /* @__PURE__ */ F(-1), i = /* @__PURE__ */ F([]), a = K(() => n.value.locale), o = K(() => {
+		let t = Wd(), n = Yn(Fc), r = /* @__PURE__ */ F(-1), i = /* @__PURE__ */ F([]), a = K(() => n.value.locale), o = K(() => {
 			let { reaction: e } = n.value;
 			return e?.length ? e : null;
 		}), s = K(() => {
@@ -6038,51 +5995,51 @@ var Ud = /\$.*?\$/u, Wd = /^\$(.*?)\$/u, Gd = /^(?:\s{0,3})\$\$((?:[^\n]|\n[^\n]
 			}
 		};
 		return yr(() => {
-			pl(() => [n.value.serverURL, n.value.path], () => l());
+			ml(() => [n.value.serverURL, n.value.path], () => l());
 		}), xr(() => {
 			c?.();
-		}), (e, t) => s.value ? (B(), V("div", If, [H("div", {
+		}), (e, t) => s.value ? (B(), V("div", bf, [H("div", {
 			class: "wl-reaction-title",
 			textContent: k(a.value.reactionTitle)
-		}, null, 8, Lf), H("ul", Rf, [(B(!0), V(z, null, Dr(s.value, ({ active: e, icon: t, desc: n }, a) => (B(), V("li", {
+		}, null, 8, xf), H("ul", Sf, [(B(!0), V(z, null, Dr(s.value, ({ active: e, icon: t, desc: n }, a) => (B(), V("li", {
 			key: a,
 			class: O(["wl-reaction-item", { active: e }]),
 			onClick: (e) => u(a)
-		}, [H("div", Bf, [H("img", {
+		}, [H("div", wf, [H("img", {
 			src: t,
 			alt: n
-		}, null, 8, Vf), r.value === a ? (B(), Mi(I(Mf), {
+		}, null, 8, Tf), r.value === a ? (B(), Mi(I(gf), {
 			key: 0,
 			class: "wl-reaction-loading"
 		})) : (B(), V("div", {
 			key: 1,
 			class: "wl-reaction-votes",
 			textContent: k(i.value[a] || 0)
-		}, null, 8, Hf))]), H("div", {
+		}, null, 8, Ef))]), H("div", {
 			class: "wl-reaction-text",
 			textContent: k(n)
-		}, null, 8, Uf)], 10, zf))), 128))])])) : W("v-if", !0);
+		}, null, 8, Df)], 10, Cf))), 128))])])) : W("v-if", !0);
 	}
-}), Gf = /* @__PURE__ */ new Map();
-function Kf(e) {
-	var t = Gf.get(e);
+}), kf = /* @__PURE__ */ new Map();
+function Af(e) {
+	var t = kf.get(e);
 	t && t.destroy();
 }
-function qf(e) {
-	var t = Gf.get(e);
+function jf(e) {
+	var t = kf.get(e);
 	t && t.update();
 }
-var Jf = null;
-typeof window > "u" ? ((Jf = function(e) {
+var Mf = null;
+typeof window > "u" ? ((Mf = function(e) {
 	return e;
 }).destroy = function(e) {
 	return e;
-}, Jf.update = function(e) {
+}, Mf.update = function(e) {
 	return e;
-}) : ((Jf = function(e, t) {
+}) : ((Mf = function(e, t) {
 	return e && Array.prototype.forEach.call(e.length ? e : [e], function(e) {
 		return function(e) {
-			if (e && e.nodeName && e.nodeName === "TEXTAREA" && !Gf.has(e)) {
+			if (e && e.nodeName && e.nodeName === "TEXTAREA" && !kf.has(e)) {
 				var t, n = null, r = window.getComputedStyle(e), i = (t = e.value, function() {
 					o({
 						testForHeightReduction: t === "" || !e.value.startsWith(t),
@@ -6091,7 +6048,7 @@ typeof window > "u" ? ((Jf = function(e) {
 				}), a = function(t) {
 					e.removeEventListener("autosize:destroy", a), e.removeEventListener("autosize:update", s), e.removeEventListener("input", i), window.removeEventListener("resize", s), Object.keys(t).forEach(function(n) {
 						return e.style[n] = t[n];
-					}), Gf.delete(e);
+					}), kf.delete(e);
 				}.bind(e, {
 					height: e.style.height,
 					resize: e.style.resize,
@@ -6100,7 +6057,7 @@ typeof window > "u" ? ((Jf = function(e) {
 					overflowX: e.style.overflowX,
 					wordWrap: e.style.wordWrap
 				});
-				e.addEventListener("autosize:destroy", a), e.addEventListener("autosize:update", s), e.addEventListener("input", i), window.addEventListener("resize", s), e.style.overflowX = "hidden", e.style.wordWrap = "break-word", Gf.set(e, {
+				e.addEventListener("autosize:destroy", a), e.addEventListener("autosize:update", s), e.addEventListener("input", i), window.addEventListener("resize", s), e.style.overflowX = "hidden", e.style.wordWrap = "break-word", kf.set(e, {
 					destroy: a,
 					update: s
 				}), s();
@@ -6132,15 +6089,36 @@ typeof window > "u" ? ((Jf = function(e) {
 		}(e);
 	}), e;
 }).destroy = function(e) {
-	return e && Array.prototype.forEach.call(e.length ? e : [e], Kf), e;
-}, Jf.update = function(e) {
-	return e && Array.prototype.forEach.call(e.length ? e : [e], qf), e;
+	return e && Array.prototype.forEach.call(e.length ? e : [e], Af), e;
+}, Mf.update = function(e) {
+	return e && Array.prototype.forEach.call(e.length ? e : [e], jf), e;
 });
-var Yf = Jf, Xf = ["data-index"], Zf = [
+var Nf = Mf, Pf = /* @__PURE__ */ new Map();
+for (let { folder: e, prefix: t, type: n, items: r } of $s) for (let i of r) {
+	let r = t + i;
+	Pf.set(r, `${e}/${r}.${n}`);
+}
+function Ff(e) {
+	return e.replace(/<code\b[^>]*>[\s\S]*?<\/code>|<a\b[^>]*>[\s\S]*?<\/a>|<[^>]*>|:([a-zA-Z0-9_-]+):/g, (e, t) => {
+		let n = t && Pf.get(t);
+		return n ? `<img class="wl-emoji" src="${n}" alt="${e}" loading="lazy" />` : e;
+	});
+}
+var If = /^(https?:|mailto:|#|\/)/i;
+function Lf(e) {
+	if (!e) return "";
+	let t = e;
+	return t = Rf(t), t = t.replace(/```(\w*)\n([\s\S]*?)```/g, (e, t, n) => `<pre><code class="language-${t || ""}">${n.trim()}</code></pre>`), t = t.replace(/`([^`]+)`/g, "<code>$1</code>"), t = t.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (e, t, n) => If.test(n.trim()) ? `<img src="${n}" alt="${t}" loading="lazy" />` : ""), t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (e, t, n) => If.test(n.trim()) ? `<a href="${n}" target="_blank" rel="ugc nofollow noreferrer noopener">${t}</a>` : t), t = t.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>"), t = t.replace(/__(.+?)__/g, "<strong>$1</strong>"), t = t.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, "<em>$1</em>"), t = t.replace(/(?<![a-zA-Z0-9_])_(?!_)(.+?)(?<!_)_(?![a-zA-Z0-9_])/g, "<em>$1</em>"), t = t.replace(/~~(.+?)~~/g, "<del>$1</del>"), t = t.replace(/^&gt; (.+)$/gm, "<blockquote>$1</blockquote>"), t = t.replace(/<\/blockquote>\n<blockquote>/g, "\n"), t = t.replace(/^######\s+(.+)$/gm, "<h6>$1</h6>"), t = t.replace(/^#####\s+(.+)$/gm, "<h5>$1</h5>"), t = t.replace(/^####\s+(.+)$/gm, "<h4>$1</h4>"), t = t.replace(/^###\s+(.+)$/gm, "<h3>$1</h3>"), t = t.replace(/^##\s+(.+)$/gm, "<h2>$1</h2>"), t = t.replace(/^#\s+(.+)$/gm, "<h1>$1</h1>"), t = t.replace(/^(-{3,}|\*{3,}|_{3,})$/gm, "<hr />"), t = t.replace(/^[*\-+]\s+(.+)$/gm, "<li>$1</li>"), t = t.replace(/((?:<li>.*<\/li>\n?)+)/g, "<ul>$1</ul>"), t = t.replace(/(?<!="|'|>)(https?:\/\/[^\s<)"']+)/g, "<a href=\"$1\" target=\"_blank\" rel=\"ugc nofollow noreferrer noopener\">$1</a>"), t = t.split(/\n{2,}/).map((e) => (e = e.trim(), e ? /^<(h[1-6]|ul|ol|li|blockquote|pre|hr|p|div|table)/.test(e) ? e : `<p>${e}</p>` : "")).join("\n"), t = t.replace(/(?<!\n)\n(?!\n)/g, "<br />\n"), Ff(t.trim());
+}
+function Rf(e) {
+	return e.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+// src/components/ImageWall.vue?vue&type=script&setup=true&lang.ts
+var zf = ["data-index"], Bf = [
 	"src",
 	"title",
 	"onClick"
-], Qf = /* @__PURE__ */ cr({
+], Vf = /* @__PURE__ */ cr({
 	__name: "ImageWall",
 	props: {
 		items: { default: () => [] },
@@ -6187,7 +6165,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			style: fe({ gap: `${e.gap}px` })
 		}, [(B(!0), V(z, null, Dr(n, (n) => (B(), V(z, { key: n }, [
 			W(" eslint-disable vue/no-static-inline-styles "),
-			r.value[e.items[n].src] ? W("v-if", !0) : (B(), Mi(I(Mf), {
+			r.value[e.items[n].src] ? W("v-if", !0) : (B(), Mi(I(gf), {
 				key: 0,
 				size: 36,
 				style: { margin: "20px auto" }
@@ -6200,45 +6178,49 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 				loading: "lazy",
 				onLoad: l,
 				onClick: (r) => t.$emit("insert", `![](${e.items[n].src})`)
-			}, null, 40, Zf)
-		], 64))), 128))], 12, Xf))), 128))], 4));
+			}, null, 40, Bf)
+		], 64))), 128))], 12, zf))), 128))], 4));
 	}
-}), $f = {
+}), Hf = {
 	key: 0,
 	class: "wl-login-info"
-}, ep = { class: "wl-avatar" }, tp = ["title"], np = ["title"], rp = ["src"], ip = ["title", "textContent"], ap = { class: "wl-panel" }, op = ["for", "textContent"], sp = [
+}, Uf = { class: "wl-avatar" }, Wf = ["title"], Gf = ["title"], Kf = ["src"], qf = ["title", "textContent"], Jf = { class: "wl-panel" }, Yf = ["for", "textContent"], Xf = [
 	"id",
 	"onUpdate:modelValue",
 	"name",
 	"type"
-], cp = ["readonly", "placeholder"], lp = {
+], Zf = ["readonly", "placeholder"], Qf = {
 	key: 1,
 	class: "wl-preview"
-}, up = ["innerHTML"], dp = { class: "wl-footer" }, fp = {
+}, $f = ["innerHTML"], ep = { class: "wl-footer" }, tp = {
 	key: 0,
 	class: "wl-actions"
-}, pp = {
+}, np = {
 	href: "https://guides.github.com/features/mastering-markdown/",
 	title: "Markdown Guide",
 	"aria-label": "Markdown is supported",
 	class: "wl-action",
 	target: "_blank",
 	rel: "noopener noreferrer"
-}, mp = ["title"], hp = ["title"], gp = ["title", "aria-label"], _p = ["title"], vp = { class: "wl-info" }, yp = { class: "board-spoiler-option" }, bp = { key: 0 }, xp = { class: "wl-text-number" }, Sp = { key: 0 }, Cp = ["textContent"], wp = ["textContent"], Tp = ["disabled"], Ep = ["placeholder"], Dp = {
+}, rp = ["title"], ip = ["title"], ap = ["title", "aria-label"], op = ["title"], sp = { class: "wl-info" }, cp = { class: "board-spoiler-option" }, lp = { key: 0 }, up = { class: "wl-text-number" }, dp = { key: 0 }, fp = ["textContent"], pp = ["textContent"], mp = ["disabled"], hp = ["placeholder"], gp = {
 	key: 1,
 	class: "wl-loading"
-}, Op = [
+}, _p = [
 	"title",
 	"onClick",
 	"onMouseenter"
-], kp = ["src", "alt"], Ap = ["src"], jp = {
+], vp = ["src", "alt"], yp = ["src"], bp = {
 	key: 0,
 	class: "wl-tabs"
-}, Mp = ["onClick"], Np = [
+}, xp = [
+	"aria-pressed",
+	"aria-label",
+	"onClick"
+], Sp = [
 	"src",
 	"alt",
 	"title"
-], Pp = ["title"], Fp = /* @__PURE__ */ cr({
+], Cp = ["title"], wp = /* @__PURE__ */ cr({
 	__name: "CommentBox",
 	props: {
 		edit: {},
@@ -6253,7 +6235,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 		"submit"
 	],
 	setup(e, { emit: t }) {
-		let n = e, r = t, i = Yn(Pc), a = n.edit ? /* @__PURE__ */ F(n.edit.orig) : nf(), o = tf(), s = yf(), c = n.edit ? /* @__PURE__ */ F(!!n.edit.spoiler) : Dl("COPPERFIELD_DRAFT_SPOILER", !1), l = K(() => !!n.edit && s.value.type !== "administrator"), u = /* @__PURE__ */ F({}), d = ur("textarea"), f = ur("image-uploader"), p = ur("emoji-button"), m = ur("emoji-popup"), h = ur("gif-button"), g = ur("gif-popup"), _ = ur("gif-search"), v = /* @__PURE__ */ F({
+		let n = e, r = t, i = Yn(Fc), a = n.edit ? /* @__PURE__ */ F(n.edit.orig) : Bd(), o = zd(), s = nf(), c = n.edit ? /* @__PURE__ */ F(!!n.edit.spoiler) : Ol("COPPERFIELD_DRAFT_SPOILER", !1), l = K(() => !!n.edit && s.value.type !== "administrator"), u = /* @__PURE__ */ F({}), d = ur("textarea"), f = ur("image-uploader"), p = ur("emoji-button"), m = ur("emoji-popup"), h = ur("gif-button"), g = ur("gif-popup"), _ = ur("gif-search"), v = /* @__PURE__ */ F({
 			tabs: [],
 			map: {}
 		}), y = /* @__PURE__ */ F(0), b = /* @__PURE__ */ F(!1), x = /* @__PURE__ */ F(""), S = /* @__PURE__ */ F({}), C, ee = (e, t) => {
@@ -6290,12 +6272,12 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			}
 		}, me = (e) => {
 			if (e.dataTransfer?.items) {
-				let t = Bl(e.dataTransfer.items);
+				let t = Vl(e.dataTransfer.items);
 				t && ue.value && (pe(t), e.preventDefault());
 			}
 		}, he = (e) => {
 			if (e.clipboardData) {
-				let t = Bl(e.clipboardData.items);
+				let t = Vl(e.clipboardData.items);
 				t && ue.value && pe(t);
 			}
 		}, ge = () => {
@@ -6317,7 +6299,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 				mail: o.value.mail,
 				link: o.value.link,
 				url: i.value.path,
-				ua: await $d()
+				ua: await Ld()
 			};
 			if (!n.edit) {
 				if (s.value.token) _.nick = s.value.display_name, _.mail = s.value.email, _.link = s.value.url;
@@ -6327,7 +6309,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 						u.value.nick.focus(), alert(D.value.nickError);
 						return;
 					}
-					if (m.includes("mail") && !_.mail || _.mail && !Yc(_.mail)) {
+					if (m.includes("mail") && !_.mail || _.mail && !Xc(_.mail)) {
 						u.value.mail.focus(), alert(D.value.mailError);
 						return;
 					}
@@ -6338,9 +6320,9 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			if (!_.comment) d.value.focus();
 			else if (!oe.value) alert(D.value.wordHint.replace("$0", p[0].toString()).replace("$1", p[1].toString()).replace("$2", w.value.toString()));
 			else {
-				_.comment = qd(_.comment, v.value.map), n.replyId && n.rootId && (_.pid = n.replyId, _.rid = n.rootId, _.at = n.replyUser), E.value = !0;
+				n.replyId && n.rootId && (_.pid = n.replyId, _.rid = n.rootId, _.at = n.replyUser), E.value = !0;
 				try {
-					h && (_.recaptchaV3 = await ff(h).execute("social")), g && (_.turnstile = await _f(g).execute("social"));
+					h && (_.recaptchaV3 = await Yd(h).execute("social")), g && (_.turnstile = await ef(g).execute("social"));
 					let i = {
 						serverURL: e,
 						lang: t,
@@ -6403,10 +6385,10 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 					e.target.scrollTop = t;
 				}, 50);
 			}
-		}, Te = cl((e) => {
+		}, Te = ll((e) => {
 			T.list = [], ce.value = !1, we(e);
 		}, 300);
-		return _l("click", Ce), _l("message", ({ data: e }) => {
+		return vl("click", Ce), vl("message", ({ data: e }) => {
 			e?.type === "profile" && (s.value = {
 				...s.value,
 				...e.data
@@ -6415,7 +6397,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 				mail: s.value.email,
 				link: s.value.url
 			}));
-		}), pl([i, w], ([e, t]) => {
+		}), ml([i, w], ([e, t]) => {
 			let { wordLimit: n } = e;
 			n ? t < n[0] && n[0] !== 0 ? ([ae.value] = n, oe.value = !1) : ([, ae.value] = n, oe.value = t <= n[1]) : (ae.value = 0, oe.value = !0);
 		}), $n(ne, async (e) => {
@@ -6423,26 +6405,21 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			let t = i.value.search;
 			_.value && (_.value.value = ""), T.loading = !0, T.list = await (t.default?.() ?? t.search("")), T.loading = !1;
 		}), yr(() => {
-			n.edit?.objectId && (a.value = n.edit.orig), pl(() => a.value, (e) => {
-				let { highlighter: t, texRenderer: n } = i.value;
-				se.value = e, ie.value = Jd(e, {
-					emojiMap: v.value.map,
-					highlighter: t,
-					texRenderer: n
-				}), w.value = Qd(e), e ? Yf(d.value) : Yf.destroy(d.value);
-			}), pl(() => i.value.emoji, async (e) => {
-				v.value = await Ll(e);
+			n.edit?.objectId && (a.value = n.edit.orig), ml(() => a.value, (e) => {
+				se.value = e, ie.value = Lf(e), w.value = Id(e), e ? Nf(d.value) : Nf.destroy(d.value);
+			}), ml(() => i.value.emoji, async (e) => {
+				v.value = await Rl(e);
 			});
 		}), (t, d) => (B(), V("div", {
 			key: I(s).token,
 			class: "wl-comment"
 		}, [
-			I(i).login !== "disable" && le.value && !e.edit?.objectId ? (B(), V("div", $f, [H("div", ep, [H("button", {
+			I(i).login !== "disable" && le.value && !e.edit?.objectId ? (B(), V("div", Hf, [H("div", Uf, [H("button", {
 				type: "submit",
 				class: "wl-logout-btn",
 				title: D.value.logout,
 				onClick: xe
-			}, [U(I(xf), { size: 14 })], 8, tp), H("a", {
+			}, [U(I(af), { size: 14 })], 8, Wf), H("a", {
 				href: "#",
 				class: "wl-login-nick",
 				"aria-label": "Profile",
@@ -6451,15 +6428,15 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			}, [H("img", {
 				src: I(s).avatar,
 				alt: "avatar"
-			}, null, 8, rp)], 8, np)]), H("a", {
+			}, null, 8, Kf)], 8, Gf)]), H("a", {
 				href: "#",
 				class: "wl-login-nick",
 				"aria-label": "Profile",
 				title: D.value.profile,
 				onClick: Se,
 				textContent: k(I(s).display_name)
-			}, null, 8, ip)])) : W("v-if", !0),
-			H("div", ap, [
+			}, null, 8, qf)])) : W("v-if", !0),
+			H("div", Jf, [
 				I(i).login !== "force" && I(i).meta.length && !le.value ? (B(), V("div", {
 					key: 0,
 					class: O(["wl-header", `item${I(i).meta.length}`])
@@ -6469,7 +6446,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 				}, [H("label", {
 					for: `wl-${e}`,
 					textContent: k(D.value[e] + (I(i).requiredMeta.includes(e) || !I(i).requiredMeta.length ? "" : `(${D.value.optional})`))
-				}, null, 8, op), Kn(H("input", {
+				}, null, 8, Yf), Kn(H("input", {
 					id: `wl-${e}`,
 					ref_for: !0,
 					ref: (t) => {
@@ -6479,7 +6456,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 					class: O(["wl-input", `wl-${e}`]),
 					name: e,
 					type: e === "mail" ? "email" : "text"
-				}, null, 10, sp), [[go, I(o)[e]]])]))), 128))], 2)) : W("v-if", !0),
+				}, null, 10, Xf), [[go, I(o)[e]]])]))), 128))], 2)) : W("v-if", !0),
 				Kn(H("textarea", {
 					id: "wl-edit",
 					ref: "textarea",
@@ -6490,26 +6467,26 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 					onKeydown: ye,
 					onDrop: me,
 					onPaste: he
-				}, null, 40, cp), [[oo, I(a)]]),
-				re.value ? (B(), V("div", lp, [
+				}, null, 40, Zf), [[oo, I(a)]]),
+				re.value ? (B(), V("div", Qf, [
 					d[8] ||= H("hr", null, null, -1),
 					H("h4", null, k(D.value.preview) + ":", 1),
 					W(" eslint-disable-next-line vue/no-v-html "),
 					H("div", {
 						class: "wl-content",
 						innerHTML: ie.value
-					}, null, 8, up)
+					}, null, 8, $f)
 				])) : W("v-if", !0),
-				H("div", dp, [
-					l.value ? W("v-if", !0) : (B(), V("div", fp, [
-						H("a", pp, [U(I(Df))]),
+				H("div", ep, [
+					l.value ? W("v-if", !0) : (B(), V("div", tp, [
+						H("a", np, [U(I(df))]),
 						Kn(H("button", {
 							ref: "emoji-button",
 							type: "button",
 							class: O(["wl-action", { active: b.value }]),
 							title: D.value.emoji,
 							onClick: d[1] ||= (e) => b.value = !b.value
-						}, [U(I(Cf))], 10, mp), [[Ta, v.value.tabs.length]]),
+						}, [U(I(sf))], 10, rp), [[Ta, v.value.tabs.length]]),
 						I(i).search ? (B(), V("button", {
 							key: 0,
 							ref: "gif-button",
@@ -6517,7 +6494,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 							class: O(["wl-action", { active: ne.value }]),
 							title: D.value.gif,
 							onClick: d[2] ||= (e) => ne.value = !ne.value
-						}, [U(I(Nf))], 10, hp)) : W("v-if", !0),
+						}, [U(I(_f))], 10, ip)) : W("v-if", !0),
 						H("input", {
 							id: "wl-image-upload",
 							ref: "image-uploader",
@@ -6533,27 +6510,27 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 							class: "wl-action",
 							title: D.value.uploadImage,
 							"aria-label": D.value.uploadImage
-						}, [U(I(wf))], 8, gp)) : W("v-if", !0),
+						}, [U(I(cf))], 8, ap)) : W("v-if", !0),
 						H("button", {
 							type: "button",
 							class: O(["wl-action", { active: re.value }]),
 							title: D.value.preview,
 							onClick: d[3] ||= (e) => re.value = !re.value
-						}, [U(I(Ef))], 10, _p)
+						}, [U(I(uf))], 10, op)
 					])),
-					H("div", vp, [
+					H("div", sp, [
 						d[11] ||= H("div", { class: "wl-captcha-container" }, null, -1),
-						H("label", yp, [Kn(H("input", {
+						H("label", cp, [Kn(H("input", {
 							"onUpdate:modelValue": d[4] ||= (e) => /* @__PURE__ */ P(c) ? c.value = e : null,
 							type: "checkbox"
 						}, null, 512), [[so, I(c)]]), d[9] ||= Bi(" 含剧透（文字和图片） ", -1)]),
-						l.value ? (B(), V("span", bp, "仅修改剧透标记")) : W("v-if", !0),
-						H("div", xp, [
+						l.value ? (B(), V("span", lp, "仅修改剧透标记")) : W("v-if", !0),
+						H("div", up, [
 							Bi(k(w.value) + " ", 1),
-							I(i).wordLimit ? (B(), V("span", Sp, [d[10] ||= Bi(" \xA0/\xA0 ", -1), H("span", {
+							I(i).wordLimit ? (B(), V("span", dp, [d[10] ||= Bi(" \xA0/\xA0 ", -1), H("span", {
 								class: O({ illegal: !oe.value }),
 								textContent: k(ae.value)
-							}, null, 10, Cp)])) : W("v-if", !0),
+							}, null, 10, fp)])) : W("v-if", !0),
 							Bi(" \xA0" + k(D.value.word), 1)
 						]),
 						I(i).login !== "disable" && !le.value ? (B(), V("button", {
@@ -6562,7 +6539,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 							class: "wl-btn",
 							onClick: be,
 							textContent: k(D.value.login)
-						}, null, 8, wp)) : W("v-if", !0),
+						}, null, 8, pp)) : W("v-if", !0),
 						I(i).login !== "force" || le.value ? (B(), V("button", {
 							key: 2,
 							type: "submit",
@@ -6570,10 +6547,10 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 							title: "Cmd|Ctrl + Enter",
 							disabled: E.value,
 							onClick: ve
-						}, [E.value ? (B(), Mi(I(Mf), {
+						}, [E.value ? (B(), Mi(I(gf), {
 							key: 0,
 							size: 16
-						})) : (B(), V(z, { key: 1 }, [Bi(k(n.edit ? "保存修改" : I(c) ? "发布剧透评论" : D.value.submit), 1)], 64))], 8, Tp)) : W("v-if", !0)
+						})) : (B(), V(z, { key: 1 }, [Bi(k(n.edit ? "保存修改" : I(c) ? "发布剧透评论" : D.value.submit), 1)], 64))], 8, mp)) : W("v-if", !0)
 					]),
 					H("div", {
 						ref: "gif-popup",
@@ -6584,8 +6561,8 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 							type: "text",
 							placeholder: D.value.gifSearchPlaceholder,
 							onInput: d[5] ||= (...e) => I(Te) && I(Te)(...e)
-						}, null, 40, Ep),
-						T.list.length ? (B(), Mi(Qf, {
+						}, null, 40, hp),
+						T.list.length ? (B(), Mi(Vf, {
 							key: 0,
 							items: T.list,
 							"column-width": 200,
@@ -6593,7 +6570,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 							onInsert: d[6] ||= (e) => de(e),
 							onScroll: we
 						}, null, 8, ["items"])) : W("v-if", !0),
-						T.loading ? (B(), V("div", Dp, [U(I(Mf), { size: 30 })])) : W("v-if", !0)
+						T.loading ? (B(), V("div", gp, [U(I(gf), { size: 30 })])) : W("v-if", !0)
 					], 2),
 					H("div", {
 						ref: "emoji-popup",
@@ -6617,7 +6594,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 							alt: e,
 							loading: "lazy",
 							referrerPolicy: "no-referrer"
-						}, null, 8, kp)) : W("v-if", !0)], 40, Op))), 128))], 32)) : W("v-if", !0)], 64))), 128)),
+						}, null, 8, vp)) : W("v-if", !0)], 40, _p))), 128))], 32)) : W("v-if", !0)], 64))), 128)),
 						H("div", null, [x.value ? (B(), V("img", {
 							key: 0,
 							class: "wl-emoji-preview",
@@ -6626,11 +6603,13 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 							loading: "lazy",
 							referrerPolicy: "no-referrer",
 							style: fe(S.value)
-						}, null, 12, Ap)) : W("v-if", !0)]),
-						v.value.tabs.length > 1 ? (B(), V("div", jp, [(B(!0), V(z, null, Dr(v.value.tabs, (e, t) => (B(), V("button", {
+						}, null, 12, yp)) : W("v-if", !0)]),
+						v.value.tabs.length > 1 ? (B(), V("div", bp, [(B(!0), V(z, null, Dr(v.value.tabs, (e, t) => (B(), V("button", {
 							key: e.name,
 							type: "button",
 							class: O(["wl-tab", { active: y.value === t }]),
+							"aria-pressed": y.value === t,
+							"aria-label": e.name,
 							onClick: (e) => y.value = t
 						}, [H("img", {
 							class: "wl-emoji",
@@ -6639,7 +6618,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 							title: e.name,
 							loading: "lazy",
 							referrerPolicy: "no-referrer"
-						}, null, 8, Np)], 10, Mp))), 128))])) : W("v-if", !0)
+						}, null, 8, Sp), H("span", null, k(e.name), 1)], 10, xp))), 128))])) : W("v-if", !0)
 					], 2)
 				])
 			]),
@@ -6649,39 +6628,39 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 				class: "wl-close",
 				title: D.value.cancelReply,
 				onClick: d[7] ||= (t) => e.replyId ? r("cancelReply") : r("cancelEdit")
-			}, [U(I(xf), { size: 24 })], 8, Pp)) : W("v-if", !0)
+			}, [U(I(af), { size: 24 })], 8, Cp)) : W("v-if", !0)
 		]));
 	}
-}), Ip = ["id"], Lp = {
+}), Tp = ["id"], Ep = {
 	class: "wl-user",
 	"aria-hidden": "true"
-}, Rp = ["src"], zp = { class: "wl-card" }, Bp = { class: "wl-head" }, Vp = ["href"], Hp = {
+}, Dp = ["src"], Op = { class: "wl-card" }, kp = { class: "wl-head" }, Ap = ["href"], jp = {
 	key: 1,
 	class: "wl-nick"
-}, Up = ["textContent"], Wp = ["textContent"], Gp = ["textContent"], Kp = ["textContent"], qp = { class: "wl-comment-actions" }, Jp = ["disabled"], Yp = ["title", "href"], Xp = ["title"], Zp = ["title"], Qp = {
+}, Mp = ["textContent"], Np = ["textContent"], Pp = ["textContent"], Fp = ["textContent"], Ip = { class: "wl-comment-actions" }, Lp = ["disabled"], Rp = ["title", "href"], zp = ["title"], Bp = ["title"], Vp = {
 	class: "wl-meta",
 	"aria-hidden": "true"
-}, $p = ["data-value", "textContent"], em = {
+}, Hp = ["data-value", "textContent"], Up = {
 	key: 0,
 	class: "wl-warning",
 	"aria-hidden": "true"
-}, tm = ["aria-expanded"], nm = { class: "board-spoiler-action" }, rm = {
+}, Wp = ["aria-expanded"], Gp = { class: "board-spoiler-action" }, Kp = {
 	key: 2,
 	class: "wl-content"
-}, im = {
+}, qp = {
 	key: 0,
 	class: "wl-reply-to"
-}, am = ["href"], om = ["innerHTML"], sm = {
+}, Jp = ["href"], Yp = ["innerHTML"], Xp = {
 	key: 3,
 	class: "wl-admin-actions"
-}, cm = { class: "wl-comment-status" }, lm = [
+}, Zp = { class: "wl-comment-status" }, Qp = [
 	"disabled",
 	"onClick",
 	"textContent"
-], um = {
+], $p = {
 	key: 5,
 	class: "wl-quote"
-}, dm = /* @__PURE__ */ cr({
+}, em = /* @__PURE__ */ cr({
 	__name: "CommentCard",
 	props: {
 		comment: {},
@@ -6704,10 +6683,10 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			"approved",
 			"waiting",
 			"spam"
-		], i = Yn(Pc), a = af(), o = /* @__PURE__ */ Ol(), s = yf(), c = K(() => i.value.locale), l = K(() => {
+		], i = Yn(Fc), a = Hd(), o = /* @__PURE__ */ kl(), s = nf(), c = K(() => i.value.locale), l = K(() => {
 			let { link: t } = e.comment;
-			return t ? Lc(t) ? t : `https://${t}` : "";
-		}), u = K(() => a.value.includes(e.comment.objectId)), d = K(() => qc(new Date(e.comment.time), o.value, c.value)), f = K(() => s.value.type === "administrator"), p = K(() => e.comment.user_id && s.value.objectId === e.comment.user_id), m = K(() => e.comment.objectId === e.reply?.objectId), h = /* @__PURE__ */ F(!1), g = K(() => !!e.comment.spoiler && !h.value);
+			return t ? Rc(t) ? t : `https://${t}` : "";
+		}), u = K(() => a.value.includes(e.comment.objectId)), d = K(() => Jc(new Date(e.comment.time), o.value, c.value)), f = K(() => s.value.type === "administrator"), p = K(() => e.comment.user_id && s.value.objectId === e.comment.user_id), m = K(() => e.comment.objectId === e.reply?.objectId), h = /* @__PURE__ */ F(!1), g = K(() => !!e.comment.spoiler && !h.value);
 		$n(() => [e.comment.objectId, e.comment.spoiler], () => {
 			h.value = !1;
 		});
@@ -6719,54 +6698,54 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			return B(), V("div", {
 				id: e.comment.objectId.toString(),
 				class: "wl-card-item"
-			}, [H("div", Lp, [
+			}, [H("div", Ep, [
 				e.comment.avatar ? (B(), V("img", {
 					key: 0,
 					class: "wl-user-avatar",
 					src: e.comment.avatar,
 					alt: ""
-				}, null, 8, Rp)) : W("v-if", !0),
-				e.comment.type === "guest" ? (B(), Mi(I(Af), { key: 1 })) : W("v-if", !0),
-				e.comment.type === "administrator" ? (B(), Mi(I(jf), { key: 2 })) : W("v-if", !0)
-			]), H("div", zp, [
-				H("div", Bp, [
+				}, null, 8, Dp)) : W("v-if", !0),
+				e.comment.type === "guest" ? (B(), Mi(I(mf), { key: 1 })) : W("v-if", !0),
+				e.comment.type === "administrator" ? (B(), Mi(I(hf), { key: 2 })) : W("v-if", !0)
+			]), H("div", Op, [
+				H("div", kp, [
 					l.value ? (B(), V("a", {
 						key: 0,
 						class: "wl-nick",
 						href: l.value,
 						target: "_blank",
 						rel: "ugc nofollow noreferrer noopener"
-					}, k(e.comment.nick), 9, Vp)) : (B(), V("span", Hp, k(e.comment.nick), 1)),
+					}, k(e.comment.nick), 9, Ap)) : (B(), V("span", jp, k(e.comment.nick), 1)),
 					e.comment.label ? (B(), V("span", {
 						key: 2,
 						class: "wl-badge",
 						textContent: k(e.comment.label)
-					}, null, 8, Up)) : W("v-if", !0),
+					}, null, 8, Mp)) : W("v-if", !0),
 					e.comment.sticky ? (B(), V("span", {
 						key: 3,
 						class: "wl-badge",
 						textContent: k(c.value.sticky)
-					}, null, 8, Wp)) : W("v-if", !0),
+					}, null, 8, Np)) : W("v-if", !0),
 					typeof e.comment.level == "number" ? (B(), V("span", {
 						key: 4,
 						class: O(`wl-badge level${e.comment.level}`),
 						textContent: k(c.value[`level${e.comment.level}`] || `Level ${e.comment.level}`)
-					}, null, 10, Gp)) : W("v-if", !0),
+					}, null, 10, Pp)) : W("v-if", !0),
 					H("span", {
 						class: "wl-time",
 						textContent: k(d.value)
-					}, null, 8, Kp),
-					H("div", qp, [
+					}, null, 8, Fp),
+					H("div", Ip, [
 						f.value || p.value ? (B(), V(z, { key: 0 }, [H("button", {
 							type: "button",
 							class: "wl-edit",
 							disabled: g.value,
 							onClick: a[0] ||= (t) => n("edit", e.comment)
-						}, [U(I(kf))], 8, Jp), H("button", {
+						}, [U(I(pf))], 8, Lp), H("button", {
 							type: "button",
 							class: "wl-delete",
 							onClick: a[1] ||= (t) => n("delete", e.comment)
-						}, [U(I(Sf))])], 64)) : W("v-if", !0),
+						}, [U(I(of))])], 64)) : W("v-if", !0),
 						p.value && !I(i).noRss ? (B(), V("a", {
 							key: 1,
 							role: "button",
@@ -6775,22 +6754,22 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 							href: `${I(i).serverURL}/api/comment/rss?user_id=${e.comment.user_id}`,
 							target: "_blank",
 							rel: "noopener noreferrer"
-						}, [U(I(Ff))], 8, Yp)) : W("v-if", !0),
+						}, [U(I(yf))], 8, Rp)) : W("v-if", !0),
 						H("button", {
 							type: "button",
 							class: "wl-like",
 							title: u.value ? c.value.cancelLike : c.value.like,
 							onClick: a[2] ||= (t) => n("like", e.comment)
-						}, [U(I(Tf), { active: u.value }, null, 8, ["active"]), Bi(" " + k("like" in e.comment ? e.comment.like : ""), 1)], 8, Xp),
+						}, [U(I(lf), { active: u.value }, null, 8, ["active"]), Bi(" " + k("like" in e.comment ? e.comment.like : ""), 1)], 8, zp),
 						H("button", {
 							type: "button",
 							class: O(["wl-reply", { active: m.value }]),
 							title: m.value ? c.value.cancelReply : c.value.reply,
 							onClick: a[3] ||= (t) => n("reply", m.value ? null : e.comment)
-						}, [U(I(Of))], 10, Zp)
+						}, [U(I(ff))], 10, Bp)
 					])
 				]),
-				H("div", Qp, [(B(), V(z, null, Dr([
+				H("div", Vp, [(B(), V(z, null, Dr([
 					"addr",
 					"browser",
 					"os"
@@ -6799,19 +6778,19 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 					class: O(`wl-${t}`),
 					"data-value": e.comment[t],
 					textContent: k(e.comment[t])
-				}, null, 10, $p)) : W("v-if", !0)], 64))), 64))]),
-				e.comment.status === "waiting" && !f.value ? (B(), V("div", em, k(c.value.commentUnderReview), 1)) : W("v-if", !0),
+				}, null, 10, Hp)) : W("v-if", !0)], 64))), 64))]),
+				e.comment.status === "waiting" && !f.value ? (B(), V("div", Up, k(c.value.commentUnderReview), 1)) : W("v-if", !0),
 				e.comment.spoiler && !v.value ? (B(), V("button", {
 					key: 1,
 					type: "button",
 					class: "board-spoiler-toggle",
 					"aria-expanded": h.value,
 					onClick: _
-				}, [a[17] ||= H("span", null, "含剧透", -1), H("span", nm, k(h.value ? "收起" : "展开") + k("children" in e.comment && e.comment.children?.length ? "讨论" : "正文"), 1)], 8, tm)) : W("v-if", !0),
+				}, [a[17] ||= H("span", null, "含剧透", -1), H("span", Gp, k(h.value ? "收起" : "展开") + k("children" in e.comment && e.comment.children?.length ? "讨论" : "正文"), 1)], 8, Wp)) : W("v-if", !0),
 				W(" eslint-disable vue/no-v-html "),
-				!g.value && !v.value ? (B(), V("div", rm, ["reply_user" in e.comment && e.comment.reply_user ? (B(), V("p", im, [H("a", { href: "#" + e.comment.pid }, "@" + k(e.comment.reply_user.nick), 9, am), a[18] ||= H("span", null, ": ", -1)])) : W("v-if", !0), H("div", { innerHTML: e.comment.comment }, null, 8, om)])) : W("v-if", !0),
+				!g.value && !v.value ? (B(), V("div", Kp, ["reply_user" in e.comment && e.comment.reply_user ? (B(), V("p", qp, [H("a", { href: "#" + e.comment.pid }, "@" + k(e.comment.reply_user.nick), 9, Jp), a[18] ||= H("span", null, ": ", -1)])) : W("v-if", !0), H("div", { innerHTML: e.comment.comment }, null, 8, Yp)])) : W("v-if", !0),
 				W(" eslint-enable vue/no-v-html "),
-				f.value && !v.value ? (B(), V("div", sm, [H("span", cm, [(B(), V(z, null, Dr(r, (t) => H("button", {
+				f.value && !v.value ? (B(), V("div", Xp, [H("span", Zp, [(B(), V(z, null, Dr(r, (t) => H("button", {
 					key: t,
 					type: "submit",
 					class: O(`wl-btn wl-${t}`),
@@ -6821,7 +6800,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 						comment: e.comment
 					}),
 					textContent: k(c.value[t])
-				}, null, 10, lm)), 64))]), f.value && !("rid" in e.comment) ? (B(), V("button", {
+				}, null, 10, Qp)), 64))]), f.value && !("rid" in e.comment) ? (B(), V("button", {
 					key: 0,
 					type: "submit",
 					class: "wl-btn wl-sticky",
@@ -6833,7 +6812,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 						"wl-reply-wrapper": m.value,
 						"wl-edit-wrapper": v.value
 					})
-				}, [U(Fp, {
+				}, [U(wp, {
 					edit: e.edit,
 					"reply-id": e.reply?.objectId,
 					"reply-user": e.comment.nick,
@@ -6848,7 +6827,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 					"reply-user",
 					"root-id"
 				])], 2)) : W("v-if", !0),
-				!g.value && "children" in e.comment ? (B(), V("div", um, [(B(!0), V(z, null, Dr(e.comment.children, (t) => (B(), Mi(o, {
+				!g.value && "children" in e.comment ? (B(), V("div", $p, [(B(!0), V(z, null, Dr(e.comment.children, (t) => (B(), Mi(o, {
 					key: t.objectId,
 					comment: t,
 					reply: e.reply,
@@ -6868,25 +6847,25 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 					"edit",
 					"root-id"
 				]))), 128))])) : W("v-if", !0)
-			])], 8, Ip);
+			])], 8, Tp);
 		};
 	}
-}), fm = { "data-waline": "" }, pm = { class: "wl-meta-head" }, mm = { class: "wl-count" }, hm = ["textContent"], gm = { class: "wl-sort" }, _m = ["onClick"], vm = { class: "wl-cards" }, ym = {
+}), tm = { "data-waline": "" }, nm = { class: "wl-meta-head" }, rm = { class: "wl-count" }, im = ["textContent"], am = { class: "wl-sort" }, om = ["onClick"], sm = { class: "wl-cards" }, cm = {
 	key: 1,
 	class: "wl-operation"
-}, bm = ["textContent"], xm = {
+}, lm = ["textContent"], um = {
 	key: 2,
 	class: "wl-loading"
-}, Sm = ["textContent"], Cm = { class: "wl-operation" }, wm = ["textContent"], Tm = {
+}, dm = ["textContent"], fm = { class: "wl-operation" }, pm = ["textContent"], mm = {
 	key: 5,
 	class: "wl-meta-foot"
-}, Em = {
+}, hm = {
 	key: 0,
 	class: "wl-rss"
-}, Dm = ["href", "alt"], Om = ["textContent"], km = ["href", "alt"], Am = ["textContent"], jm = {
+}, gm = ["href", "alt"], _m = ["textContent"], vm = ["href", "alt"], ym = ["textContent"], bm = {
 	key: 1,
 	class: "wl-power"
-}, Mm = /* @__PURE__ */ cr({
+}, xm = /* @__PURE__ */ cr({
 	__name: "WalineComment",
 	props: {
 		serverURL: {},
@@ -6912,8 +6891,8 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 		texRenderer: { type: Function }
 	},
 	setup(e) {
-		let t = e, n = yf(), r = af(), i = /* @__PURE__ */ F("loading"), a = /* @__PURE__ */ F(0), o = /* @__PURE__ */ F(1), s = /* @__PURE__ */ F(0), c = K(() => Vc(t)), l = /* @__PURE__ */ F(c.value.commentSorting), u = /* @__PURE__ */ F([]), d = /* @__PURE__ */ F(null), f = /* @__PURE__ */ F(null), p = K(() => Wc(c.value.dark)), m = K(() => c.value.locale);
-		Ml(p, { id: "waline-darkmode" });
+		let t = e, n = nf(), r = Hd(), i = /* @__PURE__ */ F("loading"), a = /* @__PURE__ */ F(0), o = /* @__PURE__ */ F(1), s = /* @__PURE__ */ F(0), c = K(() => Hc(t)), l = /* @__PURE__ */ F(c.value.commentSorting), u = /* @__PURE__ */ F([]), d = /* @__PURE__ */ F(null), f = /* @__PURE__ */ F(null), p = K(() => Gc(c.value.dark)), m = K(() => c.value.locale);
+		Nl(p, { id: "waline-darkmode" });
 		let h = null, g = (e) => {
 			let { serverURL: t, path: r, pageSize: d } = c.value, f = new AbortController();
 			i.value = "loading", h?.(), Ao({
@@ -6921,7 +6900,7 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 				lang: c.value.lang,
 				path: r,
 				pageSize: d,
-				sortBy: Mc[l.value],
+				sortBy: Nc[l.value],
 				page: e,
 				signal: f.signal,
 				token: n.value.token
@@ -6986,8 +6965,8 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 				comment: { like: !o }
 			}), o ? r.value = r.value.filter((e) => e !== a) : (r.value = [...r.value, a], r.value.length > 50 && (r.value = r.value.slice(-50))), e.like = Math.max(0, (e.like || 0) + (o ? -1 : 1));
 		};
-		return Jn(Pc, c), yr(async () => {
-			pl(() => [t.serverURL, t.path], () => {
+		return Jn(Fc, c), yr(async () => {
+			ml(() => [t.serverURL, t.path], () => {
 				v();
 			});
 			let e = new URLSearchParams(location.search).get("token");
@@ -7001,23 +6980,23 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 			i.searchParams.delete("token"), history.replaceState(null, "", i.pathname + (i.searchParams.toString() ? `?${i.searchParams.toString()}` : "") + i.hash);
 		}), xr(() => {
 			h?.();
-		}), (e, t) => (B(), V("div", fm, [
-			U(Wf),
-			!d.value && !f.value ? (B(), Mi(Fp, {
+		}), (e, t) => (B(), V("div", tm, [
+			U(Of),
+			!d.value && !f.value ? (B(), Mi(wp, {
 				key: 0,
 				onLog: v,
 				onSubmit: S
 			})) : W("v-if", !0),
-			H("div", pm, [H("div", mm, [a.value ? (B(), V("span", {
+			H("div", nm, [H("div", rm, [a.value ? (B(), V("span", {
 				key: 0,
 				class: "wl-num",
 				textContent: k(a.value)
-			}, null, 8, hm)) : W("v-if", !0), Bi(" " + k(m.value.comment), 1)]), H("ul", gm, [(B(!0), V(z, null, Dr(I(Nc), (e) => (B(), V("li", {
+			}, null, 8, im)) : W("v-if", !0), Bi(" " + k(m.value.comment), 1)]), H("ul", am, [(B(!0), V(z, null, Dr(I(Pc), (e) => (B(), V("li", {
 				key: e,
 				class: O([e === l.value ? "active" : ""]),
 				onClick: (t) => y(e)
-			}, k(m.value[e]), 11, _m))), 128))])]),
-			H("div", vm, [(B(!0), V(z, null, Dr(u.value, (e) => (B(), Mi(dm, {
+			}, k(m.value[e]), 11, om))), 128))])]),
+			H("div", sm, [(B(!0), V(z, null, Dr(u.value, (e) => (B(), Mi(em, {
 				key: e.objectId,
 				"root-id": e.objectId,
 				comment: e,
@@ -7037,80 +7016,80 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 				"reply",
 				"edit"
 			]))), 128))]),
-			i.value === "error" ? (B(), V("div", ym, [H("button", {
+			i.value === "error" ? (B(), V("div", cm, [H("button", {
 				type: "button",
 				class: "wl-btn",
 				onClick: v,
 				textContent: k(m.value.refresh)
-			}, null, 8, bm)])) : i.value === "loading" ? (B(), V("div", xm, [U(I(Mf), { size: 30 })])) : u.value.length ? o.value < s.value ? (B(), V(z, { key: 4 }, [W(" Load more button "), H("div", Cm, [H("button", {
+			}, null, 8, lm)])) : i.value === "loading" ? (B(), V("div", um, [U(I(gf), { size: 30 })])) : u.value.length ? o.value < s.value ? (B(), V(z, { key: 4 }, [W(" Load more button "), H("div", fm, [H("button", {
 				type: "button",
 				class: "wl-btn",
 				onClick: _,
 				textContent: k(m.value.more)
-			}, null, 8, wm)])], 2112)) : W("v-if", !0) : (B(), V("div", {
+			}, null, 8, pm)])], 2112)) : W("v-if", !0) : (B(), V("div", {
 				key: 3,
 				class: "wl-empty",
 				textContent: k(m.value.sofa)
-			}, null, 8, Sm)),
-			u.value.length || i.value !== "loading" ? (B(), V("div", Tm, [
-				c.value.noRss ? W("v-if", !0) : (B(), V("div", Em, [H("a", {
+			}, null, 8, dm)),
+			u.value.length || i.value !== "loading" ? (B(), V("div", mm, [
+				c.value.noRss ? W("v-if", !0) : (B(), V("div", hm, [H("a", {
 					href: `${c.value.serverURL}/api/comment/rss?path=${encodeURIComponent(c.value.path)}`,
 					target: "_blank",
 					rel: "noopener noreferrer",
 					alt: m.value.subPostComment
-				}, [U(I(Pf)), H("span", { textContent: k(m.value.subPostComment) }, null, 8, Om)], 8, Dm), H("a", {
+				}, [U(I(vf)), H("span", { textContent: k(m.value.subPostComment) }, null, 8, _m)], 8, gm), H("a", {
 					href: `${c.value.serverURL}/api/comment/rss`,
 					target: "_blank",
 					rel: "noopener noreferrer",
 					alt: m.value.subSiteComment
-				}, [U(I(Pf)), H("span", { textContent: k(m.value.subSiteComment) }, null, 8, Am)], 8, km)])),
+				}, [U(I(vf)), H("span", { textContent: k(m.value.subSiteComment) }, null, 8, ym)], 8, vm)])),
 				W(" Copyright Information "),
-				c.value.noCopyright ? W("v-if", !0) : (B(), V("div", jm, [
+				c.value.noCopyright ? W("v-if", !0) : (B(), V("div", bm, [
 					t[0] ||= Bi(" Powered by ", -1),
 					t[1] ||= H("a", {
 						href: "https://github.com/walinejs/waline",
 						target: "_blank",
 						rel: "noopener noreferrer"
 					}, " Waline ", -1),
-					Bi(" v" + k(I(bf)), 1)
+					Bi(" v" + k(I(rf)), 1)
 				]))
 			])) : W("v-if", !0)
 		]));
 	}
-}), Nm = (e, t) => {
+}), Sm = (e, t) => {
 	t.forEach((t, n) => {
 		let r = e[n].time;
 		typeof r == "number" && (t.textContent = r.toString());
 	});
-}, Pm = ({ serverURL: e, path: t = window.location.pathname, selector: n = ".waline-pageview-count", update: r = !0, lang: i = navigator.language }) => {
+}, Cm = ({ serverURL: e, path: t = window.location.pathname, selector: n = ".waline-pageview-count", update: r = !0, lang: i = navigator.language }) => {
 	let a = new AbortController(), o = [...document.querySelectorAll(n)], s = (e) => {
-		let n = Yd(e);
+		let n = Nd(e);
 		return n != null && t !== n;
 	}, c = async (n) => {
 		try {
-			Nm(await Lo({
-				serverURL: Rc(e),
-				paths: n.map((e) => Yd(e) ?? t),
+			Sm(await Lo({
+				serverURL: zc(e),
+				paths: n.map((e) => Nd(e) ?? t),
 				lang: i,
 				signal: a.signal
 			}), n);
 		} catch (e) {
-			Rl(e);
+			zl(e);
 		}
 	};
 	if (r) {
 		let n = o.filter((e) => !s(e)), r = o.filter((e) => s(e));
 		Ro({
-			serverURL: Rc(e),
+			serverURL: zc(e),
 			path: t,
 			lang: i
 		}).then((e) => {
-			Nm(e, n);
+			Sm(e, n);
 		}), r.length > 0 && c(r);
 	} else c(o);
 	return a.abort.bind(a);
-}, Fm = ({ el: e = "#waline", path: t = window.location.pathname, comment: n = !1, pageview: r = !1, ...i }) => {
-	let a = e ? zl(e) : null;
+}, wm = ({ el: e = "#waline", path: t = window.location.pathname, comment: n = !1, pageview: r = !1, ...i }) => {
+	let a = e ? Bl(e) : null;
 	if (e && !a) throw Error("Option 'el' do not match any domElement!");
 	if (!i.serverURL) throw Error("Option 'serverURL' is missing!");
 	let o = /* @__PURE__ */ Ht({ ...i }), s = /* @__PURE__ */ Ht({
@@ -7118,19 +7097,19 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 		pageview: r,
 		path: t
 	}), c = () => {
-		s.comment && ef({
+		s.comment && Rd({
 			serverURL: o.serverURL,
 			path: s.path,
-			...Hc(s.comment) ? { selector: s.comment } : {}
+			...Uc(s.comment) ? { selector: s.comment } : {}
 		});
 	}, l = () => {
-		s.pageview && Pm({
+		s.pageview && Cm({
 			serverURL: o.serverURL,
 			path: s.path,
-			...Hc(s.pageview) ? { selector: s.pageview } : {}
+			...Uc(s.pageview) ? { selector: s.pageview } : {}
 		});
 	}, u = null;
-	a && (u = So(() => q(Mm, {
+	a && (u = So(() => q(xm, {
 		path: s.path,
 		...o
 	})), u.mount(a));
@@ -7147,4 +7126,4 @@ var Yf = Jf, Xf = ["data-index"], Zf = [
 		}
 	};
 };
-export { Fm as init };
+export { wm as init };

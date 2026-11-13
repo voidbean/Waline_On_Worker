@@ -3,6 +3,26 @@
  * Handles common constructs + XSS sanitization
  */
 
+import packs from "./board-emoji.json";
+
+// Only trusted pack entries supply URLs; unsupported or mistyped codes remain text.
+const emoji = new Map<string, string>();
+for (const { folder, prefix, type, items } of packs) {
+	for (const item of items) {
+		const key = prefix + item;
+		emoji.set(key, `${folder}/${key}.${type}`);
+	}
+}
+
+function renderEmoji(html: string): string {
+	// The input here is our own rendered markup. Leave tags, code and links alone,
+	// including image alt/src attributes and URLs that look like a shortcode.
+	return html.replace(/<code\b[^>]*>[\s\S]*?<\/code>|<a\b[^>]*>[\s\S]*?<\/a>|<[^>]*>|:([a-zA-Z0-9_-]+):/g, (match, key) => {
+		const url = key && emoji.get(key);
+		return url ? `<img class="wl-emoji" src="${url}" alt="${match}" loading="lazy" />` : match;
+	});
+}
+
 const SAFE_HREF = /^(https?:|mailto:|#|\/)/i;
 
 export function renderMarkdown(text: string): string {
@@ -39,7 +59,7 @@ export function renderMarkdown(text: string): string {
 
 	// Italic *text* or _text_
 	html = html.replace(/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g, "<em>$1</em>");
-	html = html.replace(/(?<!_)_(?!_)(.+?)(?<!_)_(?!_)/g, "<em>$1</em>");
+	html = html.replace(/(?<![a-zA-Z0-9_])_(?!_)(.+?)(?<!_)_(?![a-zA-Z0-9_])/g, "<em>$1</em>");
 
 	// Strikethrough ~~text~~
 	html = html.replace(/~~(.+?)~~/g, "<del>$1</del>");
@@ -87,7 +107,7 @@ export function renderMarkdown(text: string): string {
 	// Line breaks in paragraphs
 	html = html.replace(/(?<!\n)\n(?!\n)/g, "<br />\n");
 
-	return html.trim();
+	return renderEmoji(html.trim());
 }
 
 function escapeHtml(text: string): string {
