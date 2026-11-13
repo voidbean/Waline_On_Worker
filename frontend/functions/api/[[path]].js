@@ -3,17 +3,14 @@ export async function onRequest({ request, env }) {
 	const path = url.pathname.replace(/\/$/, "");
 	const refuse = () =>
 		Response.json(
-			{ errno: 1, errmsg: "Please use QQ sign-in on this board" },
+			{ errno: 1, errmsg: "Unsupported board account request" },
 			{ status: 403 },
 		);
 
-	if (
-		request.method === "POST" &&
-		(path === "/api/token" || path === "/api/user")
-	)
-		return refuse();
+	// Administrator bootstrap is only available directly on the Worker.
+	if (request.headers.has("X-Admin-Bootstrap-Token")) return refuse();
 	if (path === "/api/oauth") {
-		// The Pages entry signs in via QQ only; it never links accounts via a supplied JWT.
+		// The Pages OAuth entry only accepts QQ; it never links accounts via a supplied JWT.
 		if (
 			url.searchParams.get("type") !== "qq" ||
 			!/^\/ui\/qq-return\/[a-f0-9-]{36}$/.test(

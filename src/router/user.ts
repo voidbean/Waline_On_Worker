@@ -137,6 +137,20 @@ userRoutes.post("/", rateLimit("REGISTRATION_RATE_LIMIT"), async (c) => {
 		return c.json({ errno: 1, errmsg: "Registration is disabled" }, 403);
 	}
 
+	if (
+		typeof email !== "string" ||
+		email.length > 254 ||
+		!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+		email.toLowerCase().endsWith("@oauth.local") ||
+		typeof password !== "string" ||
+		password.length < 8
+	) {
+		return c.json(
+			{ errno: 1, errmsg: "Invalid email or password (minimum 8 characters)" },
+			400,
+		);
+	}
+
 	// Do not reveal account existence while registration is disabled.
 	const existing = await c.env.DB.prepare(
 		"SELECT id FROM wl_Users WHERE email = ?",
@@ -163,7 +177,7 @@ userRoutes.post("/", rateLimit("REGISTRATION_RATE_LIMIT"), async (c) => {
 				.run()
 		: await c.env.DB.prepare(
 				`INSERT INTO wl_Users (display_name, email, password, type, url)
-				 VALUES (?, ?, ?, 'guest', ?)`,
+				 VALUES (?, ?, ?, 'guest', ?) ON CONFLICT(email) DO NOTHING`,
 			)
 				.bind(
 					display_name || email.split("@")[0],
@@ -172,6 +186,8 @@ userRoutes.post("/", rateLimit("REGISTRATION_RATE_LIMIT"), async (c) => {
 					url || "",
 				)
 				.run();
+	if (!isFirst && insert.meta.changes === 0)
+		return c.json({ errno: 1, errmsg: "Registration failed" }, 409);
 	if (isFirst && insert.meta.changes === 0) {
 		return c.json(
 			{ errno: 1, errmsg: "Administrator is already initialized" },

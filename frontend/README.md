@@ -5,11 +5,14 @@ uses that same origin for comments and accounts. Pages calls the existing Worker
 through the `WALINE` service binding. The board serves a pinned, patched Waline client bundle locally; its version-matched
 CSS still loads from unpkg. See vendor/README.md for the build and licenses.
 
-- `/account` is the board's own QQ sign-in and profile page. QQ handles external
+- `/account` is the board's own sign-in and profile page (QQ first). QQ handles external
   authorization; the return is bound to the initiating tab and lands back on
   Pages. A first QQ sign-in creates an account using the existing backend flow.
-  Password sign-in, registration, and other OAuth providers aren't exposed on
-  the Pages entry. This doesn't disable anonymous comments or revoke sessions.
+  A collapsed secondary form supports email/password registration and sign-in,
+  including existing two-factor accounts. No email verification or automatic
+  merging by email: returning QQ users keep their linked account. Other OAuth
+  providers and first-admin bootstrap are not exposed on the Pages entry. Anonymous
+  comments and existing sessions are unaffected.
 - Previously shared `/ui/*` links lead to the board account page; use the
   original Worker UI for administration. Nickname and optional homepage can
   be changed on Pages without giving the frontend a privileged credential.
@@ -28,6 +31,11 @@ Both assets are served locally; the board is an unofficial fan site.
 - Project: `copperaqua`; production branch: `main`.
 - Root directory: `frontend`; build command: leave blank; build output: `public`.
   The sibling `functions` directory is picked up by Pages.
+- For email registration, deploy the Worker changes first with
+  `ALLOW_REGISTRATION = "true"` under its production `[vars]` (not a Pages
+  variable), then release Pages. Keep the login and registration rate limiters.
+  No database migration is required. Set the flag back to `"false"` to stop new
+  password registrations without disrupting existing sign-ins.
 - Before releasing this change, open **Workers & Pages → copperaqua → Settings →
   Bindings → Add → Service binding** for **Production**. Name it `WALINE` and
   select the existing `waline-on-worker` service in the same account.

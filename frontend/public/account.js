@@ -5,6 +5,7 @@ const attemptKey = "copperfield.qq.attempt";
 const title = document.querySelector("#title");
 const status = document.querySelector("#status");
 const qq = document.querySelector("#qq");
+const alternative = document.querySelector("#email-alternative");
 const profile = document.querySelector("#profile");
 const result = new URLSearchParams(location.hash.slice(1));
 if (location.hash) history.replaceState(null, "", location.pathname);
@@ -30,7 +31,7 @@ async function accountRequest(path, token, options) {
 	});
 	if (res.status === 401) {
 		if (currentUser()?.token === token) localStorage.removeItem(USER_KEY);
-		throw new Error("登录已失效，请重新使用 QQ 登录。");
+		throw new Error("登录已失效，请重新登录。");
 	}
 	const json = await res.json();
 	if (!res.ok || json.errno !== 0 || !json.data?.objectId)
@@ -41,9 +42,99 @@ async function accountRequest(path, token, options) {
 function showLogin(message) {
 	title.textContent = "QQ 登录 / 注册";
 	status.textContent = message || "首次使用 QQ 登录会自动创建水楼账号。";
-	qq.hidden = false;
+	qq.hidden = alternative.hidden = false;
 	profile.hidden = true;
 }
+
+const emailForm = document.querySelector("#email-form");
+const emailStatus = document.querySelector("#email-status");
+const switchMode = document.querySelector("#email-switch");
+const emailFields = emailForm.querySelector("fieldset");
+const submitEmail = emailForm.querySelector('[type="submit"]');
+const { email, password, code } = emailForm.elements;
+let registering = true;
+
+function setEmailMode(register) {
+	registering = register;
+	password.autocomplete = register ? "new-password" : "current-password";
+	password.minLength = register ? 8 : 1;
+	password.placeholder = register ? "至少 8 个字符" : "";
+	code.parentElement.hidden = code.disabled = true;
+	code.required = false;
+	code.value = "";
+	submitEmail.textContent = register ? "注册邮箱账号" : "邮箱登录";
+	switchMode.textContent = register ? "已有账号？去登录" : "没有账号？去注册";
+	emailStatus.textContent = "";
+}
+
+switchMode.onclick = () => {
+	setEmailMode(!registering);
+	password.value = "";
+};
+
+async function postCredentials(path, body) {
+	const res = await fetch(path, {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(body),
+		cache: "no-store",
+	});
+	const json = await res.json().catch(() => null);
+	if (res.status === 429) throw new Error("尝试过于频繁，请稍后再试。");
+	if (path === "/api/user" && res.status === 409)
+		throw new Error("该邮箱不能重复注册，请使用原来的方式登录。");
+	if (path === "/api/user" && res.status === 403)
+		throw new Error("邮箱注册暂未开放，请使用 QQ 登录。");
+	if (res.status === 401 && json?.data?.["2fa"]) {
+		code.parentElement.hidden = code.disabled = false;
+		code.required = true;
+		throw new Error("请输入两步验证码后再次登录。");
+	}
+	if (res.status === 401)
+		throw new Error(
+			code.required ? "登录失败，请检查密码和验证码。" : "邮箱或密码不正确。",
+		);
+	if (!res.ok || json?.errno !== 0 || !json.data?.objectId)
+		throw new Error(
+			res.status === 400
+				? "请检查邮箱格式和密码。"
+				: "请求未成功，请稍后重试。",
+		);
+	return json.data;
+}
+
+emailForm.onsubmit = async (event) => {
+	event.preventDefault();
+	if (emailFields.disabled) return;
+	emailFields.disabled = true;
+	const credentials = { email: email.value.trim(), password: password.value };
+	let created = false;
+	try {
+		if (registering) {
+			emailStatus.textContent = "正在注册…";
+			await postCredentials("/api/user", credentials);
+			created = true;
+			setEmailMode(false);
+		}
+		emailStatus.textContent = "正在登录…";
+		const user = await postCredentials(
+			"/api/token",
+			code.required ? { ...credentials, code: code.value } : credentials,
+		);
+		if (!user.token) throw new Error("未收到登录凭据，请重新登录。");
+		localStorage.setItem(USER_KEY, JSON.stringify(user));
+		emailForm.reset();
+		location.replace("/");
+	} catch (err) {
+		const message =
+			err instanceof TypeError
+				? "网络请求失败，请检查连接后重试。"
+				: err.message;
+		emailStatus.textContent = (created ? "账号已注册。" : "") + message;
+	} finally {
+		emailFields.disabled = false;
+	}
+};
 
 async function init() {
 	const callback = result.has("attempt");

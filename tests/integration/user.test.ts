@@ -68,7 +68,7 @@ describe("POST /api/user — registration", () => {
 	it("public registration stays closed by default after bootstrap", async () => {
 		await createUser(db, { email: "first@example.com" });
 		const res = await api.post("/api/user", {
-			body: { email: "second@example.com", password: "pass" },
+			body: { email: "second@example.com", password: "password123" },
 		});
 		expect(res.status).toBe(403);
 	});
@@ -78,7 +78,7 @@ describe("POST /api/user — registration", () => {
 		const data = await json(
 			await api.post("/api/user", {
 				env: { ALLOW_REGISTRATION: "true" },
-				body: { email: "second@example.com", password: "pass" },
+				body: { email: "second@example.com", password: "password123" },
 			}),
 		);
 		expect(data.data.type).toBe("guest");
@@ -88,7 +88,7 @@ describe("POST /api/user — registration", () => {
 		await createUser(db, { email: "taken@example.com" });
 		const res = await api.post("/api/user", {
 			env: { ALLOW_REGISTRATION: "true" },
-			body: { email: "taken@example.com", password: "pass" },
+			body: { email: "taken@example.com", password: "password123" },
 		});
 		expect(res.status).toBe(409);
 		expect((await json(res)).errno).toBe(1);
@@ -97,10 +97,10 @@ describe("POST /api/user — registration", () => {
 	it("does not reveal whether an account exists while registration is closed", async () => {
 		await createUser(db, { email: "taken@example.com" });
 		const duplicate = await api.post("/api/user", {
-			body: { email: "taken@example.com", password: "pass" },
+			body: { email: "taken@example.com", password: "password123" },
 		});
 		const unknown = await api.post("/api/user", {
-			body: { email: "unknown@example.com", password: "pass" },
+			body: { email: "unknown@example.com", password: "password123" },
 		});
 		expect(duplicate.status).toBe(403);
 		expect(unknown.status).toBe(403);
@@ -116,12 +116,25 @@ describe("POST /api/user — registration", () => {
 		).toBe(400);
 	});
 
+	it.each([
+		["not-an-email", "password123"],
+		["fake@OAUTH.LOCAL", "password123"],
+		["new@example.com", "short"],
+	])("rejects invalid public registration: %s", async (email, password) => {
+		await createUser(db);
+		const res = await api.post("/api/user", {
+			env: { ALLOW_REGISTRATION: "true" },
+			body: { email, password },
+		});
+		expect(res.status).toBe(400);
+	});
+
 	it("defaults display_name to email prefix when omitted", async () => {
 		await createUser(db, { email: "existing@example.com" });
 		const data = await json(
 			await api.post("/api/user", {
 				env: { ALLOW_REGISTRATION: "true" },
-				body: { email: "bob@example.com", password: "pass" },
+				body: { email: "bob@example.com", password: "password123" },
 			}),
 		);
 		expect(data.data.display_name).toBe("bob");

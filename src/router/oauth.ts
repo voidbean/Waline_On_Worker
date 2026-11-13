@@ -22,8 +22,9 @@ oauthRoutes.get("/", async (c) => {
 	const redirect = sanitizeRedirect(c.req.query("redirect"));
 	const oauthUrl = c.env.OAUTH_URL || DEFAULT_OAUTH_URL;
 
-	if (!type) {
-		return c.json({ errno: 1, errmsg: "type is required" }, 400);
+	const socialField = getSocialField(type || "");
+	if (!type || !socialField) {
+		return c.json({ errno: 1, errmsg: "Unsupported OAuth provider" }, 400);
 	}
 
 	// Step 1: No code → redirect to OAuth provider
@@ -70,11 +71,10 @@ oauthRoutes.get("/", async (c) => {
 			return c.redirect(`${redirect}?error=oauth_no_id`);
 		}
 
-		const socialField = getSocialField(type);
 		const jwtSecret = c.env.JWT_SECRET;
 
 		// Account-linking flow: state carries the logged-in user's JWT
-		if (state && jwtSecret && socialField) {
+		if (state && jwtSecret) {
 			try {
 				const payload = await verifyJwt(state, jwtSecret);
 				if (payload?.id) {
@@ -114,33 +114,13 @@ oauthRoutes.get("/", async (c) => {
 			}
 		}
 
-		// Normal OAuth login: find existing user by social link or email
-		// Try to find existing user by social link
-		let user: Record<string, unknown> | null = null;
-
-		if (socialField) {
-			user = await c.env.DB.prepare(
-				`SELECT * FROM wl_Users WHERE ${socialField} = ?`,
-			)
+		// Public password registration does not verify mailbox ownership. A matching
+		// email is not proof that the user controls both accounts.
+		const findLinkedUser = () =>
+			c.env.DB.prepare(`SELECT * FROM wl_Users WHERE ${socialField} = ?`)
 				.bind(socialId)
 				.first();
-		}
-
-		// If not found by social, try by email
-		if (!user && socialEmail) {
-			user = await c.env.DB.prepare("SELECT * FROM wl_Users WHERE email = ?")
-				.bind(socialEmail)
-				.first();
-
-			// Link social account
-			if (user && socialField) {
-				await c.env.DB.prepare(
-					`UPDATE wl_Users SET ${socialField} = ?, updatedAt = datetime('now') WHERE id = ?`,
-				)
-					.bind(socialId, user.id)
-					.run();
-			}
-		}
+		let user = await findLinkedUser();
 
 		// Create new user if not found
 		if (!user) {
@@ -149,25 +129,30 @@ oauthRoutes.get("/", async (c) => {
 			).first();
 			const isFirst = ((userCount?.count as number) || 0) === 0;
 
-			const email = socialEmail || `${type}_${socialId}@oauth.local`;
-
-			await c.env.DB.prepare(
-				`INSERT INTO wl_Users (display_name, email, password, type, url, avatar, ${socialField || "github"})
-         VALUES (?, ?, '', ?, ?, ?, ?)`,
-			)
-				.bind(
-					socialName || socialId,
-					email,
-					isFirst ? "administrator" : "guest",
-					socialUrl,
-					socialAvatar,
-					socialId,
+			const internalEmail = `${type}_${socialId}@oauth.local`;
+			// Preserve the provider email when unused. On collision, keep the QQ
+			// identity separate, without changing the existing account or password.
+			const emails =
+				socialEmail && !socialEmail.toLowerCase().endsWith("@oauth.local")
+					? [socialEmail, internalEmail]
+					: [internalEmail];
+			for (const email of emails) {
+				await c.env.DB.prepare(
+					`INSERT INTO wl_Users (display_name, email, password, type, url, avatar, ${socialField})
+					 VALUES (?, ?, '', ?, ?, ?, ?) ON CONFLICT(email) DO NOTHING`,
 				)
-				.run();
-
-			user = await c.env.DB.prepare("SELECT * FROM wl_Users WHERE email = ?")
-				.bind(email)
-				.first();
+					.bind(
+						socialName || socialId,
+						email,
+						isFirst ? "administrator" : "guest",
+						socialUrl,
+						socialAvatar,
+						socialId,
+					)
+					.run();
+				user = await findLinkedUser();
+				if (user) break;
+			}
 		}
 
 		if (!user) {
@@ -208,5 +193,5 @@ function getSocialField(type: string): string | null {
 		weibo: "weibo",
 		qq: "qq",
 	};
-	return map[type] || null;
+	return Object.hasOwn(map, type) ? map[type] : null;
 }

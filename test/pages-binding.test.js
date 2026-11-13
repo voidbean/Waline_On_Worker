@@ -49,8 +49,6 @@ const invoke = (path, method, service) =>
 
 describe("Pages board accounts", () => {
 	it.each([
-		["/api/token", "POST"],
-		["/api/user", "POST"],
 		["/api/oauth?type=github", "GET"],
 		["/api/oauth?type=qq&redirect=/ui", "GET"],
 	])("rejects %s %s before the binding", async (path, method) => {
@@ -61,6 +59,38 @@ describe("Pages board accounts", () => {
 				})
 			).status,
 		).toBe(403);
+	});
+
+	it.each([
+		"/api/user",
+		"/api/token",
+	])("forwards email credentials to %s", async (path) => {
+		const body = { email: "board@example.com", password: "test-password" };
+		const request = new Request(origin + path, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(body),
+		});
+		const response = await api({
+			request,
+			env: {
+				WALINE: {
+					fetch: async (r) => {
+						expect(await r.json()).toEqual(body);
+						return new Response(null, { status: 429 });
+					},
+				},
+			},
+		});
+		expect(response.status).toBe(429);
+	});
+
+	it("never passes administrator bootstrap credentials through Pages", async () => {
+		const request = new Request(origin + "/api/user", {
+			method: "POST",
+			headers: { "X-Admin-Bootstrap-Token": "test" },
+		});
+		expect((await api({ request, env: {} })).status).toBe(403);
 	});
 
 	it("keeps QQ code exchange on the Pages origin and does not forward account-link state", async () => {

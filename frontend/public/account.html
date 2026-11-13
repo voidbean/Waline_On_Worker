@@ -19,6 +19,20 @@
 			<h1 id="title">水楼账号</h1>
 			<p role="status" id="status">正在读取账号…</p>
 			<button type="button" id="qq" hidden>用 QQ 登录 / 注册</button>
+			<details id="email-alternative" hidden>
+				<summary>改用邮箱密码注册 / 登录</summary>
+				<form id="email-form" method="post">
+					<p>邮箱注册会创建独立账号，不会带入 QQ 账号的评论和资料。</p>
+					<fieldset aria-label="邮箱账号">
+						<label>邮箱<input name="email" type="email" required maxlength="254" autocomplete="username" /></label>
+						<label>密码<input name="password" type="password" required minlength="8" autocomplete="new-password" placeholder="至少 8 个字符" /></label>
+						<label hidden>两步验证码<input name="code" inputmode="numeric" pattern="[0-9]{6}" autocomplete="one-time-code" disabled /></label>
+						<button type="submit">注册邮箱账号</button>
+						<button type="button" id="email-switch">已有账号？去登录</button>
+					</fieldset>
+					<p role="status" id="email-status"></p>
+				</form>
+			</details>
 			<form id="profile" hidden>
 				<img id="avatar-preview" alt="当前头像" width="72" height="72" hidden />
 				<label>更换头像<input name="photo" type="file" accept="image/jpeg,image/png,image/webp" /></label>

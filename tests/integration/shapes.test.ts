@@ -66,7 +66,7 @@ describe("Response shape — POST /api/user", () => {
 				env: { ALLOW_REGISTRATION: "true" },
 				body: {
 					email: "newshape@test.com",
-					password: "pass",
+					password: "password123",
 					display_name: "New User",
 				},
 			}),
